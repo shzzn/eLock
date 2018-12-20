@@ -1,0 +1,2052 @@
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"zmoto.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Port1_MOTO_Write,"ax",%progbits
+  20              		.align	2
+  21              		.global	Port1_MOTO_Write
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	Port1_MOTO_Write, %function
+  25              	Port1_MOTO_Write:
+  26              	.LFB36:
+  27              		.file 1 "zmoto.c"
+   1:zmoto.c       **** #include <project.h>
+   2:zmoto.c       **** #include "zmain.h"
+   3:zmoto.c       **** 
+   4:zmoto.c       **** /* Data Register */
+   5:zmoto.c       **** #define Port1_reg   (* (reg32 *) CYREG_GPIO_PRT1_DR)
+   6:zmoto.c       **** #define ZMOTOMask   0xF0
+   7:zmoto.c       **** 
+   8:zmoto.c       ****  const uint8	Phase_C[8] = {0x90,0x10,0x30,0x20,0x60,0x40,0xC0,0x80};
+   9:zmoto.c       ****  const uint8	Phase_CC[8] ={0x80,0xC0,0x40,0x60,0x20,0x30,0x10,0x90};
+  10:zmoto.c       **** 
+  11:zmoto.c       **** void Port1_MOTO_Write(uint8 value)
+  12:zmoto.c       **** {
+  28              		.loc 1 12 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  13:zmoto.c       ****     uint8 drVal = (uint8)(Port1_reg & (uint8)(~ZMOTOMask));
+  34              		.loc 1 13 0
+  35 0000 034A     		ldr	r2, .L2
+  36 0002 1168     		ldr	r1, [r2]
+  37 0004 0F23     		movs	r3, #15
+  38 0006 0B40     		ands	r3, r1
+  39              	.LVL1:
+  14:zmoto.c       ****     drVal = drVal | value;
+  40              		.loc 1 14 0
+  41 0008 1843     		orrs	r0, r3
+  42              	.LVL2:
+  15:zmoto.c       ****     Port1_reg = (uint32)drVal;
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 2
+
+
+  43              		.loc 1 15 0
+  44 000a 1060     		str	r0, [r2]
+  16:zmoto.c       **** }
+  45              		.loc 1 16 0
+  46              		@ sp needed
+  47 000c 7047     		bx	lr
+  48              	.L3:
+  49 000e C046     		.align	2
+  50              	.L2:
+  51 0010 00010440 		.word	1074004224
+  52              		.cfi_endproc
+  53              	.LFE36:
+  54              		.size	Port1_MOTO_Write, .-Port1_MOTO_Write
+  55              		.section	.text.ZMoto,"ax",%progbits
+  56              		.align	2
+  57              		.global	ZMoto
+  58              		.code	16
+  59              		.thumb_func
+  60              		.type	ZMoto, %function
+  61              	ZMoto:
+  62              	.LFB37:
+  17:zmoto.c       **** 
+  18:zmoto.c       ****     
+  19:zmoto.c       ****     
+  20:zmoto.c       **** void ZMoto()
+  21:zmoto.c       **** {
+  63              		.loc 1 21 0
+  64              		.cfi_startproc
+  65              		@ args = 0, pretend = 0, frame = 0
+  66              		@ frame_needed = 0, uses_anonymous_args = 0
+  67 0000 10B5     		push	{r4, lr}
+  68              		.cfi_def_cfa_offset 8
+  69              		.cfi_offset 4, -8
+  70              		.cfi_offset 14, -4
+  22:zmoto.c       **** 	pcb_ZMoto.status = excute;
+  71              		.loc 1 22 0
+  72 0002 304B     		ldr	r3, .L14
+  73 0004 0222     		movs	r2, #2
+  74 0006 1A70     		strb	r2, [r3]
+  23:zmoto.c       ****     switch (pcb_ZMoto.mode)
+  75              		.loc 1 23 0
+  76 0008 5B78     		ldrb	r3, [r3, #1]
+  77 000a 012B     		cmp	r3, #1
+  78 000c 02D0     		beq	.L6
+  79 000e 022B     		cmp	r3, #2
+  80 0010 24D0     		beq	.L7
+  81 0012 4FE0     		b	.L13
+  82              	.L6:
+  24:zmoto.c       ****     {
+  25:zmoto.c       ****         case mdMOTO_CLOCK:
+  26:zmoto.c       ****             if(pcb_ZMoto.step <8)
+  83              		.loc 1 26 0
+  84 0014 2B4B     		ldr	r3, .L14
+  85 0016 9B78     		ldrb	r3, [r3, #2]
+  86 0018 072B     		cmp	r3, #7
+  87 001a 0BD8     		bhi	.L8
+  27:zmoto.c       ****             {
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 3
+
+
+  28:zmoto.c       ****                 Port1_MOTO_Write(Phase_C[pcb_ZMoto.step]);    
+  88              		.loc 1 28 0
+  89 001c 2A4A     		ldr	r2, .L14+4
+  90 001e D05C     		ldrb	r0, [r2, r3]
+  91 0020 FFF7FEFF 		bl	Port1_MOTO_Write
+  92              	.LVL3:
+  29:zmoto.c       ****                 pcb_ZMoto.step ++;
+  93              		.loc 1 29 0
+  94 0024 2748     		ldr	r0, .L14
+  95 0026 8378     		ldrb	r3, [r0, #2]
+  96 0028 0133     		adds	r3, r3, #1
+  97 002a 8370     		strb	r3, [r0, #2]
+  30:zmoto.c       ****                 ZBlock(&pcb_ZMoto,2);
+  98              		.loc 1 30 0
+  99 002c 0221     		movs	r1, #2
+ 100 002e FFF7FEFF 		bl	ZBlock
+ 101              	.LVL4:
+ 102 0032 45E0     		b	.L4
+ 103              	.L8:
+  31:zmoto.c       ****             }
+  32:zmoto.c       ****             else
+  33:zmoto.c       ****             {
+  34:zmoto.c       ****                 if(pcb_ZMoto.cycle >0)
+ 104              		.loc 1 34 0
+ 105 0034 234B     		ldr	r3, .L14
+ 106 0036 DB78     		ldrb	r3, [r3, #3]
+ 107 0038 002B     		cmp	r3, #0
+ 108 003a 08D0     		beq	.L10
+  35:zmoto.c       ****                 {
+  36:zmoto.c       ****                     pcb_ZMoto.cycle --;
+ 109              		.loc 1 36 0
+ 110 003c 2148     		ldr	r0, .L14
+ 111 003e 013B     		subs	r3, r3, #1
+ 112 0040 C370     		strb	r3, [r0, #3]
+  37:zmoto.c       ****                     pcb_ZMoto.step = 0;
+ 113              		.loc 1 37 0
+ 114 0042 0023     		movs	r3, #0
+ 115 0044 8370     		strb	r3, [r0, #2]
+  38:zmoto.c       ****                     ZBlock(&pcb_ZMoto,2);
+ 116              		.loc 1 38 0
+ 117 0046 0221     		movs	r1, #2
+ 118 0048 FFF7FEFF 		bl	ZBlock
+ 119              	.LVL5:
+ 120 004c 38E0     		b	.L4
+ 121              	.L10:
+  39:zmoto.c       ****                 }
+  40:zmoto.c       ****                 else
+  41:zmoto.c       ****                 {
+  42:zmoto.c       ****                     Port1_MOTO_Write(0);
+ 122              		.loc 1 42 0
+ 123 004e 0020     		movs	r0, #0
+ 124 0050 FFF7FEFF 		bl	Port1_MOTO_Write
+ 125              	.LVL6:
+  43:zmoto.c       ****                     ZDestroy(&pcb_ZMoto);
+ 126              		.loc 1 43 0
+ 127 0054 1B48     		ldr	r0, .L14
+ 128 0056 FFF7FEFF 		bl	ZDestroy
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 4
+
+
+ 129              	.LVL7:
+ 130 005a 31E0     		b	.L4
+ 131              	.L7:
+  44:zmoto.c       ****                 }
+  45:zmoto.c       ****             }            
+  46:zmoto.c       ****         break;
+  47:zmoto.c       ****         case mdMOTO_CCLOCK:
+  48:zmoto.c       ****             if(pcb_ZMoto.step <8)
+ 132              		.loc 1 48 0
+ 133 005c 194B     		ldr	r3, .L14
+ 134 005e 9B78     		ldrb	r3, [r3, #2]
+ 135 0060 072B     		cmp	r3, #7
+ 136 0062 0CD8     		bhi	.L11
+  49:zmoto.c       ****             {
+  50:zmoto.c       ****                 Port1_MOTO_Write(Phase_CC[pcb_ZMoto.step]);    
+ 137              		.loc 1 50 0
+ 138 0064 184A     		ldr	r2, .L14+4
+ 139 0066 D318     		adds	r3, r2, r3
+ 140 0068 187A     		ldrb	r0, [r3, #8]
+ 141 006a FFF7FEFF 		bl	Port1_MOTO_Write
+ 142              	.LVL8:
+  51:zmoto.c       ****                 pcb_ZMoto.step ++;
+ 143              		.loc 1 51 0
+ 144 006e 1548     		ldr	r0, .L14
+ 145 0070 8378     		ldrb	r3, [r0, #2]
+ 146 0072 0133     		adds	r3, r3, #1
+ 147 0074 8370     		strb	r3, [r0, #2]
+  52:zmoto.c       ****                 ZBlock(&pcb_ZMoto,2);
+ 148              		.loc 1 52 0
+ 149 0076 0221     		movs	r1, #2
+ 150 0078 FFF7FEFF 		bl	ZBlock
+ 151              	.LVL9:
+ 152 007c 20E0     		b	.L4
+ 153              	.L11:
+  53:zmoto.c       ****             }
+  54:zmoto.c       ****             else
+  55:zmoto.c       ****             {
+  56:zmoto.c       ****                 if(pcb_ZMoto.cycle >0)
+ 154              		.loc 1 56 0
+ 155 007e 114B     		ldr	r3, .L14
+ 156 0080 DB78     		ldrb	r3, [r3, #3]
+ 157 0082 002B     		cmp	r3, #0
+ 158 0084 08D0     		beq	.L12
+  57:zmoto.c       ****                 {
+  58:zmoto.c       ****                     pcb_ZMoto.cycle --;
+ 159              		.loc 1 58 0
+ 160 0086 0F48     		ldr	r0, .L14
+ 161 0088 013B     		subs	r3, r3, #1
+ 162 008a C370     		strb	r3, [r0, #3]
+  59:zmoto.c       ****                     pcb_ZMoto.step = 0;
+ 163              		.loc 1 59 0
+ 164 008c 0023     		movs	r3, #0
+ 165 008e 8370     		strb	r3, [r0, #2]
+  60:zmoto.c       ****                     ZBlock(&pcb_ZMoto,2);
+ 166              		.loc 1 60 0
+ 167 0090 0221     		movs	r1, #2
+ 168 0092 FFF7FEFF 		bl	ZBlock
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 5
+
+
+ 169              	.LVL10:
+ 170 0096 13E0     		b	.L4
+ 171              	.L12:
+  61:zmoto.c       ****                 }
+  62:zmoto.c       ****                 else
+  63:zmoto.c       ****                 {
+  64:zmoto.c       ****                     Port1_MOTO_Write(0);
+ 172              		.loc 1 64 0
+ 173 0098 0020     		movs	r0, #0
+ 174 009a FFF7FEFF 		bl	Port1_MOTO_Write
+ 175              	.LVL11:
+  65:zmoto.c       ****                     pcb_ZMoto.mode = mdMOTO_CLOCK;
+ 176              		.loc 1 65 0
+ 177 009e 0948     		ldr	r0, .L14
+ 178 00a0 0123     		movs	r3, #1
+ 179 00a2 4370     		strb	r3, [r0, #1]
+  66:zmoto.c       ****                     pcb_ZMoto.step = 0;
+ 180              		.loc 1 66 0
+ 181 00a4 0023     		movs	r3, #0
+ 182 00a6 8370     		strb	r3, [r0, #2]
+  67:zmoto.c       ****                     pcb_ZMoto.cycle = MOTO_CYC;
+ 183              		.loc 1 67 0
+ 184 00a8 0B33     		adds	r3, r3, #11
+ 185 00aa C370     		strb	r3, [r0, #3]
+  68:zmoto.c       ****                     ZBlock(&pcb_ZMoto,3000);    //3000ms
+ 186              		.loc 1 68 0
+ 187 00ac 0749     		ldr	r1, .L14+8
+ 188 00ae FFF7FEFF 		bl	ZBlock
+ 189              	.LVL12:
+ 190 00b2 05E0     		b	.L4
+ 191              	.L13:
+  69:zmoto.c       ****                 }
+  70:zmoto.c       ****             }            
+  71:zmoto.c       ****         break;
+  72:zmoto.c       ****         default:
+  73:zmoto.c       ****             Port1_MOTO_Write(0);
+ 192              		.loc 1 73 0
+ 193 00b4 0020     		movs	r0, #0
+ 194 00b6 FFF7FEFF 		bl	Port1_MOTO_Write
+ 195              	.LVL13:
+  74:zmoto.c       ****             ZDestroy(&pcb_ZMoto);
+ 196              		.loc 1 74 0
+ 197 00ba 0248     		ldr	r0, .L14
+ 198 00bc FFF7FEFF 		bl	ZDestroy
+ 199              	.LVL14:
+ 200              	.L4:
+  75:zmoto.c       ****         break;
+  76:zmoto.c       ****     }
+  77:zmoto.c       **** } ...
+ 201              		.loc 1 77 0
+ 202              		@ sp needed
+ 203 00c0 10BD     		pop	{r4, pc}
+ 204              	.L15:
+ 205 00c2 C046     		.align	2
+ 206              	.L14:
+ 207 00c4 00000000 		.word	pcb_ZMoto
+ 208 00c8 00000000 		.word	.LANCHOR0
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 6
+
+
+ 209 00cc B80B0000 		.word	3000
+ 210              		.cfi_endproc
+ 211              	.LFE37:
+ 212              		.size	ZMoto, .-ZMoto
+ 213              		.global	Phase_CC
+ 214              		.global	Phase_C
+ 215              		.section	.rodata
+ 216              		.align	2
+ 217              		.set	.LANCHOR0,. + 0
+ 218              		.type	Phase_C, %object
+ 219              		.size	Phase_C, 8
+ 220              	Phase_C:
+ 221 0000 90       		.byte	-112
+ 222 0001 10       		.byte	16
+ 223 0002 30       		.byte	48
+ 224 0003 20       		.byte	32
+ 225 0004 60       		.byte	96
+ 226 0005 40       		.byte	64
+ 227 0006 C0       		.byte	-64
+ 228 0007 80       		.byte	-128
+ 229              		.type	Phase_CC, %object
+ 230              		.size	Phase_CC, 8
+ 231              	Phase_CC:
+ 232 0008 80       		.byte	-128
+ 233 0009 C0       		.byte	-64
+ 234 000a 40       		.byte	64
+ 235 000b 60       		.byte	96
+ 236 000c 20       		.byte	32
+ 237 000d 30       		.byte	48
+ 238 000e 10       		.byte	16
+ 239 000f 90       		.byte	-112
+ 240              		.text
+ 241              	.Letext0:
+ 242              		.file 2 "Generated_Source\\PSoC4/cytypes.h"
+ 243              		.file 3 "Generated_Source\\PSoC4/BLE_1_Stack.h"
+ 244              		.file 4 "zglobal.h"
+ 245              		.section	.debug_info,"",%progbits
+ 246              	.Ldebug_info0:
+ 247 0000 AC040000 		.4byte	0x4ac
+ 248 0004 0400     		.2byte	0x4
+ 249 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 250 000a 04       		.byte	0x4
+ 251 000b 01       		.uleb128 0x1
+ 252 000c 96010000 		.4byte	.LASF112
+ 253 0010 0C       		.byte	0xc
+ 254 0011 7C080000 		.4byte	.LASF113
+ 255 0015 D6080000 		.4byte	.LASF114
+ 256 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 257 001d 00000000 		.4byte	0
+ 258 0021 00000000 		.4byte	.Ldebug_line0
+ 259 0025 02       		.uleb128 0x2
+ 260 0026 01       		.byte	0x1
+ 261 0027 06       		.byte	0x6
+ 262 0028 31050000 		.4byte	.LASF0
+ 263 002c 02       		.uleb128 0x2
+ 264 002d 01       		.byte	0x1
+ 265 002e 08       		.byte	0x8
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 7
+
+
+ 266 002f C7040000 		.4byte	.LASF1
+ 267 0033 02       		.uleb128 0x2
+ 268 0034 02       		.byte	0x2
+ 269 0035 05       		.byte	0x5
+ 270 0036 91000000 		.4byte	.LASF2
+ 271 003a 02       		.uleb128 0x2
+ 272 003b 02       		.byte	0x2
+ 273 003c 07       		.byte	0x7
+ 274 003d AD060000 		.4byte	.LASF3
+ 275 0041 02       		.uleb128 0x2
+ 276 0042 04       		.byte	0x4
+ 277 0043 05       		.byte	0x5
+ 278 0044 55030000 		.4byte	.LASF4
+ 279 0048 02       		.uleb128 0x2
+ 280 0049 04       		.byte	0x4
+ 281 004a 07       		.byte	0x7
+ 282 004b 5F010000 		.4byte	.LASF5
+ 283 004f 02       		.uleb128 0x2
+ 284 0050 08       		.byte	0x8
+ 285 0051 05       		.byte	0x5
+ 286 0052 C8080000 		.4byte	.LASF6
+ 287 0056 02       		.uleb128 0x2
+ 288 0057 08       		.byte	0x8
+ 289 0058 07       		.byte	0x7
+ 290 0059 0F030000 		.4byte	.LASF7
+ 291 005d 03       		.uleb128 0x3
+ 292 005e 04       		.byte	0x4
+ 293 005f 05       		.byte	0x5
+ 294 0060 696E7400 		.ascii	"int\000"
+ 295 0064 02       		.uleb128 0x2
+ 296 0065 04       		.byte	0x4
+ 297 0066 07       		.byte	0x7
+ 298 0067 C7020000 		.4byte	.LASF8
+ 299 006b 04       		.uleb128 0x4
+ 300 006c 48020000 		.4byte	.LASF9
+ 301 0070 02       		.byte	0x2
+ 302 0071 E401     		.2byte	0x1e4
+ 303 0073 2C000000 		.4byte	0x2c
+ 304 0077 04       		.uleb128 0x4
+ 305 0078 0E080000 		.4byte	.LASF10
+ 306 007c 02       		.byte	0x2
+ 307 007d E601     		.2byte	0x1e6
+ 308 007f 48000000 		.4byte	0x48
+ 309 0083 02       		.uleb128 0x2
+ 310 0084 04       		.byte	0x4
+ 311 0085 04       		.byte	0x4
+ 312 0086 A8020000 		.4byte	.LASF11
+ 313 008a 02       		.uleb128 0x2
+ 314 008b 08       		.byte	0x8
+ 315 008c 04       		.byte	0x4
+ 316 008d 75080000 		.4byte	.LASF12
+ 317 0091 02       		.uleb128 0x2
+ 318 0092 01       		.byte	0x1
+ 319 0093 08       		.byte	0x8
+ 320 0094 17070000 		.4byte	.LASF13
+ 321 0098 04       		.uleb128 0x4
+ 322 0099 84060000 		.4byte	.LASF14
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 8
+
+
+ 323 009d 02       		.byte	0x2
+ 324 009e 9002     		.2byte	0x290
+ 325 00a0 A4000000 		.4byte	0xa4
+ 326 00a4 05       		.uleb128 0x5
+ 327 00a5 77000000 		.4byte	0x77
+ 328 00a9 02       		.uleb128 0x2
+ 329 00aa 08       		.byte	0x8
+ 330 00ab 04       		.byte	0x4
+ 331 00ac 00000000 		.4byte	.LASF15
+ 332 00b0 02       		.uleb128 0x2
+ 333 00b1 04       		.byte	0x4
+ 334 00b2 07       		.byte	0x7
+ 335 00b3 A1000000 		.4byte	.LASF16
+ 336 00b7 06       		.uleb128 0x6
+ 337 00b8 01       		.byte	0x1
+ 338 00b9 2C000000 		.4byte	0x2c
+ 339 00bd 03       		.byte	0x3
+ 340 00be 3501     		.2byte	0x135
+ 341 00c0 75020000 		.4byte	0x275
+ 342 00c4 07       		.uleb128 0x7
+ 343 00c5 3E070000 		.4byte	.LASF17
+ 344 00c9 00       		.byte	0
+ 345 00ca 07       		.uleb128 0x7
+ 346 00cb 45010000 		.4byte	.LASF18
+ 347 00cf 01       		.byte	0x1
+ 348 00d0 07       		.uleb128 0x7
+ 349 00d1 380A0000 		.4byte	.LASF19
+ 350 00d5 02       		.byte	0x2
+ 351 00d6 07       		.uleb128 0x7
+ 352 00d7 F6080000 		.4byte	.LASF20
+ 353 00db 03       		.byte	0x3
+ 354 00dc 07       		.uleb128 0x7
+ 355 00dd 08010000 		.4byte	.LASF21
+ 356 00e1 04       		.byte	0x4
+ 357 00e2 07       		.uleb128 0x7
+ 358 00e3 DC030000 		.4byte	.LASF22
+ 359 00e7 05       		.byte	0x5
+ 360 00e8 07       		.uleb128 0x7
+ 361 00e9 36000000 		.4byte	.LASF23
+ 362 00ed 06       		.byte	0x6
+ 363 00ee 07       		.uleb128 0x7
+ 364 00ef 54090000 		.4byte	.LASF24
+ 365 00f3 20       		.byte	0x20
+ 366 00f4 07       		.uleb128 0x7
+ 367 00f5 08060000 		.4byte	.LASF25
+ 368 00f9 21       		.byte	0x21
+ 369 00fa 07       		.uleb128 0x7
+ 370 00fb 0C000000 		.4byte	.LASF26
+ 371 00ff 22       		.byte	0x22
+ 372 0100 07       		.uleb128 0x7
+ 373 0101 06040000 		.4byte	.LASF27
+ 374 0105 23       		.byte	0x23
+ 375 0106 07       		.uleb128 0x7
+ 376 0107 88050000 		.4byte	.LASF28
+ 377 010b 24       		.byte	0x24
+ 378 010c 07       		.uleb128 0x7
+ 379 010d AE080000 		.4byte	.LASF29
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 9
+
+
+ 380 0111 25       		.byte	0x25
+ 381 0112 07       		.uleb128 0x7
+ 382 0113 AE030000 		.4byte	.LASF30
+ 383 0117 26       		.byte	0x26
+ 384 0118 07       		.uleb128 0x7
+ 385 0119 8F030000 		.4byte	.LASF31
+ 386 011d 27       		.byte	0x27
+ 387 011e 07       		.uleb128 0x7
+ 388 011f 55000000 		.4byte	.LASF32
+ 389 0123 28       		.byte	0x28
+ 390 0124 07       		.uleb128 0x7
+ 391 0125 67060000 		.4byte	.LASF33
+ 392 0129 29       		.byte	0x29
+ 393 012a 07       		.uleb128 0x7
+ 394 012b C7060000 		.4byte	.LASF34
+ 395 012f 2A       		.byte	0x2a
+ 396 0130 07       		.uleb128 0x7
+ 397 0131 77010000 		.4byte	.LASF35
+ 398 0135 2B       		.byte	0x2b
+ 399 0136 07       		.uleb128 0x7
+ 400 0137 24020000 		.4byte	.LASF36
+ 401 013b 2C       		.byte	0x2c
+ 402 013c 07       		.uleb128 0x7
+ 403 013d C6070000 		.4byte	.LASF37
+ 404 0141 2D       		.byte	0x2d
+ 405 0142 07       		.uleb128 0x7
+ 406 0143 3D050000 		.4byte	.LASF38
+ 407 0147 2E       		.byte	0x2e
+ 408 0148 07       		.uleb128 0x7
+ 409 0149 FC0A0000 		.4byte	.LASF39
+ 410 014d 2F       		.byte	0x2f
+ 411 014e 07       		.uleb128 0x7
+ 412 014f AA000000 		.4byte	.LASF40
+ 413 0153 30       		.byte	0x30
+ 414 0154 07       		.uleb128 0x7
+ 415 0155 51080000 		.4byte	.LASF41
+ 416 0159 31       		.byte	0x31
+ 417 015a 07       		.uleb128 0x7
+ 418 015b EE020000 		.4byte	.LASF42
+ 419 015f 32       		.byte	0x32
+ 420 0160 07       		.uleb128 0x7
+ 421 0161 F0060000 		.4byte	.LASF43
+ 422 0165 33       		.byte	0x33
+ 423 0166 07       		.uleb128 0x7
+ 424 0167 90070000 		.4byte	.LASF44
+ 425 016b 34       		.byte	0x34
+ 426 016c 07       		.uleb128 0x7
+ 427 016d 73070000 		.4byte	.LASF45
+ 428 0171 35       		.byte	0x35
+ 429 0172 07       		.uleb128 0x7
+ 430 0173 2D030000 		.4byte	.LASF46
+ 431 0177 36       		.byte	0x36
+ 432 0178 07       		.uleb128 0x7
+ 433 0179 5D040000 		.4byte	.LASF47
+ 434 017d 37       		.byte	0x37
+ 435 017e 07       		.uleb128 0x7
+ 436 017f E9000000 		.4byte	.LASF48
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 10
+
+
+ 437 0183 40       		.byte	0x40
+ 438 0184 07       		.uleb128 0x7
+ 439 0185 DF050000 		.4byte	.LASF49
+ 440 0189 41       		.byte	0x41
+ 441 018a 07       		.uleb128 0x7
+ 442 018b 9B090000 		.4byte	.LASF50
+ 443 018f 42       		.byte	0x42
+ 444 0190 07       		.uleb128 0x7
+ 445 0191 55070000 		.4byte	.LASF51
+ 446 0195 43       		.byte	0x43
+ 447 0196 07       		.uleb128 0x7
+ 448 0197 D7090000 		.4byte	.LASF52
+ 449 019b 44       		.byte	0x44
+ 450 019c 07       		.uleb128 0x7
+ 451 019d 1F060000 		.4byte	.LASF53
+ 452 01a1 45       		.byte	0x45
+ 453 01a2 07       		.uleb128 0x7
+ 454 01a3 1D010000 		.4byte	.LASF54
+ 455 01a7 46       		.byte	0x46
+ 456 01a8 07       		.uleb128 0x7
+ 457 01a9 13050000 		.4byte	.LASF55
+ 458 01ad 47       		.byte	0x47
+ 459 01ae 07       		.uleb128 0x7
+ 460 01af 61050000 		.4byte	.LASF56
+ 461 01b3 48       		.byte	0x48
+ 462 01b4 07       		.uleb128 0x7
+ 463 01b5 AE020000 		.4byte	.LASF57
+ 464 01b9 49       		.byte	0x49
+ 465 01ba 07       		.uleb128 0x7
+ 466 01bb A8070000 		.4byte	.LASF58
+ 467 01bf 4A       		.byte	0x4a
+ 468 01c0 07       		.uleb128 0x7
+ 469 01c1 F5090000 		.4byte	.LASF59
+ 470 01c5 4B       		.byte	0x4b
+ 471 01c6 07       		.uleb128 0x7
+ 472 01c7 A4050000 		.4byte	.LASF60
+ 473 01cb 4C       		.byte	0x4c
+ 474 01cc 07       		.uleb128 0x7
+ 475 01cd D4020000 		.4byte	.LASF61
+ 476 01d1 4D       		.byte	0x4d
+ 477 01d2 07       		.uleb128 0x7
+ 478 01d3 B9090000 		.4byte	.LASF62
+ 479 01d7 4E       		.byte	0x4e
+ 480 01d8 07       		.uleb128 0x7
+ 481 01d9 D5040000 		.4byte	.LASF63
+ 482 01dd 4F       		.byte	0x4f
+ 483 01de 07       		.uleb128 0x7
+ 484 01df A20A0000 		.4byte	.LASF64
+ 485 01e3 50       		.byte	0x50
+ 486 01e4 07       		.uleb128 0x7
+ 487 01e5 EF070000 		.4byte	.LASF65
+ 488 01e9 51       		.byte	0x51
+ 489 01ea 07       		.uleb128 0x7
+ 490 01eb BE050000 		.4byte	.LASF66
+ 491 01ef 52       		.byte	0x52
+ 492 01f0 07       		.uleb128 0x7
+ 493 01f1 5E030000 		.4byte	.LASF67
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 11
+
+
+ 494 01f5 53       		.byte	0x53
+ 495 01f6 07       		.uleb128 0x7
+ 496 01f7 4E020000 		.4byte	.LASF68
+ 497 01fb 54       		.byte	0x54
+ 498 01fc 07       		.uleb128 0x7
+ 499 01fd C60A0000 		.4byte	.LASF69
+ 500 0201 55       		.byte	0x55
+ 501 0202 07       		.uleb128 0x7
+ 502 0203 730A0000 		.4byte	.LASF70
+ 503 0207 56       		.byte	0x56
+ 504 0208 07       		.uleb128 0x7
+ 505 0209 4A0A0000 		.4byte	.LASF71
+ 506 020d 57       		.byte	0x57
+ 507 020e 07       		.uleb128 0x7
+ 508 020f 8A060000 		.4byte	.LASF72
+ 509 0213 58       		.byte	0x58
+ 510 0214 07       		.uleb128 0x7
+ 511 0215 A1040000 		.4byte	.LASF73
+ 512 0219 70       		.byte	0x70
+ 513 021a 07       		.uleb128 0x7
+ 514 021b 2E090000 		.4byte	.LASF74
+ 515 021f 71       		.byte	0x71
+ 516 0220 07       		.uleb128 0x7
+ 517 0221 22070000 		.4byte	.LASF75
+ 518 0225 72       		.byte	0x72
+ 519 0226 07       		.uleb128 0x7
+ 520 0227 33080000 		.4byte	.LASF76
+ 521 022b 73       		.byte	0x73
+ 522 022c 07       		.uleb128 0x7
+ 523 022d 3F040000 		.4byte	.LASF77
+ 524 0231 74       		.byte	0x74
+ 525 0232 07       		.uleb128 0x7
+ 526 0233 46060000 		.4byte	.LASF78
+ 527 0237 75       		.byte	0x75
+ 528 0238 07       		.uleb128 0x7
+ 529 0239 79020000 		.4byte	.LASF79
+ 530 023d 76       		.byte	0x76
+ 531 023e 07       		.uleb128 0x7
+ 532 023f 0F090000 		.4byte	.LASF80
+ 533 0243 77       		.byte	0x77
+ 534 0244 07       		.uleb128 0x7
+ 535 0245 78090000 		.4byte	.LASF81
+ 536 0249 78       		.byte	0x78
+ 537 024a 07       		.uleb128 0x7
+ 538 024b 8B080000 		.4byte	.LASF82
+ 539 024f 79       		.byte	0x79
+ 540 0250 07       		.uleb128 0x7
+ 541 0251 140A0000 		.4byte	.LASF83
+ 542 0255 7A       		.byte	0x7a
+ 543 0256 07       		.uleb128 0x7
+ 544 0257 15080000 		.4byte	.LASF84
+ 545 025b FA       		.byte	0xfa
+ 546 025c 07       		.uleb128 0x7
+ 547 025d F4040000 		.4byte	.LASF85
+ 548 0261 FB       		.byte	0xfb
+ 549 0262 07       		.uleb128 0x7
+ 550 0263 EA0A0000 		.4byte	.LASF86
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 12
+
+
+ 551 0267 FC       		.byte	0xfc
+ 552 0268 07       		.uleb128 0x7
+ 553 0269 D1000000 		.4byte	.LASF87
+ 554 026d FD       		.byte	0xfd
+ 555 026e 07       		.uleb128 0x7
+ 556 026f FA050000 		.4byte	.LASF88
+ 557 0273 FF       		.byte	0xff
+ 558 0274 00       		.byte	0
+ 559 0275 08       		.uleb128 0x8
+ 560 0276 01       		.byte	0x1
+ 561 0277 2C000000 		.4byte	0x2c
+ 562 027b 04       		.byte	0x4
+ 563 027c 0B       		.byte	0xb
+ 564 027d B8020000 		.4byte	0x2b8
+ 565 0281 07       		.uleb128 0x7
+ 566 0282 84080000 		.4byte	.LASF89
+ 567 0286 00       		.byte	0
+ 568 0287 07       		.uleb128 0x7
+ 569 0288 950A0000 		.4byte	.LASF90
+ 570 028c 01       		.byte	0x1
+ 571 028d 07       		.uleb128 0x7
+ 572 028e F8030000 		.4byte	.LASF91
+ 573 0292 02       		.byte	0x2
+ 574 0293 07       		.uleb128 0x7
+ 575 0294 9B000000 		.4byte	.LASF92
+ 576 0298 03       		.byte	0x3
+ 577 0299 07       		.uleb128 0x7
+ 578 029a 9A040000 		.4byte	.LASF93
+ 579 029e 04       		.byte	0x4
+ 580 029f 07       		.uleb128 0x7
+ 581 02a0 3E010000 		.4byte	.LASF94
+ 582 02a4 05       		.byte	0x5
+ 583 02a5 07       		.uleb128 0x7
+ 584 02a6 4E030000 		.4byte	.LASF95
+ 585 02aa 06       		.byte	0x6
+ 586 02ab 07       		.uleb128 0x7
+ 587 02ac 35040000 		.4byte	.LASF96
+ 588 02b0 07       		.byte	0x7
+ 589 02b1 07       		.uleb128 0x7
+ 590 02b2 9A020000 		.4byte	.LASF97
+ 591 02b6 08       		.byte	0x8
+ 592 02b7 00       		.byte	0
+ 593 02b8 09       		.uleb128 0x9
+ 594 02b9 6D7600   		.ascii	"mv\000"
+ 595 02bc 04       		.byte	0x4
+ 596 02bd 0D       		.byte	0xd
+ 597 02be 75020000 		.4byte	0x275
+ 598 02c2 08       		.uleb128 0x8
+ 599 02c3 01       		.byte	0x1
+ 600 02c4 2C000000 		.4byte	0x2c
+ 601 02c8 04       		.byte	0x4
+ 602 02c9 0E       		.byte	0xe
+ 603 02ca E7020000 		.4byte	0x2e7
+ 604 02ce 07       		.uleb128 0x7
+ 605 02cf 87030000 		.4byte	.LASF98
+ 606 02d3 00       		.byte	0
+ 607 02d4 07       		.uleb128 0x7
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 13
+
+
+ 608 02d5 1C070000 		.4byte	.LASF99
+ 609 02d9 01       		.byte	0x1
+ 610 02da 07       		.uleb128 0x7
+ 611 02db 58010000 		.4byte	.LASF100
+ 612 02df 02       		.byte	0x2
+ 613 02e0 07       		.uleb128 0x7
+ 614 02e1 D6030000 		.4byte	.LASF101
+ 615 02e5 03       		.byte	0x3
+ 616 02e6 00       		.byte	0
+ 617 02e7 09       		.uleb128 0x9
+ 618 02e8 737600   		.ascii	"sv\000"
+ 619 02eb 04       		.byte	0x4
+ 620 02ec 0E       		.byte	0xe
+ 621 02ed C2020000 		.4byte	0x2c2
+ 622 02f1 0A       		.uleb128 0xa
+ 623 02f2 A1020000 		.4byte	.LASF115
+ 624 02f6 08       		.byte	0x8
+ 625 02f7 04       		.byte	0x4
+ 626 02f8 0F       		.byte	0xf
+ 627 02f9 3A030000 		.4byte	0x33a
+ 628 02fd 0B       		.uleb128 0xb
+ 629 02fe C0060000 		.4byte	.LASF102
+ 630 0302 04       		.byte	0x4
+ 631 0303 11       		.byte	0x11
+ 632 0304 E7020000 		.4byte	0x2e7
+ 633 0308 00       		.byte	0
+ 634 0309 0B       		.uleb128 0xb
+ 635 030a 03010000 		.4byte	.LASF103
+ 636 030e 04       		.byte	0x4
+ 637 030f 12       		.byte	0x12
+ 638 0310 B8020000 		.4byte	0x2b8
+ 639 0314 01       		.byte	0x1
+ 640 0315 0B       		.uleb128 0xb
+ 641 0316 C10A0000 		.4byte	.LASF104
+ 642 031a 04       		.byte	0x4
+ 643 031b 13       		.byte	0x13
+ 644 031c 2C000000 		.4byte	0x2c
+ 645 0320 02       		.byte	0x2
+ 646 0321 0B       		.uleb128 0xb
+ 647 0322 4F000000 		.4byte	.LASF105
+ 648 0326 04       		.byte	0x4
+ 649 0327 14       		.byte	0x14
+ 650 0328 2C000000 		.4byte	0x2c
+ 651 032c 03       		.byte	0x3
+ 652 032d 0C       		.uleb128 0xc
+ 653 032e 636C6B00 		.ascii	"clk\000"
+ 654 0332 04       		.byte	0x4
+ 655 0333 15       		.byte	0x15
+ 656 0334 64000000 		.4byte	0x64
+ 657 0338 04       		.byte	0x4
+ 658 0339 00       		.byte	0
+ 659 033a 0D       		.uleb128 0xd
+ 660 033b 7F030000 		.4byte	.LASF106
+ 661 033f 04       		.byte	0x4
+ 662 0340 18       		.byte	0x18
+ 663 0341 F1020000 		.4byte	0x2f1
+ 664 0345 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 14
+
+
+ 665 0346 80000000 		.4byte	.LASF116
+ 666 034a 01       		.byte	0x1
+ 667 034b 0B       		.byte	0xb
+ 668 034c 00000000 		.4byte	.LFB36
+ 669 0350 14000000 		.4byte	.LFE36-.LFB36
+ 670 0354 01       		.uleb128 0x1
+ 671 0355 9C       		.byte	0x9c
+ 672 0356 79030000 		.4byte	0x379
+ 673 035a 0F       		.uleb128 0xf
+ 674 035b 71010000 		.4byte	.LASF117
+ 675 035f 01       		.byte	0x1
+ 676 0360 0B       		.byte	0xb
+ 677 0361 6B000000 		.4byte	0x6b
+ 678 0365 00000000 		.4byte	.LLST0
+ 679 0369 10       		.uleb128 0x10
+ 680 036a 30000000 		.4byte	.LASF118
+ 681 036e 01       		.byte	0x1
+ 682 036f 0D       		.byte	0xd
+ 683 0370 6B000000 		.4byte	0x6b
+ 684 0374 21000000 		.4byte	.LLST1
+ 685 0378 00       		.byte	0
+ 686 0379 11       		.uleb128 0x11
+ 687 037a CB000000 		.4byte	.LASF119
+ 688 037e 01       		.byte	0x1
+ 689 037f 14       		.byte	0x14
+ 690 0380 00000000 		.4byte	.LFB37
+ 691 0384 D0000000 		.4byte	.LFE37-.LFB37
+ 692 0388 01       		.uleb128 0x1
+ 693 0389 9C       		.byte	0x9c
+ 694 038a 4D040000 		.4byte	0x44d
+ 695 038e 12       		.uleb128 0x12
+ 696 038f 24000000 		.4byte	.LVL3
+ 697 0393 45030000 		.4byte	0x345
+ 698 0397 13       		.uleb128 0x13
+ 699 0398 32000000 		.4byte	.LVL4
+ 700 039c 99040000 		.4byte	0x499
+ 701 03a0 AA030000 		.4byte	0x3aa
+ 702 03a4 14       		.uleb128 0x14
+ 703 03a5 01       		.uleb128 0x1
+ 704 03a6 51       		.byte	0x51
+ 705 03a7 01       		.uleb128 0x1
+ 706 03a8 32       		.byte	0x32
+ 707 03a9 00       		.byte	0
+ 708 03aa 13       		.uleb128 0x13
+ 709 03ab 4C000000 		.4byte	.LVL5
+ 710 03af 99040000 		.4byte	0x499
+ 711 03b3 BD030000 		.4byte	0x3bd
+ 712 03b7 14       		.uleb128 0x14
+ 713 03b8 01       		.uleb128 0x1
+ 714 03b9 51       		.byte	0x51
+ 715 03ba 01       		.uleb128 0x1
+ 716 03bb 32       		.byte	0x32
+ 717 03bc 00       		.byte	0
+ 718 03bd 13       		.uleb128 0x13
+ 719 03be 54000000 		.4byte	.LVL6
+ 720 03c2 45030000 		.4byte	0x345
+ 721 03c6 D0030000 		.4byte	0x3d0
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 15
+
+
+ 722 03ca 14       		.uleb128 0x14
+ 723 03cb 01       		.uleb128 0x1
+ 724 03cc 50       		.byte	0x50
+ 725 03cd 01       		.uleb128 0x1
+ 726 03ce 30       		.byte	0x30
+ 727 03cf 00       		.byte	0
+ 728 03d0 12       		.uleb128 0x12
+ 729 03d1 5A000000 		.4byte	.LVL7
+ 730 03d5 A4040000 		.4byte	0x4a4
+ 731 03d9 12       		.uleb128 0x12
+ 732 03da 6E000000 		.4byte	.LVL8
+ 733 03de 45030000 		.4byte	0x345
+ 734 03e2 13       		.uleb128 0x13
+ 735 03e3 7C000000 		.4byte	.LVL9
+ 736 03e7 99040000 		.4byte	0x499
+ 737 03eb F5030000 		.4byte	0x3f5
+ 738 03ef 14       		.uleb128 0x14
+ 739 03f0 01       		.uleb128 0x1
+ 740 03f1 51       		.byte	0x51
+ 741 03f2 01       		.uleb128 0x1
+ 742 03f3 32       		.byte	0x32
+ 743 03f4 00       		.byte	0
+ 744 03f5 13       		.uleb128 0x13
+ 745 03f6 96000000 		.4byte	.LVL10
+ 746 03fa 99040000 		.4byte	0x499
+ 747 03fe 08040000 		.4byte	0x408
+ 748 0402 14       		.uleb128 0x14
+ 749 0403 01       		.uleb128 0x1
+ 750 0404 51       		.byte	0x51
+ 751 0405 01       		.uleb128 0x1
+ 752 0406 32       		.byte	0x32
+ 753 0407 00       		.byte	0
+ 754 0408 13       		.uleb128 0x13
+ 755 0409 9E000000 		.4byte	.LVL11
+ 756 040d 45030000 		.4byte	0x345
+ 757 0411 1B040000 		.4byte	0x41b
+ 758 0415 14       		.uleb128 0x14
+ 759 0416 01       		.uleb128 0x1
+ 760 0417 50       		.byte	0x50
+ 761 0418 01       		.uleb128 0x1
+ 762 0419 30       		.byte	0x30
+ 763 041a 00       		.byte	0
+ 764 041b 13       		.uleb128 0x13
+ 765 041c B2000000 		.4byte	.LVL12
+ 766 0420 99040000 		.4byte	0x499
+ 767 0424 30040000 		.4byte	0x430
+ 768 0428 14       		.uleb128 0x14
+ 769 0429 01       		.uleb128 0x1
+ 770 042a 51       		.byte	0x51
+ 771 042b 03       		.uleb128 0x3
+ 772 042c 0A       		.byte	0xa
+ 773 042d B80B     		.2byte	0xbb8
+ 774 042f 00       		.byte	0
+ 775 0430 13       		.uleb128 0x13
+ 776 0431 BA000000 		.4byte	.LVL13
+ 777 0435 45030000 		.4byte	0x345
+ 778 0439 43040000 		.4byte	0x443
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 16
+
+
+ 779 043d 14       		.uleb128 0x14
+ 780 043e 01       		.uleb128 0x1
+ 781 043f 50       		.byte	0x50
+ 782 0440 01       		.uleb128 0x1
+ 783 0441 30       		.byte	0x30
+ 784 0442 00       		.byte	0
+ 785 0443 12       		.uleb128 0x12
+ 786 0444 C0000000 		.4byte	.LVL14
+ 787 0448 A4040000 		.4byte	0x4a4
+ 788 044c 00       		.byte	0
+ 789 044d 15       		.uleb128 0x15
+ 790 044e 6F020000 		.4byte	.LASF107
+ 791 0452 04       		.byte	0x4
+ 792 0453 1B       		.byte	0x1b
+ 793 0454 3A030000 		.4byte	0x33a
+ 794 0458 16       		.uleb128 0x16
+ 795 0459 68040000 		.4byte	0x468
+ 796 045d 68040000 		.4byte	0x468
+ 797 0461 17       		.uleb128 0x17
+ 798 0462 B0000000 		.4byte	0xb0
+ 799 0466 07       		.byte	0x7
+ 800 0467 00       		.byte	0
+ 801 0468 18       		.uleb128 0x18
+ 802 0469 6B000000 		.4byte	0x6b
+ 803 046d 19       		.uleb128 0x19
+ 804 046e 92040000 		.4byte	.LASF108
+ 805 0472 01       		.byte	0x1
+ 806 0473 08       		.byte	0x8
+ 807 0474 7E040000 		.4byte	0x47e
+ 808 0478 05       		.uleb128 0x5
+ 809 0479 03       		.byte	0x3
+ 810 047a 00000000 		.4byte	Phase_C
+ 811 047e 18       		.uleb128 0x18
+ 812 047f 58040000 		.4byte	0x458
+ 813 0483 19       		.uleb128 0x19
+ 814 0484 77000000 		.4byte	.LASF109
+ 815 0488 01       		.byte	0x1
+ 816 0489 09       		.byte	0x9
+ 817 048a 94040000 		.4byte	0x494
+ 818 048e 05       		.uleb128 0x5
+ 819 048f 03       		.byte	0x3
+ 820 0490 00000000 		.4byte	Phase_CC
+ 821 0494 18       		.uleb128 0x18
+ 822 0495 58040000 		.4byte	0x458
+ 823 0499 1A       		.uleb128 0x1a
+ 824 049a 26030000 		.4byte	.LASF110
+ 825 049e 26030000 		.4byte	.LASF110
+ 826 04a2 04       		.byte	0x4
+ 827 04a3 27       		.byte	0x27
+ 828 04a4 1A       		.uleb128 0x1a
+ 829 04a5 2C040000 		.4byte	.LASF111
+ 830 04a9 2C040000 		.4byte	.LASF111
+ 831 04ad 04       		.byte	0x4
+ 832 04ae 29       		.byte	0x29
+ 833 04af 00       		.byte	0
+ 834              		.section	.debug_abbrev,"",%progbits
+ 835              	.Ldebug_abbrev0:
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 17
+
+
+ 836 0000 01       		.uleb128 0x1
+ 837 0001 11       		.uleb128 0x11
+ 838 0002 01       		.byte	0x1
+ 839 0003 25       		.uleb128 0x25
+ 840 0004 0E       		.uleb128 0xe
+ 841 0005 13       		.uleb128 0x13
+ 842 0006 0B       		.uleb128 0xb
+ 843 0007 03       		.uleb128 0x3
+ 844 0008 0E       		.uleb128 0xe
+ 845 0009 1B       		.uleb128 0x1b
+ 846 000a 0E       		.uleb128 0xe
+ 847 000b 55       		.uleb128 0x55
+ 848 000c 17       		.uleb128 0x17
+ 849 000d 11       		.uleb128 0x11
+ 850 000e 01       		.uleb128 0x1
+ 851 000f 10       		.uleb128 0x10
+ 852 0010 17       		.uleb128 0x17
+ 853 0011 00       		.byte	0
+ 854 0012 00       		.byte	0
+ 855 0013 02       		.uleb128 0x2
+ 856 0014 24       		.uleb128 0x24
+ 857 0015 00       		.byte	0
+ 858 0016 0B       		.uleb128 0xb
+ 859 0017 0B       		.uleb128 0xb
+ 860 0018 3E       		.uleb128 0x3e
+ 861 0019 0B       		.uleb128 0xb
+ 862 001a 03       		.uleb128 0x3
+ 863 001b 0E       		.uleb128 0xe
+ 864 001c 00       		.byte	0
+ 865 001d 00       		.byte	0
+ 866 001e 03       		.uleb128 0x3
+ 867 001f 24       		.uleb128 0x24
+ 868 0020 00       		.byte	0
+ 869 0021 0B       		.uleb128 0xb
+ 870 0022 0B       		.uleb128 0xb
+ 871 0023 3E       		.uleb128 0x3e
+ 872 0024 0B       		.uleb128 0xb
+ 873 0025 03       		.uleb128 0x3
+ 874 0026 08       		.uleb128 0x8
+ 875 0027 00       		.byte	0
+ 876 0028 00       		.byte	0
+ 877 0029 04       		.uleb128 0x4
+ 878 002a 16       		.uleb128 0x16
+ 879 002b 00       		.byte	0
+ 880 002c 03       		.uleb128 0x3
+ 881 002d 0E       		.uleb128 0xe
+ 882 002e 3A       		.uleb128 0x3a
+ 883 002f 0B       		.uleb128 0xb
+ 884 0030 3B       		.uleb128 0x3b
+ 885 0031 05       		.uleb128 0x5
+ 886 0032 49       		.uleb128 0x49
+ 887 0033 13       		.uleb128 0x13
+ 888 0034 00       		.byte	0
+ 889 0035 00       		.byte	0
+ 890 0036 05       		.uleb128 0x5
+ 891 0037 35       		.uleb128 0x35
+ 892 0038 00       		.byte	0
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 18
+
+
+ 893 0039 49       		.uleb128 0x49
+ 894 003a 13       		.uleb128 0x13
+ 895 003b 00       		.byte	0
+ 896 003c 00       		.byte	0
+ 897 003d 06       		.uleb128 0x6
+ 898 003e 04       		.uleb128 0x4
+ 899 003f 01       		.byte	0x1
+ 900 0040 0B       		.uleb128 0xb
+ 901 0041 0B       		.uleb128 0xb
+ 902 0042 49       		.uleb128 0x49
+ 903 0043 13       		.uleb128 0x13
+ 904 0044 3A       		.uleb128 0x3a
+ 905 0045 0B       		.uleb128 0xb
+ 906 0046 3B       		.uleb128 0x3b
+ 907 0047 05       		.uleb128 0x5
+ 908 0048 01       		.uleb128 0x1
+ 909 0049 13       		.uleb128 0x13
+ 910 004a 00       		.byte	0
+ 911 004b 00       		.byte	0
+ 912 004c 07       		.uleb128 0x7
+ 913 004d 28       		.uleb128 0x28
+ 914 004e 00       		.byte	0
+ 915 004f 03       		.uleb128 0x3
+ 916 0050 0E       		.uleb128 0xe
+ 917 0051 1C       		.uleb128 0x1c
+ 918 0052 0B       		.uleb128 0xb
+ 919 0053 00       		.byte	0
+ 920 0054 00       		.byte	0
+ 921 0055 08       		.uleb128 0x8
+ 922 0056 04       		.uleb128 0x4
+ 923 0057 01       		.byte	0x1
+ 924 0058 0B       		.uleb128 0xb
+ 925 0059 0B       		.uleb128 0xb
+ 926 005a 49       		.uleb128 0x49
+ 927 005b 13       		.uleb128 0x13
+ 928 005c 3A       		.uleb128 0x3a
+ 929 005d 0B       		.uleb128 0xb
+ 930 005e 3B       		.uleb128 0x3b
+ 931 005f 0B       		.uleb128 0xb
+ 932 0060 01       		.uleb128 0x1
+ 933 0061 13       		.uleb128 0x13
+ 934 0062 00       		.byte	0
+ 935 0063 00       		.byte	0
+ 936 0064 09       		.uleb128 0x9
+ 937 0065 16       		.uleb128 0x16
+ 938 0066 00       		.byte	0
+ 939 0067 03       		.uleb128 0x3
+ 940 0068 08       		.uleb128 0x8
+ 941 0069 3A       		.uleb128 0x3a
+ 942 006a 0B       		.uleb128 0xb
+ 943 006b 3B       		.uleb128 0x3b
+ 944 006c 0B       		.uleb128 0xb
+ 945 006d 49       		.uleb128 0x49
+ 946 006e 13       		.uleb128 0x13
+ 947 006f 00       		.byte	0
+ 948 0070 00       		.byte	0
+ 949 0071 0A       		.uleb128 0xa
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 19
+
+
+ 950 0072 13       		.uleb128 0x13
+ 951 0073 01       		.byte	0x1
+ 952 0074 03       		.uleb128 0x3
+ 953 0075 0E       		.uleb128 0xe
+ 954 0076 0B       		.uleb128 0xb
+ 955 0077 0B       		.uleb128 0xb
+ 956 0078 3A       		.uleb128 0x3a
+ 957 0079 0B       		.uleb128 0xb
+ 958 007a 3B       		.uleb128 0x3b
+ 959 007b 0B       		.uleb128 0xb
+ 960 007c 01       		.uleb128 0x1
+ 961 007d 13       		.uleb128 0x13
+ 962 007e 00       		.byte	0
+ 963 007f 00       		.byte	0
+ 964 0080 0B       		.uleb128 0xb
+ 965 0081 0D       		.uleb128 0xd
+ 966 0082 00       		.byte	0
+ 967 0083 03       		.uleb128 0x3
+ 968 0084 0E       		.uleb128 0xe
+ 969 0085 3A       		.uleb128 0x3a
+ 970 0086 0B       		.uleb128 0xb
+ 971 0087 3B       		.uleb128 0x3b
+ 972 0088 0B       		.uleb128 0xb
+ 973 0089 49       		.uleb128 0x49
+ 974 008a 13       		.uleb128 0x13
+ 975 008b 38       		.uleb128 0x38
+ 976 008c 0B       		.uleb128 0xb
+ 977 008d 00       		.byte	0
+ 978 008e 00       		.byte	0
+ 979 008f 0C       		.uleb128 0xc
+ 980 0090 0D       		.uleb128 0xd
+ 981 0091 00       		.byte	0
+ 982 0092 03       		.uleb128 0x3
+ 983 0093 08       		.uleb128 0x8
+ 984 0094 3A       		.uleb128 0x3a
+ 985 0095 0B       		.uleb128 0xb
+ 986 0096 3B       		.uleb128 0x3b
+ 987 0097 0B       		.uleb128 0xb
+ 988 0098 49       		.uleb128 0x49
+ 989 0099 13       		.uleb128 0x13
+ 990 009a 38       		.uleb128 0x38
+ 991 009b 0B       		.uleb128 0xb
+ 992 009c 00       		.byte	0
+ 993 009d 00       		.byte	0
+ 994 009e 0D       		.uleb128 0xd
+ 995 009f 16       		.uleb128 0x16
+ 996 00a0 00       		.byte	0
+ 997 00a1 03       		.uleb128 0x3
+ 998 00a2 0E       		.uleb128 0xe
+ 999 00a3 3A       		.uleb128 0x3a
+ 1000 00a4 0B       		.uleb128 0xb
+ 1001 00a5 3B       		.uleb128 0x3b
+ 1002 00a6 0B       		.uleb128 0xb
+ 1003 00a7 49       		.uleb128 0x49
+ 1004 00a8 13       		.uleb128 0x13
+ 1005 00a9 00       		.byte	0
+ 1006 00aa 00       		.byte	0
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 20
+
+
+ 1007 00ab 0E       		.uleb128 0xe
+ 1008 00ac 2E       		.uleb128 0x2e
+ 1009 00ad 01       		.byte	0x1
+ 1010 00ae 3F       		.uleb128 0x3f
+ 1011 00af 19       		.uleb128 0x19
+ 1012 00b0 03       		.uleb128 0x3
+ 1013 00b1 0E       		.uleb128 0xe
+ 1014 00b2 3A       		.uleb128 0x3a
+ 1015 00b3 0B       		.uleb128 0xb
+ 1016 00b4 3B       		.uleb128 0x3b
+ 1017 00b5 0B       		.uleb128 0xb
+ 1018 00b6 27       		.uleb128 0x27
+ 1019 00b7 19       		.uleb128 0x19
+ 1020 00b8 11       		.uleb128 0x11
+ 1021 00b9 01       		.uleb128 0x1
+ 1022 00ba 12       		.uleb128 0x12
+ 1023 00bb 06       		.uleb128 0x6
+ 1024 00bc 40       		.uleb128 0x40
+ 1025 00bd 18       		.uleb128 0x18
+ 1026 00be 9742     		.uleb128 0x2117
+ 1027 00c0 19       		.uleb128 0x19
+ 1028 00c1 01       		.uleb128 0x1
+ 1029 00c2 13       		.uleb128 0x13
+ 1030 00c3 00       		.byte	0
+ 1031 00c4 00       		.byte	0
+ 1032 00c5 0F       		.uleb128 0xf
+ 1033 00c6 05       		.uleb128 0x5
+ 1034 00c7 00       		.byte	0
+ 1035 00c8 03       		.uleb128 0x3
+ 1036 00c9 0E       		.uleb128 0xe
+ 1037 00ca 3A       		.uleb128 0x3a
+ 1038 00cb 0B       		.uleb128 0xb
+ 1039 00cc 3B       		.uleb128 0x3b
+ 1040 00cd 0B       		.uleb128 0xb
+ 1041 00ce 49       		.uleb128 0x49
+ 1042 00cf 13       		.uleb128 0x13
+ 1043 00d0 02       		.uleb128 0x2
+ 1044 00d1 17       		.uleb128 0x17
+ 1045 00d2 00       		.byte	0
+ 1046 00d3 00       		.byte	0
+ 1047 00d4 10       		.uleb128 0x10
+ 1048 00d5 34       		.uleb128 0x34
+ 1049 00d6 00       		.byte	0
+ 1050 00d7 03       		.uleb128 0x3
+ 1051 00d8 0E       		.uleb128 0xe
+ 1052 00d9 3A       		.uleb128 0x3a
+ 1053 00da 0B       		.uleb128 0xb
+ 1054 00db 3B       		.uleb128 0x3b
+ 1055 00dc 0B       		.uleb128 0xb
+ 1056 00dd 49       		.uleb128 0x49
+ 1057 00de 13       		.uleb128 0x13
+ 1058 00df 02       		.uleb128 0x2
+ 1059 00e0 17       		.uleb128 0x17
+ 1060 00e1 00       		.byte	0
+ 1061 00e2 00       		.byte	0
+ 1062 00e3 11       		.uleb128 0x11
+ 1063 00e4 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 21
+
+
+ 1064 00e5 01       		.byte	0x1
+ 1065 00e6 3F       		.uleb128 0x3f
+ 1066 00e7 19       		.uleb128 0x19
+ 1067 00e8 03       		.uleb128 0x3
+ 1068 00e9 0E       		.uleb128 0xe
+ 1069 00ea 3A       		.uleb128 0x3a
+ 1070 00eb 0B       		.uleb128 0xb
+ 1071 00ec 3B       		.uleb128 0x3b
+ 1072 00ed 0B       		.uleb128 0xb
+ 1073 00ee 11       		.uleb128 0x11
+ 1074 00ef 01       		.uleb128 0x1
+ 1075 00f0 12       		.uleb128 0x12
+ 1076 00f1 06       		.uleb128 0x6
+ 1077 00f2 40       		.uleb128 0x40
+ 1078 00f3 18       		.uleb128 0x18
+ 1079 00f4 9742     		.uleb128 0x2117
+ 1080 00f6 19       		.uleb128 0x19
+ 1081 00f7 01       		.uleb128 0x1
+ 1082 00f8 13       		.uleb128 0x13
+ 1083 00f9 00       		.byte	0
+ 1084 00fa 00       		.byte	0
+ 1085 00fb 12       		.uleb128 0x12
+ 1086 00fc 898201   		.uleb128 0x4109
+ 1087 00ff 00       		.byte	0
+ 1088 0100 11       		.uleb128 0x11
+ 1089 0101 01       		.uleb128 0x1
+ 1090 0102 31       		.uleb128 0x31
+ 1091 0103 13       		.uleb128 0x13
+ 1092 0104 00       		.byte	0
+ 1093 0105 00       		.byte	0
+ 1094 0106 13       		.uleb128 0x13
+ 1095 0107 898201   		.uleb128 0x4109
+ 1096 010a 01       		.byte	0x1
+ 1097 010b 11       		.uleb128 0x11
+ 1098 010c 01       		.uleb128 0x1
+ 1099 010d 31       		.uleb128 0x31
+ 1100 010e 13       		.uleb128 0x13
+ 1101 010f 01       		.uleb128 0x1
+ 1102 0110 13       		.uleb128 0x13
+ 1103 0111 00       		.byte	0
+ 1104 0112 00       		.byte	0
+ 1105 0113 14       		.uleb128 0x14
+ 1106 0114 8A8201   		.uleb128 0x410a
+ 1107 0117 00       		.byte	0
+ 1108 0118 02       		.uleb128 0x2
+ 1109 0119 18       		.uleb128 0x18
+ 1110 011a 9142     		.uleb128 0x2111
+ 1111 011c 18       		.uleb128 0x18
+ 1112 011d 00       		.byte	0
+ 1113 011e 00       		.byte	0
+ 1114 011f 15       		.uleb128 0x15
+ 1115 0120 34       		.uleb128 0x34
+ 1116 0121 00       		.byte	0
+ 1117 0122 03       		.uleb128 0x3
+ 1118 0123 0E       		.uleb128 0xe
+ 1119 0124 3A       		.uleb128 0x3a
+ 1120 0125 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 22
+
+
+ 1121 0126 3B       		.uleb128 0x3b
+ 1122 0127 0B       		.uleb128 0xb
+ 1123 0128 49       		.uleb128 0x49
+ 1124 0129 13       		.uleb128 0x13
+ 1125 012a 3F       		.uleb128 0x3f
+ 1126 012b 19       		.uleb128 0x19
+ 1127 012c 3C       		.uleb128 0x3c
+ 1128 012d 19       		.uleb128 0x19
+ 1129 012e 00       		.byte	0
+ 1130 012f 00       		.byte	0
+ 1131 0130 16       		.uleb128 0x16
+ 1132 0131 01       		.uleb128 0x1
+ 1133 0132 01       		.byte	0x1
+ 1134 0133 49       		.uleb128 0x49
+ 1135 0134 13       		.uleb128 0x13
+ 1136 0135 01       		.uleb128 0x1
+ 1137 0136 13       		.uleb128 0x13
+ 1138 0137 00       		.byte	0
+ 1139 0138 00       		.byte	0
+ 1140 0139 17       		.uleb128 0x17
+ 1141 013a 21       		.uleb128 0x21
+ 1142 013b 00       		.byte	0
+ 1143 013c 49       		.uleb128 0x49
+ 1144 013d 13       		.uleb128 0x13
+ 1145 013e 2F       		.uleb128 0x2f
+ 1146 013f 0B       		.uleb128 0xb
+ 1147 0140 00       		.byte	0
+ 1148 0141 00       		.byte	0
+ 1149 0142 18       		.uleb128 0x18
+ 1150 0143 26       		.uleb128 0x26
+ 1151 0144 00       		.byte	0
+ 1152 0145 49       		.uleb128 0x49
+ 1153 0146 13       		.uleb128 0x13
+ 1154 0147 00       		.byte	0
+ 1155 0148 00       		.byte	0
+ 1156 0149 19       		.uleb128 0x19
+ 1157 014a 34       		.uleb128 0x34
+ 1158 014b 00       		.byte	0
+ 1159 014c 03       		.uleb128 0x3
+ 1160 014d 0E       		.uleb128 0xe
+ 1161 014e 3A       		.uleb128 0x3a
+ 1162 014f 0B       		.uleb128 0xb
+ 1163 0150 3B       		.uleb128 0x3b
+ 1164 0151 0B       		.uleb128 0xb
+ 1165 0152 49       		.uleb128 0x49
+ 1166 0153 13       		.uleb128 0x13
+ 1167 0154 3F       		.uleb128 0x3f
+ 1168 0155 19       		.uleb128 0x19
+ 1169 0156 02       		.uleb128 0x2
+ 1170 0157 18       		.uleb128 0x18
+ 1171 0158 00       		.byte	0
+ 1172 0159 00       		.byte	0
+ 1173 015a 1A       		.uleb128 0x1a
+ 1174 015b 2E       		.uleb128 0x2e
+ 1175 015c 00       		.byte	0
+ 1176 015d 3F       		.uleb128 0x3f
+ 1177 015e 19       		.uleb128 0x19
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 23
+
+
+ 1178 015f 3C       		.uleb128 0x3c
+ 1179 0160 19       		.uleb128 0x19
+ 1180 0161 6E       		.uleb128 0x6e
+ 1181 0162 0E       		.uleb128 0xe
+ 1182 0163 03       		.uleb128 0x3
+ 1183 0164 0E       		.uleb128 0xe
+ 1184 0165 3A       		.uleb128 0x3a
+ 1185 0166 0B       		.uleb128 0xb
+ 1186 0167 3B       		.uleb128 0x3b
+ 1187 0168 0B       		.uleb128 0xb
+ 1188 0169 00       		.byte	0
+ 1189 016a 00       		.byte	0
+ 1190 016b 00       		.byte	0
+ 1191              		.section	.debug_loc,"",%progbits
+ 1192              	.Ldebug_loc0:
+ 1193              	.LLST0:
+ 1194 0000 00000000 		.4byte	.LVL0
+ 1195 0004 0A000000 		.4byte	.LVL2
+ 1196 0008 0100     		.2byte	0x1
+ 1197 000a 50       		.byte	0x50
+ 1198 000b 0A000000 		.4byte	.LVL2
+ 1199 000f 14000000 		.4byte	.LFE36
+ 1200 0013 0400     		.2byte	0x4
+ 1201 0015 F3       		.byte	0xf3
+ 1202 0016 01       		.uleb128 0x1
+ 1203 0017 50       		.byte	0x50
+ 1204 0018 9F       		.byte	0x9f
+ 1205 0019 00000000 		.4byte	0
+ 1206 001d 00000000 		.4byte	0
+ 1207              	.LLST1:
+ 1208 0021 08000000 		.4byte	.LVL1
+ 1209 0025 0A000000 		.4byte	.LVL2
+ 1210 0029 0100     		.2byte	0x1
+ 1211 002b 53       		.byte	0x53
+ 1212 002c 0A000000 		.4byte	.LVL2
+ 1213 0030 14000000 		.4byte	.LFE36
+ 1214 0034 0100     		.2byte	0x1
+ 1215 0036 50       		.byte	0x50
+ 1216 0037 00000000 		.4byte	0
+ 1217 003b 00000000 		.4byte	0
+ 1218              		.section	.debug_aranges,"",%progbits
+ 1219 0000 24000000 		.4byte	0x24
+ 1220 0004 0200     		.2byte	0x2
+ 1221 0006 00000000 		.4byte	.Ldebug_info0
+ 1222 000a 04       		.byte	0x4
+ 1223 000b 00       		.byte	0
+ 1224 000c 0000     		.2byte	0
+ 1225 000e 0000     		.2byte	0
+ 1226 0010 00000000 		.4byte	.LFB36
+ 1227 0014 14000000 		.4byte	.LFE36-.LFB36
+ 1228 0018 00000000 		.4byte	.LFB37
+ 1229 001c D0000000 		.4byte	.LFE37-.LFB37
+ 1230 0020 00000000 		.4byte	0
+ 1231 0024 00000000 		.4byte	0
+ 1232              		.section	.debug_ranges,"",%progbits
+ 1233              	.Ldebug_ranges0:
+ 1234 0000 00000000 		.4byte	.LFB36
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 24
+
+
+ 1235 0004 14000000 		.4byte	.LFE36
+ 1236 0008 00000000 		.4byte	.LFB37
+ 1237 000c D0000000 		.4byte	.LFE37
+ 1238 0010 00000000 		.4byte	0
+ 1239 0014 00000000 		.4byte	0
+ 1240              		.section	.debug_line,"",%progbits
+ 1241              	.Ldebug_line0:
+ 1242 0000 A4000000 		.section	.debug_str,"MS",%progbits,1
+ 1242      02006000 
+ 1242      00000201 
+ 1242      FB0E0D00 
+ 1242      01010101 
+ 1243              	.LASF15:
+ 1244 0000 6C6F6E67 		.ascii	"long double\000"
+ 1244      20646F75 
+ 1244      626C6500 
+ 1245              	.LASF26:
+ 1246 000c 4359424C 		.ascii	"CYBLE_EVT_GAP_PASSKEY_ENTRY_REQUEST\000"
+ 1246      455F4556 
+ 1246      545F4741 
+ 1246      505F5041 
+ 1246      53534B45 
+ 1247              	.LASF118:
+ 1248 0030 64725661 		.ascii	"drVal\000"
+ 1248      6C00
+ 1249              	.LASF23:
+ 1250 0036 4359424C 		.ascii	"CYBLE_EVT_MEMORY_REQUEST\000"
+ 1250      455F4556 
+ 1250      545F4D45 
+ 1250      4D4F5259 
+ 1250      5F524551 
+ 1251              	.LASF105:
+ 1252 004f 6379636C 		.ascii	"cycle\000"
+ 1252      6500
+ 1253              	.LASF32:
+ 1254 0055 4359424C 		.ascii	"CYBLE_EVT_GAP_DEVICE_DISCONNECTED\000"
+ 1254      455F4556 
+ 1254      545F4741 
+ 1254      505F4445 
+ 1254      56494345 
+ 1255              	.LASF109:
+ 1256 0077 50686173 		.ascii	"Phase_CC\000"
+ 1256      655F4343 
+ 1256      00
+ 1257              	.LASF116:
+ 1258 0080 506F7274 		.ascii	"Port1_MOTO_Write\000"
+ 1258      315F4D4F 
+ 1258      544F5F57 
+ 1258      72697465 
+ 1258      00
+ 1259              	.LASF2:
+ 1260 0091 73686F72 		.ascii	"short int\000"
+ 1260      7420696E 
+ 1260      7400
+ 1261              	.LASF92:
+ 1262 009b 6D644449 		.ascii	"mdDIM\000"
+ 1262      4D00
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 25
+
+
+ 1263              	.LASF16:
+ 1264 00a1 73697A65 		.ascii	"sizetype\000"
+ 1264      74797065 
+ 1264      00
+ 1265              	.LASF40:
+ 1266 00aa 4359424C 		.ascii	"CYBLE_EVT_GAP_DATA_LENGTH_CHANGE\000"
+ 1266      455F4556 
+ 1266      545F4741 
+ 1266      505F4441 
+ 1266      54415F4C 
+ 1267              	.LASF119:
+ 1268 00cb 5A4D6F74 		.ascii	"ZMoto\000"
+ 1268      6F00
+ 1269              	.LASF87:
+ 1270 00d1 4359424C 		.ascii	"CYBLE_EVT_FLASH_CORRUPT\000"
+ 1270      455F4556 
+ 1270      545F464C 
+ 1270      4153485F 
+ 1270      434F5252 
+ 1271              	.LASF48:
+ 1272 00e9 4359424C 		.ascii	"CYBLE_EVT_GATTC_ERROR_RSP\000"
+ 1272      455F4556 
+ 1272      545F4741 
+ 1272      5454435F 
+ 1272      4552524F 
+ 1273              	.LASF103:
+ 1274 0103 6D6F6465 		.ascii	"mode\000"
+ 1274      00
+ 1275              	.LASF21:
+ 1276 0108 4359424C 		.ascii	"CYBLE_EVT_HCI_STATUS\000"
+ 1276      455F4556 
+ 1276      545F4843 
+ 1276      495F5354 
+ 1276      41545553 
+ 1277              	.LASF54:
+ 1278 011d 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_BY_TYPE_RSP\000"
+ 1278      455F4556 
+ 1278      545F4741 
+ 1278      5454435F 
+ 1278      52454144 
+ 1279              	.LASF94:
+ 1280 013e 6D644D42 		.ascii	"mdMBle\000"
+ 1280      6C6500
+ 1281              	.LASF18:
+ 1282 0145 4359424C 		.ascii	"CYBLE_EVT_STACK_ON\000"
+ 1282      455F4556 
+ 1282      545F5354 
+ 1282      41434B5F 
+ 1282      4F4E00
+ 1283              	.LASF100:
+ 1284 0158 65786375 		.ascii	"excute\000"
+ 1284      746500
+ 1285              	.LASF5:
+ 1286 015f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1286      20756E73 
+ 1286      69676E65 
+ 1286      6420696E 
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 26
+
+
+ 1286      7400
+ 1287              	.LASF117:
+ 1288 0171 76616C75 		.ascii	"value\000"
+ 1288      6500
+ 1289              	.LASF35:
+ 1290 0177 4359424C 		.ascii	"CYBLE_EVT_GAPC_SCAN_START_STOP\000"
+ 1290      455F4556 
+ 1290      545F4741 
+ 1290      50435F53 
+ 1290      43414E5F 
+ 1291              	.LASF112:
+ 1292 0196 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 1292      43313120 
+ 1292      352E342E 
+ 1292      31203230 
+ 1292      31363036 
+ 1293 01c9 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 1293      20726576 
+ 1293      6973696F 
+ 1293      6E203233 
+ 1293      37373135 
+ 1294 01fc 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1294      66756E63 
+ 1294      74696F6E 
+ 1294      2D736563 
+ 1294      74696F6E 
+ 1295              	.LASF36:
+ 1296 0224 4359424C 		.ascii	"CYBLE_EVT_GAP_KEYINFO_EXCHNGE_CMPLT\000"
+ 1296      455F4556 
+ 1296      545F4741 
+ 1296      505F4B45 
+ 1296      59494E46 
+ 1297              	.LASF9:
+ 1298 0248 75696E74 		.ascii	"uint8\000"
+ 1298      3800
+ 1299              	.LASF68:
+ 1300 024e 4359424C 		.ascii	"CYBLE_EVT_GATTS_HANDLE_VALUE_CNF\000"
+ 1300      455F4556 
+ 1300      545F4741 
+ 1300      5454535F 
+ 1300      48414E44 
+ 1301              	.LASF107:
+ 1302 026f 7063625F 		.ascii	"pcb_ZMoto\000"
+ 1302      5A4D6F74 
+ 1302      6F00
+ 1303              	.LASF79:
+ 1304 0279 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DISCONN_CNF\000"
+ 1304      455F4556 
+ 1304      545F4C32 
+ 1304      4341505F 
+ 1304      43424643 
+ 1305              	.LASF97:
+ 1306 029a 6D645072 		.ascii	"mdProx\000"
+ 1306      6F7800
+ 1307              	.LASF115:
+ 1308 02a1 74616770 		.ascii	"tagpcb\000"
+ 1308      636200
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 27
+
+
+ 1309              	.LASF11:
+ 1310 02a8 666C6F61 		.ascii	"float\000"
+ 1310      7400
+ 1311              	.LASF57:
+ 1312 02ae 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_RSP\000"
+ 1312      455F4556 
+ 1312      545F4741 
+ 1312      5454435F 
+ 1312      52454144 
+ 1313              	.LASF8:
+ 1314 02c7 756E7369 		.ascii	"unsigned int\000"
+ 1314      676E6564 
+ 1314      20696E74 
+ 1314      00
+ 1315              	.LASF61:
+ 1316 02d4 4359424C 		.ascii	"CYBLE_EVT_GATTC_WRITE_RSP\000"
+ 1316      455F4556 
+ 1316      545F4741 
+ 1316      5454435F 
+ 1316      57524954 
+ 1317              	.LASF42:
+ 1318 02ee 4359424C 		.ascii	"CYBLE_EVT_GAPC_DIRECT_ADV_REPORT\000"
+ 1318      455F4556 
+ 1318      545F4741 
+ 1318      50435F44 
+ 1318      49524543 
+ 1319              	.LASF7:
+ 1320 030f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1320      206C6F6E 
+ 1320      6720756E 
+ 1320      7369676E 
+ 1320      65642069 
+ 1321              	.LASF110:
+ 1322 0326 5A426C6F 		.ascii	"ZBlock\000"
+ 1322      636B00
+ 1323              	.LASF46:
+ 1324 032d 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_REQ_REPLY_ERR\000"
+ 1324      455F4556 
+ 1324      545F4741 
+ 1324      505F4155 
+ 1324      54485F52 
+ 1325              	.LASF95:
+ 1326 034e 6D644D4B 		.ascii	"mdMKey\000"
+ 1326      657900
+ 1327              	.LASF4:
+ 1328 0355 6C6F6E67 		.ascii	"long int\000"
+ 1328      20696E74 
+ 1328      00
+ 1329              	.LASF67:
+ 1330 035e 4359424C 		.ascii	"CYBLE_EVT_GATTC_HANDLE_VALUE_IND\000"
+ 1330      455F4556 
+ 1330      545F4741 
+ 1330      5454435F 
+ 1330      48414E44 
+ 1331              	.LASF106:
+ 1332 037f 7063625F 		.ascii	"pcb_def\000"
+ 1332      64656600 
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 28
+
+
+ 1333              	.LASF98:
+ 1334 0387 64657374 		.ascii	"destroy\000"
+ 1334      726F7900 
+ 1335              	.LASF31:
+ 1336 038f 4359424C 		.ascii	"CYBLE_EVT_GAP_DEVICE_CONNECTED\000"
+ 1336      455F4556 
+ 1336      545F4741 
+ 1336      505F4445 
+ 1336      56494345 
+ 1337              	.LASF30:
+ 1338 03ae 4359424C 		.ascii	"CYBLE_EVT_GAPP_ADVERTISEMENT_START_STOP\000"
+ 1338      455F4556 
+ 1338      545F4741 
+ 1338      50505F41 
+ 1338      44564552 
+ 1339              	.LASF101:
+ 1340 03d6 626C6F63 		.ascii	"block\000"
+ 1340      6B00
+ 1341              	.LASF22:
+ 1342 03dc 4359424C 		.ascii	"CYBLE_EVT_STACK_BUSY_STATUS\000"
+ 1342      455F4556 
+ 1342      545F5354 
+ 1342      41434B5F 
+ 1342      42555359 
+ 1343              	.LASF91:
+ 1344 03f8 6D644D4F 		.ascii	"mdMOTO_CCLOCK\000"
+ 1344      544F5F43 
+ 1344      434C4F43 
+ 1344      4B00
+ 1345              	.LASF27:
+ 1346 0406 4359424C 		.ascii	"CYBLE_EVT_GAP_PASSKEY_DISPLAY_REQUEST\000"
+ 1346      455F4556 
+ 1346      545F4741 
+ 1346      505F5041 
+ 1346      53534B45 
+ 1347              	.LASF111:
+ 1348 042c 5A446573 		.ascii	"ZDestroy\000"
+ 1348      74726F79 
+ 1348      00
+ 1349              	.LASF96:
+ 1350 0435 6D644B65 		.ascii	"mdKeyScan\000"
+ 1350      79536361 
+ 1350      6E00
+ 1351              	.LASF77:
+ 1352 043f 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_CONN_CNF\000"
+ 1352      455F4556 
+ 1352      545F4C32 
+ 1352      4341505F 
+ 1352      43424643 
+ 1353              	.LASF47:
+ 1354 045d 4359424C 		.ascii	"CYBLE_EVT_GAP_SMP_LOC_P256_KEYS_GEN_AND_SET_COMPLET"
+ 1354      455F4556 
+ 1354      545F4741 
+ 1354      505F534D 
+ 1354      505F4C4F 
+ 1355 0490 4500     		.ascii	"E\000"
+ 1356              	.LASF108:
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 29
+
+
+ 1357 0492 50686173 		.ascii	"Phase_C\000"
+ 1357      655F4300 
+ 1358              	.LASF93:
+ 1359 049a 6D644265 		.ascii	"mdBeep\000"
+ 1359      657000
+ 1360              	.LASF73:
+ 1361 04a1 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CONN_PARAM_UPDATE_REQ\000"
+ 1361      455F4556 
+ 1361      545F4C32 
+ 1361      4341505F 
+ 1361      434F4E4E 
+ 1362              	.LASF1:
+ 1363 04c7 756E7369 		.ascii	"unsigned char\000"
+ 1363      676E6564 
+ 1363      20636861 
+ 1363      7200
+ 1364              	.LASF63:
+ 1365 04d5 4359424C 		.ascii	"CYBLE_EVT_GATTS_PREP_WRITE_REQ\000"
+ 1365      455F4556 
+ 1365      545F4741 
+ 1365      5454535F 
+ 1365      50524550 
+ 1366              	.LASF85:
+ 1367 04f4 4359424C 		.ascii	"CYBLE_EVT_LE_PING_AUTH_TIMEOUT\000"
+ 1367      455F4556 
+ 1367      545F4C45 
+ 1367      5F50494E 
+ 1367      475F4155 
+ 1368              	.LASF55:
+ 1369 0513 4359424C 		.ascii	"CYBLE_EVT_GATTC_FIND_INFO_RSP\000"
+ 1369      455F4556 
+ 1369      545F4741 
+ 1369      5454435F 
+ 1369      46494E44 
+ 1370              	.LASF0:
+ 1371 0531 7369676E 		.ascii	"signed char\000"
+ 1371      65642063 
+ 1371      68617200 
+ 1372              	.LASF38:
+ 1373 053d 4359424C 		.ascii	"CYBLE_EVT_GAP_KEYPRESS_NOTIFICATION\000"
+ 1373      455F4556 
+ 1373      545F4741 
+ 1373      505F4B45 
+ 1373      59505245 
+ 1374              	.LASF56:
+ 1375 0561 4359424C 		.ascii	"CYBLE_EVT_GATTC_FIND_BY_TYPE_VALUE_RSP\000"
+ 1375      455F4556 
+ 1375      545F4741 
+ 1375      5454435F 
+ 1375      46494E44 
+ 1376              	.LASF28:
+ 1377 0588 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_COMPLETE\000"
+ 1377      455F4556 
+ 1377      545F4741 
+ 1377      505F4155 
+ 1377      54485F43 
+ 1378              	.LASF60:
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 30
+
+
+ 1379 05a4 4359424C 		.ascii	"CYBLE_EVT_GATTS_WRITE_REQ\000"
+ 1379      455F4556 
+ 1379      545F4741 
+ 1379      5454535F 
+ 1379      57524954 
+ 1380              	.LASF66:
+ 1381 05be 4359424C 		.ascii	"CYBLE_EVT_GATTC_HANDLE_VALUE_NTF\000"
+ 1381      455F4556 
+ 1381      545F4741 
+ 1381      5454435F 
+ 1381      48414E44 
+ 1382              	.LASF49:
+ 1383 05df 4359424C 		.ascii	"CYBLE_EVT_GATT_CONNECT_IND\000"
+ 1383      455F4556 
+ 1383      545F4741 
+ 1383      54545F43 
+ 1383      4F4E4E45 
+ 1384              	.LASF88:
+ 1385 05fa 4359424C 		.ascii	"CYBLE_EVT_MAX\000"
+ 1385      455F4556 
+ 1385      545F4D41 
+ 1385      5800
+ 1386              	.LASF25:
+ 1387 0608 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_REQ\000"
+ 1387      455F4556 
+ 1387      545F4741 
+ 1387      505F4155 
+ 1387      54485F52 
+ 1388              	.LASF53:
+ 1389 061f 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_BY_GROUP_TYPE_RSP\000"
+ 1389      455F4556 
+ 1389      545F4741 
+ 1389      5454435F 
+ 1389      52454144 
+ 1390              	.LASF78:
+ 1391 0646 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DISCONN_IND\000"
+ 1391      455F4556 
+ 1391      545F4C32 
+ 1391      4341505F 
+ 1391      43424643 
+ 1392              	.LASF33:
+ 1393 0667 4359424C 		.ascii	"CYBLE_EVT_GAP_ENCRYPT_CHANGE\000"
+ 1393      455F4556 
+ 1393      545F4741 
+ 1393      505F454E 
+ 1393      43525950 
+ 1394              	.LASF14:
+ 1395 0684 72656733 		.ascii	"reg32\000"
+ 1395      3200
+ 1396              	.LASF72:
+ 1397 068a 4359424C 		.ascii	"CYBLE_EVT_GATTC_LONG_PROCEDURE_END\000"
+ 1397      455F4556 
+ 1397      545F4741 
+ 1397      5454435F 
+ 1397      4C4F4E47 
+ 1398              	.LASF3:
+ 1399 06ad 73686F72 		.ascii	"short unsigned int\000"
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 31
+
+
+ 1399      7420756E 
+ 1399      7369676E 
+ 1399      65642069 
+ 1399      6E7400
+ 1400              	.LASF102:
+ 1401 06c0 73746174 		.ascii	"status\000"
+ 1401      757300
+ 1402              	.LASF34:
+ 1403 06c7 4359424C 		.ascii	"CYBLE_EVT_GAP_CONNECTION_UPDATE_COMPLETE\000"
+ 1403      455F4556 
+ 1403      545F4741 
+ 1403      505F434F 
+ 1403      4E4E4543 
+ 1404              	.LASF43:
+ 1405 06f0 4359424C 		.ascii	"CYBLE_EVT_GAP_SMP_NEGOTIATED_AUTH_INFO\000"
+ 1405      455F4556 
+ 1405      545F4741 
+ 1405      505F534D 
+ 1405      505F4E45 
+ 1406              	.LASF13:
+ 1407 0717 63686172 		.ascii	"char\000"
+ 1407      00
+ 1408              	.LASF99:
+ 1409 071c 72656164 		.ascii	"ready\000"
+ 1409      7900
+ 1410              	.LASF75:
+ 1411 0722 4359424C 		.ascii	"CYBLE_EVT_L2CAP_COMMAND_REJ\000"
+ 1411      455F4556 
+ 1411      545F4C32 
+ 1411      4341505F 
+ 1411      434F4D4D 
+ 1412              	.LASF17:
+ 1413 073e 4359424C 		.ascii	"CYBLE_EVT_HOST_INVALID\000"
+ 1413      455F4556 
+ 1413      545F484F 
+ 1413      53545F49 
+ 1413      4E56414C 
+ 1414              	.LASF51:
+ 1415 0755 4359424C 		.ascii	"CYBLE_EVT_GATTS_XCNHG_MTU_REQ\000"
+ 1415      455F4556 
+ 1415      545F4741 
+ 1415      5454535F 
+ 1415      58434E48 
+ 1416              	.LASF45:
+ 1417 0773 4359424C 		.ascii	"CYBLE_EVT_GAP_SCAN_REQ_RECVD\000"
+ 1417      455F4556 
+ 1417      545F4741 
+ 1417      505F5343 
+ 1417      414E5F52 
+ 1418              	.LASF44:
+ 1419 0790 4359424C 		.ascii	"CYBLE_EVT_GAP_CONN_ESTB\000"
+ 1419      455F4556 
+ 1419      545F4741 
+ 1419      505F434F 
+ 1419      4E4E5F45 
+ 1420              	.LASF58:
+ 1421 07a8 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_BLOB_RSP\000"
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 32
+
+
+ 1421      455F4556 
+ 1421      545F4741 
+ 1421      5454435F 
+ 1421      52454144 
+ 1422              	.LASF37:
+ 1423 07c6 4359424C 		.ascii	"CYBLE_EVT_GAP_NUMERIC_COMPARISON_REQUEST\000"
+ 1423      455F4556 
+ 1423      545F4741 
+ 1423      505F4E55 
+ 1423      4D455249 
+ 1424              	.LASF65:
+ 1425 07ef 4359424C 		.ascii	"CYBLE_EVT_GATTC_EXEC_WRITE_RSP\000"
+ 1425      455F4556 
+ 1425      545F4741 
+ 1425      5454435F 
+ 1425      45584543 
+ 1426              	.LASF10:
+ 1427 080e 75696E74 		.ascii	"uint32\000"
+ 1427      333200
+ 1428              	.LASF84:
+ 1429 0815 4359424C 		.ascii	"CYBLE_EVT_PENDING_FLASH_WRITE\000"
+ 1429      455F4556 
+ 1429      545F5045 
+ 1429      4E44494E 
+ 1429      475F464C 
+ 1430              	.LASF76:
+ 1431 0833 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_CONN_IND\000"
+ 1431      455F4556 
+ 1431      545F4C32 
+ 1431      4341505F 
+ 1431      43424643 
+ 1432              	.LASF41:
+ 1433 0851 4359424C 		.ascii	"CYBLE_EVT_GAP_ENHANCE_CONN_COMPLETE\000"
+ 1433      455F4556 
+ 1433      545F4741 
+ 1433      505F454E 
+ 1433      48414E43 
+ 1434              	.LASF12:
+ 1435 0875 646F7562 		.ascii	"double\000"
+ 1435      6C6500
+ 1436              	.LASF113:
+ 1437 087c 7A6D6F74 		.ascii	"zmoto.c\000"
+ 1437      6F2E6300 
+ 1438              	.LASF89:
+ 1439 0884 6D644E6F 		.ascii	"mdNone\000"
+ 1439      6E6500
+ 1440              	.LASF82:
+ 1441 088b 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_TX_CREDIT_IND\000"
+ 1441      455F4556 
+ 1441      545F4C32 
+ 1441      4341505F 
+ 1441      43424643 
+ 1442              	.LASF29:
+ 1443 08ae 4359424C 		.ascii	"CYBLE_EVT_GAP_AUTH_FAILED\000"
+ 1443      455F4556 
+ 1443      545F4741 
+ 1443      505F4155 
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 33
+
+
+ 1443      54485F46 
+ 1444              	.LASF6:
+ 1445 08c8 6C6F6E67 		.ascii	"long long int\000"
+ 1445      206C6F6E 
+ 1445      6720696E 
+ 1445      7400
+ 1446              	.LASF114:
+ 1447 08d6 443A5C43 		.ascii	"D:\\CYTest\\MyELock\\MyELock.cydsn\000"
+ 1447      59546573 
+ 1447      745C4D79 
+ 1447      454C6F63 
+ 1447      6B5C4D79 
+ 1448              	.LASF20:
+ 1449 08f6 4359424C 		.ascii	"CYBLE_EVT_HARDWARE_ERROR\000"
+ 1449      455F4556 
+ 1449      545F4841 
+ 1449      52445741 
+ 1449      52455F45 
+ 1450              	.LASF80:
+ 1451 090f 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DATA_READ\000"
+ 1451      455F4556 
+ 1451      545F4C32 
+ 1451      4341505F 
+ 1451      43424643 
+ 1452              	.LASF74:
+ 1453 092e 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CONN_PARAM_UPDATE_RSP\000"
+ 1453      455F4556 
+ 1453      545F4C32 
+ 1453      4341505F 
+ 1453      434F4E4E 
+ 1454              	.LASF24:
+ 1455 0954 4359424C 		.ascii	"CYBLE_EVT_GAPC_SCAN_PROGRESS_RESULT\000"
+ 1455      455F4556 
+ 1455      545F4741 
+ 1455      50435F53 
+ 1455      43414E5F 
+ 1456              	.LASF81:
+ 1457 0978 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_RX_CREDIT_IND\000"
+ 1457      455F4556 
+ 1457      545F4C32 
+ 1457      4341505F 
+ 1457      43424643 
+ 1458              	.LASF50:
+ 1459 099b 4359424C 		.ascii	"CYBLE_EVT_GATT_DISCONNECT_IND\000"
+ 1459      455F4556 
+ 1459      545F4741 
+ 1459      54545F44 
+ 1459      4953434F 
+ 1460              	.LASF62:
+ 1461 09b9 4359424C 		.ascii	"CYBLE_EVT_GATTS_WRITE_CMD_REQ\000"
+ 1461      455F4556 
+ 1461      545F4741 
+ 1461      5454535F 
+ 1461      57524954 
+ 1462              	.LASF52:
+ 1463 09d7 4359424C 		.ascii	"CYBLE_EVT_GATTC_XCHNG_MTU_RSP\000"
+ 1463      455F4556 
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 34
+
+
+ 1463      545F4741 
+ 1463      5454435F 
+ 1463      5843484E 
+ 1464              	.LASF59:
+ 1465 09f5 4359424C 		.ascii	"CYBLE_EVT_GATTC_READ_MULTI_RSP\000"
+ 1465      455F4556 
+ 1465      545F4741 
+ 1465      5454435F 
+ 1465      52454144 
+ 1466              	.LASF83:
+ 1467 0a14 4359424C 		.ascii	"CYBLE_EVT_L2CAP_CBFC_DATA_WRITE_IND\000"
+ 1467      455F4556 
+ 1467      545F4C32 
+ 1467      4341505F 
+ 1467      43424643 
+ 1468              	.LASF19:
+ 1469 0a38 4359424C 		.ascii	"CYBLE_EVT_TIMEOUT\000"
+ 1469      455F4556 
+ 1469      545F5449 
+ 1469      4D454F55 
+ 1469      5400
+ 1470              	.LASF71:
+ 1471 0a4a 4359424C 		.ascii	"CYBLE_EVT_GATTS_READ_CHAR_VAL_ACCESS_REQ\000"
+ 1471      455F4556 
+ 1471      545F4741 
+ 1471      5454535F 
+ 1471      52454144 
+ 1472              	.LASF70:
+ 1473 0a73 4359424C 		.ascii	"CYBLE_EVT_GATTC_STOP_CMD_COMPLETE\000"
+ 1473      455F4556 
+ 1473      545F4741 
+ 1473      5454435F 
+ 1473      53544F50 
+ 1474              	.LASF90:
+ 1475 0a95 6D644D4F 		.ascii	"mdMOTO_CLOCK\000"
+ 1475      544F5F43 
+ 1475      4C4F434B 
+ 1475      00
+ 1476              	.LASF64:
+ 1477 0aa2 4359424C 		.ascii	"CYBLE_EVT_GATTS_EXEC_WRITE_REQ\000"
+ 1477      455F4556 
+ 1477      545F4741 
+ 1477      5454535F 
+ 1477      45584543 
+ 1478              	.LASF104:
+ 1479 0ac1 73746570 		.ascii	"step\000"
+ 1479      00
+ 1480              	.LASF69:
+ 1481 0ac6 4359424C 		.ascii	"CYBLE_EVT_GATTS_DATA_SIGNED_CMD_REQ\000"
+ 1481      455F4556 
+ 1481      545F4741 
+ 1481      5454535F 
+ 1481      44415441 
+ 1482              	.LASF86:
+ 1483 0aea 4359424C 		.ascii	"CYBLE_EVT_HCI_PKT\000"
+ 1483      455F4556 
+ 1483      545F4843 
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccco0EBt.s 			page 35
+
+
+ 1483      495F504B 
+ 1483      5400
+ 1484              	.LASF39:
+ 1485 0afc 4359424C 		.ascii	"CYBLE_EVT_GAP_OOB_GENERATED_NOTIFICATION\000"
+ 1485      455F4556 
+ 1485      545F4741 
+ 1485      505F4F4F 
+ 1485      425F4745 
+ 1486              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

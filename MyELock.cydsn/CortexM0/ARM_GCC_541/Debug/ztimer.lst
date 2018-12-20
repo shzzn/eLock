@@ -1,0 +1,970 @@
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"ztimer.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ZClock_Chain,"ax",%progbits
+  20              		.align	2
+  21              		.global	ZClock_Chain
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	ZClock_Chain, %function
+  25              	ZClock_Chain:
+  26              	.LFB36:
+  27              		.file 1 "ztimer.c"
+   1:ztimer.c      **** #include "zmain.h"
+   2:ztimer.c      **** 
+   3:ztimer.c      **** //unsigned int *T1DR = (unsigned int *)&T11DR;
+   4:ztimer.c      **** //unsigned int *T0DR = (unsigned int *)&T01DR;
+   5:ztimer.c      **** 
+   6:ztimer.c      **** //Rec_stream	RecBuf;
+   7:ztimer.c      **** 
+   8:ztimer.c      **** //unsigned char *RecArryPoint = (unsigned char *)&RecBuf.Array;
+   9:ztimer.c      **** 
+  10:ztimer.c      **** 
+  11:ztimer.c      **** void ZClock_Chain()	//1ms
+  12:ztimer.c      **** {
+  28              		.loc 1 12 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 10B5     		push	{r4, lr}
+  33              		.cfi_def_cfa_offset 8
+  34              		.cfi_offset 4, -8
+  35              		.cfi_offset 14, -4
+  13:ztimer.c      ****     if(pcb_ZMoto.clk >0)
+  36              		.loc 1 13 0
+  37 0002 1F4B     		ldr	r3, .L6
+  38 0004 5B68     		ldr	r3, [r3, #4]
+  39 0006 002B     		cmp	r3, #0
+  40 0008 07D0     		beq	.L2
+  14:ztimer.c      **** 	{
+  15:ztimer.c      **** 		pcb_ZMoto.clk --;
+  41              		.loc 1 15 0
+  42 000a 013B     		subs	r3, r3, #1
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 2
+
+
+  43 000c 1C4A     		ldr	r2, .L6
+  44 000e 5360     		str	r3, [r2, #4]
+  16:ztimer.c      **** 		if(pcb_ZMoto.clk == 0)
+  45              		.loc 1 16 0
+  46 0010 002B     		cmp	r3, #0
+  47 0012 02D1     		bne	.L2
+  17:ztimer.c      **** 		{
+  18:ztimer.c      **** 			ZWakeup(&pcb_ZMoto);
+  48              		.loc 1 18 0
+  49 0014 1000     		movs	r0, r2
+  50 0016 FFF7FEFF 		bl	ZWakeup
+  51              	.LVL0:
+  52              	.L2:
+  19:ztimer.c      ****     	}
+  20:ztimer.c      **** 	}
+  21:ztimer.c      ****     if(pcb_ZBeep.clk >0)
+  53              		.loc 1 21 0
+  54 001a 1A4B     		ldr	r3, .L6+4
+  55 001c 5B68     		ldr	r3, [r3, #4]
+  56 001e 002B     		cmp	r3, #0
+  57 0020 07D0     		beq	.L3
+  22:ztimer.c      **** 	{
+  23:ztimer.c      **** 		pcb_ZBeep.clk --;
+  58              		.loc 1 23 0
+  59 0022 013B     		subs	r3, r3, #1
+  60 0024 174A     		ldr	r2, .L6+4
+  61 0026 5360     		str	r3, [r2, #4]
+  24:ztimer.c      **** 		if(pcb_ZBeep.clk == 0)
+  62              		.loc 1 24 0
+  63 0028 002B     		cmp	r3, #0
+  64 002a 02D1     		bne	.L3
+  25:ztimer.c      **** 		{
+  26:ztimer.c      **** 			ZWakeup(&pcb_ZBeep);
+  65              		.loc 1 26 0
+  66 002c 1000     		movs	r0, r2
+  67 002e FFF7FEFF 		bl	ZWakeup
+  68              	.LVL1:
+  69              	.L3:
+  27:ztimer.c      ****     	}
+  28:ztimer.c      **** 	}
+  29:ztimer.c      ****     if(pcb_ZKey.clk >0)
+  70              		.loc 1 29 0
+  71 0032 154B     		ldr	r3, .L6+8
+  72 0034 5B68     		ldr	r3, [r3, #4]
+  73 0036 002B     		cmp	r3, #0
+  74 0038 07D0     		beq	.L4
+  30:ztimer.c      **** 	{
+  31:ztimer.c      **** 		pcb_ZKey.clk --;
+  75              		.loc 1 31 0
+  76 003a 013B     		subs	r3, r3, #1
+  77 003c 124A     		ldr	r2, .L6+8
+  78 003e 5360     		str	r3, [r2, #4]
+  32:ztimer.c      **** 		if(pcb_ZKey.clk == 0)
+  79              		.loc 1 32 0
+  80 0040 002B     		cmp	r3, #0
+  81 0042 02D1     		bne	.L4
+  33:ztimer.c      **** 		{
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 3
+
+
+  34:ztimer.c      **** 			ZWakeup(&pcb_ZKey);
+  82              		.loc 1 34 0
+  83 0044 1000     		movs	r0, r2
+  84 0046 FFF7FEFF 		bl	ZWakeup
+  85              	.LVL2:
+  86              	.L4:
+  35:ztimer.c      ****     	}
+  36:ztimer.c      **** 	}
+  37:ztimer.c      ****     if(pcb_ZManager.clk >0)
+  87              		.loc 1 37 0
+  88 004a 104B     		ldr	r3, .L6+12
+  89 004c 5B68     		ldr	r3, [r3, #4]
+  90 004e 002B     		cmp	r3, #0
+  91 0050 11D0     		beq	.L5
+  38:ztimer.c      **** 	{
+  39:ztimer.c      ****         Pin_BackLight_Write(Back_Light);
+  92              		.loc 1 39 0
+  93 0052 0120     		movs	r0, #1
+  94 0054 FFF7FEFF 		bl	Pin_BackLight_Write
+  95              	.LVL3:
+  40:ztimer.c      **** 		pcb_ZManager.clk --;
+  96              		.loc 1 40 0
+  97 0058 0C4A     		ldr	r2, .L6+12
+  98 005a 5368     		ldr	r3, [r2, #4]
+  99 005c 013B     		subs	r3, r3, #1
+ 100 005e 5360     		str	r3, [r2, #4]
+  41:ztimer.c      **** 		if(pcb_ZManager.clk == 0)
+ 101              		.loc 1 41 0
+ 102 0060 002B     		cmp	r3, #0
+ 103 0062 08D1     		bne	.L5
+  42:ztimer.c      **** 		{
+  43:ztimer.c      ****             Pin_BackLight_Write(Back_Dim);
+ 104              		.loc 1 43 0
+ 105 0064 0020     		movs	r0, #0
+ 106 0066 FFF7FEFF 		bl	Pin_BackLight_Write
+ 107              	.LVL4:
+  44:ztimer.c      ****             KeyNumber = 0x55;
+ 108              		.loc 1 44 0
+ 109 006a 5522     		movs	r2, #85
+ 110 006c 084B     		ldr	r3, .L6+16
+ 111 006e 1A70     		strb	r2, [r3]
+  45:ztimer.c      **** 			ZWakeup(&pcb_ZManager);
+ 112              		.loc 1 45 0
+ 113 0070 0648     		ldr	r0, .L6+12
+ 114 0072 FFF7FEFF 		bl	ZWakeup
+ 115              	.LVL5:
+ 116              	.L5:
+  46:ztimer.c      ****     	}
+  47:ztimer.c      **** 	}
+  48:ztimer.c      ****     ZBlock(&pcb_ZClockchain,1);
+ 117              		.loc 1 48 0
+ 118 0076 0121     		movs	r1, #1
+ 119 0078 0648     		ldr	r0, .L6+20
+ 120 007a FFF7FEFF 		bl	ZBlock
+ 121              	.LVL6:
+  49:ztimer.c      **** }
+ 122              		.loc 1 49 0
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 4
+
+
+ 123              		@ sp needed
+ 124 007e 10BD     		pop	{r4, pc}
+ 125              	.L7:
+ 126              		.align	2
+ 127              	.L6:
+ 128 0080 00000000 		.word	pcb_ZMoto
+ 129 0084 00000000 		.word	pcb_ZBeep
+ 130 0088 00000000 		.word	pcb_ZKey
+ 131 008c 00000000 		.word	pcb_ZManager
+ 132 0090 00000000 		.word	KeyNumber
+ 133 0094 00000000 		.word	pcb_ZClockchain
+ 134              		.cfi_endproc
+ 135              	.LFE36:
+ 136              		.size	ZClock_Chain, .-ZClock_Chain
+ 137              		.text
+ 138              	.Letext0:
+ 139              		.file 2 "zglobal.h"
+ 140              		.file 3 "zkey.h"
+ 141              		.file 4 "Generated_Source\\PSoC4/Pin_BackLight.h"
+ 142              		.section	.debug_info,"",%progbits
+ 143              	.Ldebug_info0:
+ 144 0000 2D020000 		.4byte	0x22d
+ 145 0004 0400     		.2byte	0x4
+ 146 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 147 000a 04       		.byte	0x4
+ 148 000b 01       		.uleb128 0x1
+ 149 000c 4C010000 		.4byte	.LASF41
+ 150 0010 0C       		.byte	0xc
+ 151 0011 03010000 		.4byte	.LASF42
+ 152 0015 73000000 		.4byte	.LASF43
+ 153 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 154 001d 00000000 		.4byte	0
+ 155 0021 00000000 		.4byte	.Ldebug_line0
+ 156 0025 02       		.uleb128 0x2
+ 157 0026 01       		.byte	0x1
+ 158 0027 68000000 		.4byte	0x68
+ 159 002b 02       		.byte	0x2
+ 160 002c 0B       		.byte	0xb
+ 161 002d 68000000 		.4byte	0x68
+ 162 0031 03       		.uleb128 0x3
+ 163 0032 1B020000 		.4byte	.LASF0
+ 164 0036 00       		.byte	0
+ 165 0037 03       		.uleb128 0x3
+ 166 0038 2D010000 		.4byte	.LASF1
+ 167 003c 01       		.byte	0x1
+ 168 003d 03       		.uleb128 0x3
+ 169 003e 23000000 		.4byte	.LASF2
+ 170 0042 02       		.byte	0x2
+ 171 0043 03       		.uleb128 0x3
+ 172 0044 F6000000 		.4byte	.LASF3
+ 173 0048 03       		.byte	0x3
+ 174 0049 03       		.uleb128 0x3
+ 175 004a 48000000 		.4byte	.LASF4
+ 176 004e 04       		.byte	0x4
+ 177 004f 03       		.uleb128 0x3
+ 178 0050 5E020000 		.4byte	.LASF5
+ 179 0054 05       		.byte	0x5
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 5
+
+
+ 180 0055 03       		.uleb128 0x3
+ 181 0056 26010000 		.4byte	.LASF6
+ 182 005a 06       		.byte	0x6
+ 183 005b 03       		.uleb128 0x3
+ 184 005c 36000000 		.4byte	.LASF7
+ 185 0060 07       		.byte	0x7
+ 186 0061 03       		.uleb128 0x3
+ 187 0062 56000000 		.4byte	.LASF8
+ 188 0066 08       		.byte	0x8
+ 189 0067 00       		.byte	0
+ 190 0068 04       		.uleb128 0x4
+ 191 0069 01       		.byte	0x1
+ 192 006a 08       		.byte	0x8
+ 193 006b C3000000 		.4byte	.LASF17
+ 194 006f 05       		.uleb128 0x5
+ 195 0070 6D7600   		.ascii	"mv\000"
+ 196 0073 02       		.byte	0x2
+ 197 0074 0D       		.byte	0xd
+ 198 0075 25000000 		.4byte	0x25
+ 199 0079 02       		.uleb128 0x2
+ 200 007a 01       		.byte	0x1
+ 201 007b 68000000 		.4byte	0x68
+ 202 007f 02       		.byte	0x2
+ 203 0080 0E       		.byte	0xe
+ 204 0081 9E000000 		.4byte	0x9e
+ 205 0085 03       		.uleb128 0x3
+ 206 0086 6B000000 		.4byte	.LASF9
+ 207 008a 00       		.byte	0
+ 208 008b 03       		.uleb128 0x3
+ 209 008c 0F020000 		.4byte	.LASF10
+ 210 0090 01       		.byte	0x1
+ 211 0091 03       		.uleb128 0x3
+ 212 0092 22020000 		.4byte	.LASF11
+ 213 0096 02       		.byte	0x2
+ 214 0097 03       		.uleb128 0x3
+ 215 0098 A6000000 		.4byte	.LASF12
+ 216 009c 03       		.byte	0x3
+ 217 009d 00       		.byte	0
+ 218 009e 05       		.uleb128 0x5
+ 219 009f 737600   		.ascii	"sv\000"
+ 220 00a2 02       		.byte	0x2
+ 221 00a3 0E       		.byte	0xe
+ 222 00a4 79000000 		.4byte	0x79
+ 223 00a8 06       		.uleb128 0x6
+ 224 00a9 4F000000 		.4byte	.LASF44
+ 225 00ad 08       		.byte	0x8
+ 226 00ae 02       		.byte	0x2
+ 227 00af 0F       		.byte	0xf
+ 228 00b0 F1000000 		.4byte	0xf1
+ 229 00b4 07       		.uleb128 0x7
+ 230 00b5 64000000 		.4byte	.LASF13
+ 231 00b9 02       		.byte	0x2
+ 232 00ba 11       		.byte	0x11
+ 233 00bb 9E000000 		.4byte	0x9e
+ 234 00bf 00       		.byte	0
+ 235 00c0 07       		.uleb128 0x7
+ 236 00c1 3F010000 		.4byte	.LASF14
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 6
+
+
+ 237 00c5 02       		.byte	0x2
+ 238 00c6 12       		.byte	0x12
+ 239 00c7 6F000000 		.4byte	0x6f
+ 240 00cb 01       		.byte	0x1
+ 241 00cc 07       		.uleb128 0x7
+ 242 00cd 31000000 		.4byte	.LASF15
+ 243 00d1 02       		.byte	0x2
+ 244 00d2 13       		.byte	0x13
+ 245 00d3 68000000 		.4byte	0x68
+ 246 00d7 02       		.byte	0x2
+ 247 00d8 07       		.uleb128 0x7
+ 248 00d9 15020000 		.4byte	.LASF16
+ 249 00dd 02       		.byte	0x2
+ 250 00de 14       		.byte	0x14
+ 251 00df 68000000 		.4byte	0x68
+ 252 00e3 03       		.byte	0x3
+ 253 00e4 08       		.uleb128 0x8
+ 254 00e5 636C6B00 		.ascii	"clk\000"
+ 255 00e9 02       		.byte	0x2
+ 256 00ea 15       		.byte	0x15
+ 257 00eb F1000000 		.4byte	0xf1
+ 258 00ef 04       		.byte	0x4
+ 259 00f0 00       		.byte	0
+ 260 00f1 04       		.uleb128 0x4
+ 261 00f2 04       		.byte	0x4
+ 262 00f3 07       		.byte	0x7
+ 263 00f4 19010000 		.4byte	.LASF18
+ 264 00f8 09       		.uleb128 0x9
+ 265 00f9 40000000 		.4byte	.LASF19
+ 266 00fd 02       		.byte	0x2
+ 267 00fe 18       		.byte	0x18
+ 268 00ff A8000000 		.4byte	0xa8
+ 269 0103 04       		.uleb128 0x4
+ 270 0104 01       		.byte	0x1
+ 271 0105 06       		.byte	0x6
+ 272 0106 48020000 		.4byte	.LASF20
+ 273 010a 04       		.uleb128 0x4
+ 274 010b 02       		.byte	0x2
+ 275 010c 05       		.byte	0x5
+ 276 010d 05020000 		.4byte	.LASF21
+ 277 0111 04       		.uleb128 0x4
+ 278 0112 02       		.byte	0x2
+ 279 0113 07       		.byte	0x7
+ 280 0114 E3000000 		.4byte	.LASF22
+ 281 0118 04       		.uleb128 0x4
+ 282 0119 04       		.byte	0x4
+ 283 011a 05       		.byte	0x5
+ 284 011b 29020000 		.4byte	.LASF23
+ 285 011f 04       		.uleb128 0x4
+ 286 0120 04       		.byte	0x4
+ 287 0121 07       		.byte	0x7
+ 288 0122 D1000000 		.4byte	.LASF24
+ 289 0126 04       		.uleb128 0x4
+ 290 0127 08       		.byte	0x8
+ 291 0128 05       		.byte	0x5
+ 292 0129 F7010000 		.4byte	.LASF25
+ 293 012d 04       		.uleb128 0x4
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 7
+
+
+ 294 012e 08       		.byte	0x8
+ 295 012f 07       		.byte	0x7
+ 296 0130 AC000000 		.4byte	.LASF26
+ 297 0134 0A       		.uleb128 0xa
+ 298 0135 04       		.byte	0x4
+ 299 0136 05       		.byte	0x5
+ 300 0137 696E7400 		.ascii	"int\000"
+ 301 013b 04       		.uleb128 0x4
+ 302 013c 04       		.byte	0x4
+ 303 013d 04       		.byte	0x4
+ 304 013e A0000000 		.4byte	.LASF27
+ 305 0142 04       		.uleb128 0x4
+ 306 0143 08       		.byte	0x8
+ 307 0144 04       		.byte	0x4
+ 308 0145 FC000000 		.4byte	.LASF28
+ 309 0149 04       		.uleb128 0x4
+ 310 014a 01       		.byte	0x1
+ 311 014b 08       		.byte	0x8
+ 312 014c 3A010000 		.4byte	.LASF29
+ 313 0150 04       		.uleb128 0x4
+ 314 0151 08       		.byte	0x8
+ 315 0152 04       		.byte	0x4
+ 316 0153 3C020000 		.4byte	.LASF30
+ 317 0157 04       		.uleb128 0x4
+ 318 0158 04       		.byte	0x4
+ 319 0159 07       		.byte	0x7
+ 320 015a DA010000 		.4byte	.LASF31
+ 321 015e 0B       		.uleb128 0xb
+ 322 015f 0C010000 		.4byte	.LASF45
+ 323 0163 01       		.byte	0x1
+ 324 0164 0B       		.byte	0xb
+ 325 0165 00000000 		.4byte	.LFB36
+ 326 0169 98000000 		.4byte	.LFE36-.LFB36
+ 327 016d 01       		.uleb128 0x1
+ 328 016e 9C       		.byte	0x9c
+ 329 016f CD010000 		.4byte	0x1cd
+ 330 0173 0C       		.uleb128 0xc
+ 331 0174 1A000000 		.4byte	.LVL0
+ 332 0178 0F020000 		.4byte	0x20f
+ 333 017c 0C       		.uleb128 0xc
+ 334 017d 32000000 		.4byte	.LVL1
+ 335 0181 0F020000 		.4byte	0x20f
+ 336 0185 0C       		.uleb128 0xc
+ 337 0186 4A000000 		.4byte	.LVL2
+ 338 018a 0F020000 		.4byte	0x20f
+ 339 018e 0D       		.uleb128 0xd
+ 340 018f 58000000 		.4byte	.LVL3
+ 341 0193 1A020000 		.4byte	0x21a
+ 342 0197 A1010000 		.4byte	0x1a1
+ 343 019b 0E       		.uleb128 0xe
+ 344 019c 01       		.uleb128 0x1
+ 345 019d 50       		.byte	0x50
+ 346 019e 01       		.uleb128 0x1
+ 347 019f 31       		.byte	0x31
+ 348 01a0 00       		.byte	0
+ 349 01a1 0D       		.uleb128 0xd
+ 350 01a2 6A000000 		.4byte	.LVL4
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 8
+
+
+ 351 01a6 1A020000 		.4byte	0x21a
+ 352 01aa B4010000 		.4byte	0x1b4
+ 353 01ae 0E       		.uleb128 0xe
+ 354 01af 01       		.uleb128 0x1
+ 355 01b0 50       		.byte	0x50
+ 356 01b1 01       		.uleb128 0x1
+ 357 01b2 30       		.byte	0x30
+ 358 01b3 00       		.byte	0
+ 359 01b4 0C       		.uleb128 0xc
+ 360 01b5 76000000 		.4byte	.LVL5
+ 361 01b9 0F020000 		.4byte	0x20f
+ 362 01bd 0F       		.uleb128 0xf
+ 363 01be 7E000000 		.4byte	.LVL6
+ 364 01c2 25020000 		.4byte	0x225
+ 365 01c6 0E       		.uleb128 0xe
+ 366 01c7 01       		.uleb128 0x1
+ 367 01c8 51       		.byte	0x51
+ 368 01c9 01       		.uleb128 0x1
+ 369 01ca 31       		.byte	0x31
+ 370 01cb 00       		.byte	0
+ 371 01cc 00       		.byte	0
+ 372 01cd 10       		.uleb128 0x10
+ 373 01ce 13000000 		.4byte	.LASF32
+ 374 01d2 02       		.byte	0x2
+ 375 01d3 1A       		.byte	0x1a
+ 376 01d4 F8000000 		.4byte	0xf8
+ 377 01d8 10       		.uleb128 0x10
+ 378 01d9 54020000 		.4byte	.LASF33
+ 379 01dd 02       		.byte	0x2
+ 380 01de 1B       		.byte	0x1b
+ 381 01df F8000000 		.4byte	0xf8
+ 382 01e3 10       		.uleb128 0x10
+ 383 01e4 00000000 		.4byte	.LASF34
+ 384 01e8 02       		.byte	0x2
+ 385 01e9 1C       		.byte	0x1c
+ 386 01ea F8000000 		.4byte	0xf8
+ 387 01ee 10       		.uleb128 0x10
+ 388 01ef 93000000 		.4byte	.LASF35
+ 389 01f3 02       		.byte	0x2
+ 390 01f4 1D       		.byte	0x1d
+ 391 01f5 F8000000 		.4byte	0xf8
+ 392 01f9 10       		.uleb128 0x10
+ 393 01fa 0A000000 		.4byte	.LASF36
+ 394 01fe 02       		.byte	0x2
+ 395 01ff 1E       		.byte	0x1e
+ 396 0200 F8000000 		.4byte	0xf8
+ 397 0204 10       		.uleb128 0x10
+ 398 0205 32020000 		.4byte	.LASF37
+ 399 0209 03       		.byte	0x3
+ 400 020a 09       		.byte	0x9
+ 401 020b 68000000 		.4byte	0x68
+ 402 020f 11       		.uleb128 0x11
+ 403 0210 44010000 		.4byte	.LASF38
+ 404 0214 44010000 		.4byte	.LASF38
+ 405 0218 02       		.byte	0x2
+ 406 0219 28       		.byte	0x28
+ 407 021a 11       		.uleb128 0x11
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 9
+
+
+ 408 021b E3010000 		.4byte	.LASF39
+ 409 021f E3010000 		.4byte	.LASF39
+ 410 0223 04       		.byte	0x4
+ 411 0224 33       		.byte	0x33
+ 412 0225 11       		.uleb128 0x11
+ 413 0226 5D000000 		.4byte	.LASF40
+ 414 022a 5D000000 		.4byte	.LASF40
+ 415 022e 02       		.byte	0x2
+ 416 022f 27       		.byte	0x27
+ 417 0230 00       		.byte	0
+ 418              		.section	.debug_abbrev,"",%progbits
+ 419              	.Ldebug_abbrev0:
+ 420 0000 01       		.uleb128 0x1
+ 421 0001 11       		.uleb128 0x11
+ 422 0002 01       		.byte	0x1
+ 423 0003 25       		.uleb128 0x25
+ 424 0004 0E       		.uleb128 0xe
+ 425 0005 13       		.uleb128 0x13
+ 426 0006 0B       		.uleb128 0xb
+ 427 0007 03       		.uleb128 0x3
+ 428 0008 0E       		.uleb128 0xe
+ 429 0009 1B       		.uleb128 0x1b
+ 430 000a 0E       		.uleb128 0xe
+ 431 000b 55       		.uleb128 0x55
+ 432 000c 17       		.uleb128 0x17
+ 433 000d 11       		.uleb128 0x11
+ 434 000e 01       		.uleb128 0x1
+ 435 000f 10       		.uleb128 0x10
+ 436 0010 17       		.uleb128 0x17
+ 437 0011 00       		.byte	0
+ 438 0012 00       		.byte	0
+ 439 0013 02       		.uleb128 0x2
+ 440 0014 04       		.uleb128 0x4
+ 441 0015 01       		.byte	0x1
+ 442 0016 0B       		.uleb128 0xb
+ 443 0017 0B       		.uleb128 0xb
+ 444 0018 49       		.uleb128 0x49
+ 445 0019 13       		.uleb128 0x13
+ 446 001a 3A       		.uleb128 0x3a
+ 447 001b 0B       		.uleb128 0xb
+ 448 001c 3B       		.uleb128 0x3b
+ 449 001d 0B       		.uleb128 0xb
+ 450 001e 01       		.uleb128 0x1
+ 451 001f 13       		.uleb128 0x13
+ 452 0020 00       		.byte	0
+ 453 0021 00       		.byte	0
+ 454 0022 03       		.uleb128 0x3
+ 455 0023 28       		.uleb128 0x28
+ 456 0024 00       		.byte	0
+ 457 0025 03       		.uleb128 0x3
+ 458 0026 0E       		.uleb128 0xe
+ 459 0027 1C       		.uleb128 0x1c
+ 460 0028 0B       		.uleb128 0xb
+ 461 0029 00       		.byte	0
+ 462 002a 00       		.byte	0
+ 463 002b 04       		.uleb128 0x4
+ 464 002c 24       		.uleb128 0x24
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 10
+
+
+ 465 002d 00       		.byte	0
+ 466 002e 0B       		.uleb128 0xb
+ 467 002f 0B       		.uleb128 0xb
+ 468 0030 3E       		.uleb128 0x3e
+ 469 0031 0B       		.uleb128 0xb
+ 470 0032 03       		.uleb128 0x3
+ 471 0033 0E       		.uleb128 0xe
+ 472 0034 00       		.byte	0
+ 473 0035 00       		.byte	0
+ 474 0036 05       		.uleb128 0x5
+ 475 0037 16       		.uleb128 0x16
+ 476 0038 00       		.byte	0
+ 477 0039 03       		.uleb128 0x3
+ 478 003a 08       		.uleb128 0x8
+ 479 003b 3A       		.uleb128 0x3a
+ 480 003c 0B       		.uleb128 0xb
+ 481 003d 3B       		.uleb128 0x3b
+ 482 003e 0B       		.uleb128 0xb
+ 483 003f 49       		.uleb128 0x49
+ 484 0040 13       		.uleb128 0x13
+ 485 0041 00       		.byte	0
+ 486 0042 00       		.byte	0
+ 487 0043 06       		.uleb128 0x6
+ 488 0044 13       		.uleb128 0x13
+ 489 0045 01       		.byte	0x1
+ 490 0046 03       		.uleb128 0x3
+ 491 0047 0E       		.uleb128 0xe
+ 492 0048 0B       		.uleb128 0xb
+ 493 0049 0B       		.uleb128 0xb
+ 494 004a 3A       		.uleb128 0x3a
+ 495 004b 0B       		.uleb128 0xb
+ 496 004c 3B       		.uleb128 0x3b
+ 497 004d 0B       		.uleb128 0xb
+ 498 004e 01       		.uleb128 0x1
+ 499 004f 13       		.uleb128 0x13
+ 500 0050 00       		.byte	0
+ 501 0051 00       		.byte	0
+ 502 0052 07       		.uleb128 0x7
+ 503 0053 0D       		.uleb128 0xd
+ 504 0054 00       		.byte	0
+ 505 0055 03       		.uleb128 0x3
+ 506 0056 0E       		.uleb128 0xe
+ 507 0057 3A       		.uleb128 0x3a
+ 508 0058 0B       		.uleb128 0xb
+ 509 0059 3B       		.uleb128 0x3b
+ 510 005a 0B       		.uleb128 0xb
+ 511 005b 49       		.uleb128 0x49
+ 512 005c 13       		.uleb128 0x13
+ 513 005d 38       		.uleb128 0x38
+ 514 005e 0B       		.uleb128 0xb
+ 515 005f 00       		.byte	0
+ 516 0060 00       		.byte	0
+ 517 0061 08       		.uleb128 0x8
+ 518 0062 0D       		.uleb128 0xd
+ 519 0063 00       		.byte	0
+ 520 0064 03       		.uleb128 0x3
+ 521 0065 08       		.uleb128 0x8
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 11
+
+
+ 522 0066 3A       		.uleb128 0x3a
+ 523 0067 0B       		.uleb128 0xb
+ 524 0068 3B       		.uleb128 0x3b
+ 525 0069 0B       		.uleb128 0xb
+ 526 006a 49       		.uleb128 0x49
+ 527 006b 13       		.uleb128 0x13
+ 528 006c 38       		.uleb128 0x38
+ 529 006d 0B       		.uleb128 0xb
+ 530 006e 00       		.byte	0
+ 531 006f 00       		.byte	0
+ 532 0070 09       		.uleb128 0x9
+ 533 0071 16       		.uleb128 0x16
+ 534 0072 00       		.byte	0
+ 535 0073 03       		.uleb128 0x3
+ 536 0074 0E       		.uleb128 0xe
+ 537 0075 3A       		.uleb128 0x3a
+ 538 0076 0B       		.uleb128 0xb
+ 539 0077 3B       		.uleb128 0x3b
+ 540 0078 0B       		.uleb128 0xb
+ 541 0079 49       		.uleb128 0x49
+ 542 007a 13       		.uleb128 0x13
+ 543 007b 00       		.byte	0
+ 544 007c 00       		.byte	0
+ 545 007d 0A       		.uleb128 0xa
+ 546 007e 24       		.uleb128 0x24
+ 547 007f 00       		.byte	0
+ 548 0080 0B       		.uleb128 0xb
+ 549 0081 0B       		.uleb128 0xb
+ 550 0082 3E       		.uleb128 0x3e
+ 551 0083 0B       		.uleb128 0xb
+ 552 0084 03       		.uleb128 0x3
+ 553 0085 08       		.uleb128 0x8
+ 554 0086 00       		.byte	0
+ 555 0087 00       		.byte	0
+ 556 0088 0B       		.uleb128 0xb
+ 557 0089 2E       		.uleb128 0x2e
+ 558 008a 01       		.byte	0x1
+ 559 008b 3F       		.uleb128 0x3f
+ 560 008c 19       		.uleb128 0x19
+ 561 008d 03       		.uleb128 0x3
+ 562 008e 0E       		.uleb128 0xe
+ 563 008f 3A       		.uleb128 0x3a
+ 564 0090 0B       		.uleb128 0xb
+ 565 0091 3B       		.uleb128 0x3b
+ 566 0092 0B       		.uleb128 0xb
+ 567 0093 11       		.uleb128 0x11
+ 568 0094 01       		.uleb128 0x1
+ 569 0095 12       		.uleb128 0x12
+ 570 0096 06       		.uleb128 0x6
+ 571 0097 40       		.uleb128 0x40
+ 572 0098 18       		.uleb128 0x18
+ 573 0099 9742     		.uleb128 0x2117
+ 574 009b 19       		.uleb128 0x19
+ 575 009c 01       		.uleb128 0x1
+ 576 009d 13       		.uleb128 0x13
+ 577 009e 00       		.byte	0
+ 578 009f 00       		.byte	0
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 12
+
+
+ 579 00a0 0C       		.uleb128 0xc
+ 580 00a1 898201   		.uleb128 0x4109
+ 581 00a4 00       		.byte	0
+ 582 00a5 11       		.uleb128 0x11
+ 583 00a6 01       		.uleb128 0x1
+ 584 00a7 31       		.uleb128 0x31
+ 585 00a8 13       		.uleb128 0x13
+ 586 00a9 00       		.byte	0
+ 587 00aa 00       		.byte	0
+ 588 00ab 0D       		.uleb128 0xd
+ 589 00ac 898201   		.uleb128 0x4109
+ 590 00af 01       		.byte	0x1
+ 591 00b0 11       		.uleb128 0x11
+ 592 00b1 01       		.uleb128 0x1
+ 593 00b2 31       		.uleb128 0x31
+ 594 00b3 13       		.uleb128 0x13
+ 595 00b4 01       		.uleb128 0x1
+ 596 00b5 13       		.uleb128 0x13
+ 597 00b6 00       		.byte	0
+ 598 00b7 00       		.byte	0
+ 599 00b8 0E       		.uleb128 0xe
+ 600 00b9 8A8201   		.uleb128 0x410a
+ 601 00bc 00       		.byte	0
+ 602 00bd 02       		.uleb128 0x2
+ 603 00be 18       		.uleb128 0x18
+ 604 00bf 9142     		.uleb128 0x2111
+ 605 00c1 18       		.uleb128 0x18
+ 606 00c2 00       		.byte	0
+ 607 00c3 00       		.byte	0
+ 608 00c4 0F       		.uleb128 0xf
+ 609 00c5 898201   		.uleb128 0x4109
+ 610 00c8 01       		.byte	0x1
+ 611 00c9 11       		.uleb128 0x11
+ 612 00ca 01       		.uleb128 0x1
+ 613 00cb 31       		.uleb128 0x31
+ 614 00cc 13       		.uleb128 0x13
+ 615 00cd 00       		.byte	0
+ 616 00ce 00       		.byte	0
+ 617 00cf 10       		.uleb128 0x10
+ 618 00d0 34       		.uleb128 0x34
+ 619 00d1 00       		.byte	0
+ 620 00d2 03       		.uleb128 0x3
+ 621 00d3 0E       		.uleb128 0xe
+ 622 00d4 3A       		.uleb128 0x3a
+ 623 00d5 0B       		.uleb128 0xb
+ 624 00d6 3B       		.uleb128 0x3b
+ 625 00d7 0B       		.uleb128 0xb
+ 626 00d8 49       		.uleb128 0x49
+ 627 00d9 13       		.uleb128 0x13
+ 628 00da 3F       		.uleb128 0x3f
+ 629 00db 19       		.uleb128 0x19
+ 630 00dc 3C       		.uleb128 0x3c
+ 631 00dd 19       		.uleb128 0x19
+ 632 00de 00       		.byte	0
+ 633 00df 00       		.byte	0
+ 634 00e0 11       		.uleb128 0x11
+ 635 00e1 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 13
+
+
+ 636 00e2 00       		.byte	0
+ 637 00e3 3F       		.uleb128 0x3f
+ 638 00e4 19       		.uleb128 0x19
+ 639 00e5 3C       		.uleb128 0x3c
+ 640 00e6 19       		.uleb128 0x19
+ 641 00e7 6E       		.uleb128 0x6e
+ 642 00e8 0E       		.uleb128 0xe
+ 643 00e9 03       		.uleb128 0x3
+ 644 00ea 0E       		.uleb128 0xe
+ 645 00eb 3A       		.uleb128 0x3a
+ 646 00ec 0B       		.uleb128 0xb
+ 647 00ed 3B       		.uleb128 0x3b
+ 648 00ee 0B       		.uleb128 0xb
+ 649 00ef 00       		.byte	0
+ 650 00f0 00       		.byte	0
+ 651 00f1 00       		.byte	0
+ 652              		.section	.debug_aranges,"",%progbits
+ 653 0000 1C000000 		.4byte	0x1c
+ 654 0004 0200     		.2byte	0x2
+ 655 0006 00000000 		.4byte	.Ldebug_info0
+ 656 000a 04       		.byte	0x4
+ 657 000b 00       		.byte	0
+ 658 000c 0000     		.2byte	0
+ 659 000e 0000     		.2byte	0
+ 660 0010 00000000 		.4byte	.LFB36
+ 661 0014 98000000 		.4byte	.LFE36-.LFB36
+ 662 0018 00000000 		.4byte	0
+ 663 001c 00000000 		.4byte	0
+ 664              		.section	.debug_ranges,"",%progbits
+ 665              	.Ldebug_ranges0:
+ 666 0000 00000000 		.4byte	.LFB36
+ 667 0004 98000000 		.4byte	.LFE36
+ 668 0008 00000000 		.4byte	0
+ 669 000c 00000000 		.4byte	0
+ 670              		.section	.debug_line,"",%progbits
+ 671              	.Ldebug_line0:
+ 672 0000 8A000000 		.section	.debug_str,"MS",%progbits,1
+ 672      02006000 
+ 672      00000201 
+ 672      FB0E0D00 
+ 672      01010101 
+ 673              	.LASF34:
+ 674 0000 7063625F 		.ascii	"pcb_ZBeep\000"
+ 674      5A426565 
+ 674      7000
+ 675              	.LASF36:
+ 676 000a 7063625F 		.ascii	"pcb_ZKey\000"
+ 676      5A4B6579 
+ 676      00
+ 677              	.LASF32:
+ 678 0013 7063625F 		.ascii	"pcb_ZClockchain\000"
+ 678      5A436C6F 
+ 678      636B6368 
+ 678      61696E00 
+ 679              	.LASF2:
+ 680 0023 6D644D4F 		.ascii	"mdMOTO_CCLOCK\000"
+ 680      544F5F43 
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 14
+
+
+ 680      434C4F43 
+ 680      4B00
+ 681              	.LASF15:
+ 682 0031 73746570 		.ascii	"step\000"
+ 682      00
+ 683              	.LASF7:
+ 684 0036 6D644B65 		.ascii	"mdKeyScan\000"
+ 684      79536361 
+ 684      6E00
+ 685              	.LASF19:
+ 686 0040 7063625F 		.ascii	"pcb_def\000"
+ 686      64656600 
+ 687              	.LASF4:
+ 688 0048 6D644265 		.ascii	"mdBeep\000"
+ 688      657000
+ 689              	.LASF44:
+ 690 004f 74616770 		.ascii	"tagpcb\000"
+ 690      636200
+ 691              	.LASF8:
+ 692 0056 6D645072 		.ascii	"mdProx\000"
+ 692      6F7800
+ 693              	.LASF40:
+ 694 005d 5A426C6F 		.ascii	"ZBlock\000"
+ 694      636B00
+ 695              	.LASF13:
+ 696 0064 73746174 		.ascii	"status\000"
+ 696      757300
+ 697              	.LASF9:
+ 698 006b 64657374 		.ascii	"destroy\000"
+ 698      726F7900 
+ 699              	.LASF43:
+ 700 0073 443A5C43 		.ascii	"D:\\CYTest\\MyELock\\MyELock.cydsn\000"
+ 700      59546573 
+ 700      745C4D79 
+ 700      454C6F63 
+ 700      6B5C4D79 
+ 701              	.LASF35:
+ 702 0093 7063625F 		.ascii	"pcb_ZManager\000"
+ 702      5A4D616E 
+ 702      61676572 
+ 702      00
+ 703              	.LASF27:
+ 704 00a0 666C6F61 		.ascii	"float\000"
+ 704      7400
+ 705              	.LASF12:
+ 706 00a6 626C6F63 		.ascii	"block\000"
+ 706      6B00
+ 707              	.LASF26:
+ 708 00ac 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 708      206C6F6E 
+ 708      6720756E 
+ 708      7369676E 
+ 708      65642069 
+ 709              	.LASF17:
+ 710 00c3 756E7369 		.ascii	"unsigned char\000"
+ 710      676E6564 
+ 710      20636861 
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 15
+
+
+ 710      7200
+ 711              	.LASF24:
+ 712 00d1 6C6F6E67 		.ascii	"long unsigned int\000"
+ 712      20756E73 
+ 712      69676E65 
+ 712      6420696E 
+ 712      7400
+ 713              	.LASF22:
+ 714 00e3 73686F72 		.ascii	"short unsigned int\000"
+ 714      7420756E 
+ 714      7369676E 
+ 714      65642069 
+ 714      6E7400
+ 715              	.LASF3:
+ 716 00f6 6D644449 		.ascii	"mdDIM\000"
+ 716      4D00
+ 717              	.LASF28:
+ 718 00fc 646F7562 		.ascii	"double\000"
+ 718      6C6500
+ 719              	.LASF42:
+ 720 0103 7A74696D 		.ascii	"ztimer.c\000"
+ 720      65722E63 
+ 720      00
+ 721              	.LASF45:
+ 722 010c 5A436C6F 		.ascii	"ZClock_Chain\000"
+ 722      636B5F43 
+ 722      6861696E 
+ 722      00
+ 723              	.LASF18:
+ 724 0119 756E7369 		.ascii	"unsigned int\000"
+ 724      676E6564 
+ 724      20696E74 
+ 724      00
+ 725              	.LASF6:
+ 726 0126 6D644D4B 		.ascii	"mdMKey\000"
+ 726      657900
+ 727              	.LASF1:
+ 728 012d 6D644D4F 		.ascii	"mdMOTO_CLOCK\000"
+ 728      544F5F43 
+ 728      4C4F434B 
+ 728      00
+ 729              	.LASF29:
+ 730 013a 63686172 		.ascii	"char\000"
+ 730      00
+ 731              	.LASF14:
+ 732 013f 6D6F6465 		.ascii	"mode\000"
+ 732      00
+ 733              	.LASF38:
+ 734 0144 5A57616B 		.ascii	"ZWakeup\000"
+ 734      65757000 
+ 735              	.LASF41:
+ 736 014c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 736      43313120 
+ 736      352E342E 
+ 736      31203230 
+ 736      31363036 
+ 737 017f 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 16
+
+
+ 737      20726576 
+ 737      6973696F 
+ 737      6E203233 
+ 737      37373135 
+ 738 01b2 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 738      66756E63 
+ 738      74696F6E 
+ 738      2D736563 
+ 738      74696F6E 
+ 739              	.LASF31:
+ 740 01da 73697A65 		.ascii	"sizetype\000"
+ 740      74797065 
+ 740      00
+ 741              	.LASF39:
+ 742 01e3 50696E5F 		.ascii	"Pin_BackLight_Write\000"
+ 742      4261636B 
+ 742      4C696768 
+ 742      745F5772 
+ 742      69746500 
+ 743              	.LASF25:
+ 744 01f7 6C6F6E67 		.ascii	"long long int\000"
+ 744      206C6F6E 
+ 744      6720696E 
+ 744      7400
+ 745              	.LASF21:
+ 746 0205 73686F72 		.ascii	"short int\000"
+ 746      7420696E 
+ 746      7400
+ 747              	.LASF10:
+ 748 020f 72656164 		.ascii	"ready\000"
+ 748      7900
+ 749              	.LASF16:
+ 750 0215 6379636C 		.ascii	"cycle\000"
+ 750      6500
+ 751              	.LASF0:
+ 752 021b 6D644E6F 		.ascii	"mdNone\000"
+ 752      6E6500
+ 753              	.LASF11:
+ 754 0222 65786375 		.ascii	"excute\000"
+ 754      746500
+ 755              	.LASF23:
+ 756 0229 6C6F6E67 		.ascii	"long int\000"
+ 756      20696E74 
+ 756      00
+ 757              	.LASF37:
+ 758 0232 4B65794E 		.ascii	"KeyNumber\000"
+ 758      756D6265 
+ 758      7200
+ 759              	.LASF30:
+ 760 023c 6C6F6E67 		.ascii	"long double\000"
+ 760      20646F75 
+ 760      626C6500 
+ 761              	.LASF20:
+ 762 0248 7369676E 		.ascii	"signed char\000"
+ 762      65642063 
+ 762      68617200 
+ 763              	.LASF33:
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccOBWaJc.s 			page 17
+
+
+ 764 0254 7063625F 		.ascii	"pcb_ZMoto\000"
+ 764      5A4D6F74 
+ 764      6F00
+ 765              	.LASF5:
+ 766 025e 6D644D42 		.ascii	"mdMBle\000"
+ 766      6C6500
+ 767              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

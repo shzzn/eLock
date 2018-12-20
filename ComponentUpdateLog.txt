@@ -1,0 +1,25 @@
+Last Modified Date & Time: 12/01/2018 19:39:52
+
+BLE_Temperature_Measurement01: BLE_Temperature_Measurement01.cydwr
+	cy_boot [v5.20] to [v5.80]
+	cy_lfclk [v1.0] to [v1.20]
+	LIN_Dynamic [v3.20] to [v4.0]
+
+BLE_Temperature_Measurement01: TopDesign.cysch
+	BLE [v2.30] to [v3.54]
+	WDT [v2.0] to [v2.10]
+	BARO_CS [v2.10] to [v2.20]
+	BARO_RST [v2.10] to [v2.20]
+	HT_CS [v2.10] to [v2.20]
+	SW2 [v2.10] to [v2.20]
+	UV_CS [v2.10] to [v2.20]
+	I2CM [v3.0] to [v4.0]
+	UART_DEB [v3.0] to [v4.0]
+
+
+Last Modified Date & Time: 12/09/2018 23:47:43
+
+UART_to_BLE_peripheral: UART_to_BLE_peripheral.cydwr
+	cy_boot [v5.70] to [v5.80]
+
+

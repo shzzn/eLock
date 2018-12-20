@@ -1,0 +1,1190 @@
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"zglobal.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ZCreate,"ax",%progbits
+  20              		.align	2
+  21              		.global	ZCreate
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	ZCreate, %function
+  25              	ZCreate:
+  26              	.LFB0:
+  27              		.file 1 "zglobal.c"
+   1:zglobal.c     **** #include "zglobal.h"
+   2:zglobal.c     **** 
+   3:zglobal.c     **** #define zzndebug
+   4:zglobal.c     **** unsigned char error_dected;
+   5:zglobal.c     **** 
+   6:zglobal.c     **** pcb_def pcb_ZClockchain;
+   7:zglobal.c     **** pcb_def pcb_ZMoto;
+   8:zglobal.c     **** pcb_def pcb_ZBeep;
+   9:zglobal.c     **** pcb_def pcb_ZManager;
+  10:zglobal.c     **** pcb_def pcb_ZKey;
+  11:zglobal.c     **** 
+  12:zglobal.c     **** 
+  13:zglobal.c     **** void ZCreate(pcb_def * ppcb,unsigned char mode,unsigned char cyc)
+  14:zglobal.c     **** {
+  28              		.loc 1 14 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  15:zglobal.c     **** 	if(ppcb -> status == destroy)
+  34              		.loc 1 15 0
+  35 0000 0378     		ldrb	r3, [r0]
+  36 0002 002B     		cmp	r3, #0
+  37 0004 06D1     		bne	.L2
+  16:zglobal.c     **** 	{
+  17:zglobal.c     **** 		ppcb -> mode = mode;		
+  38              		.loc 1 17 0
+  39 0006 4170     		strb	r1, [r0, #1]
+  18:zglobal.c     **** 		ppcb -> clk = 0;
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 2
+
+
+  40              		.loc 1 18 0
+  41 0008 4360     		str	r3, [r0, #4]
+  19:zglobal.c     **** 		ppcb -> step = 0;
+  42              		.loc 1 19 0
+  43 000a 8370     		strb	r3, [r0, #2]
+  20:zglobal.c     **** 		ppcb -> status = ready;
+  44              		.loc 1 20 0
+  45 000c 0133     		adds	r3, r3, #1
+  46 000e 0370     		strb	r3, [r0]
+  21:zglobal.c     **** 		ppcb -> cycle = cyc;
+  47              		.loc 1 21 0
+  48 0010 C270     		strb	r2, [r0, #3]
+  49 0012 02E0     		b	.L1
+  50              	.L2:
+  22:zglobal.c     **** 	}
+  23:zglobal.c     **** 	else
+  24:zglobal.c     **** 	{
+  25:zglobal.c     ****         error_dected = 1;
+  51              		.loc 1 25 0
+  52 0014 0122     		movs	r2, #1
+  53              	.LVL1:
+  54 0016 014B     		ldr	r3, .L4
+  55 0018 1A70     		strb	r2, [r3]
+  56              	.L1:
+  26:zglobal.c     **** 	}
+  27:zglobal.c     **** }
+  57              		.loc 1 27 0
+  58              		@ sp needed
+  59 001a 7047     		bx	lr
+  60              	.L5:
+  61              		.align	2
+  62              	.L4:
+  63 001c 00000000 		.word	error_dected
+  64              		.cfi_endproc
+  65              	.LFE0:
+  66              		.size	ZCreate, .-ZCreate
+  67              		.section	.text.ZBlock,"ax",%progbits
+  68              		.align	2
+  69              		.global	ZBlock
+  70              		.code	16
+  71              		.thumb_func
+  72              		.type	ZBlock, %function
+  73              	ZBlock:
+  74              	.LFB1:
+  28:zglobal.c     **** void ZBlock(pcb_def * ppcb,unsigned int clk)
+  29:zglobal.c     **** {
+  75              		.loc 1 29 0
+  76              		.cfi_startproc
+  77              		@ args = 0, pretend = 0, frame = 0
+  78              		@ frame_needed = 0, uses_anonymous_args = 0
+  79              		@ link register save eliminated.
+  80              	.LVL2:
+  30:zglobal.c     **** 	if(ppcb -> status != destroy)
+  81              		.loc 1 30 0
+  82 0000 0378     		ldrb	r3, [r0]
+  83 0002 002B     		cmp	r3, #0
+  84 0004 03D0     		beq	.L7
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 3
+
+
+  31:zglobal.c     **** 	{
+  32:zglobal.c     **** 		ppcb -> status = block;
+  85              		.loc 1 32 0
+  86 0006 0323     		movs	r3, #3
+  87 0008 0370     		strb	r3, [r0]
+  33:zglobal.c     **** 		ppcb -> clk = clk;
+  88              		.loc 1 33 0
+  89 000a 4160     		str	r1, [r0, #4]
+  90 000c 02E0     		b	.L6
+  91              	.L7:
+  34:zglobal.c     **** //		ppcb -> message = msgNone;
+  35:zglobal.c     **** 	}
+  36:zglobal.c     ****     else
+  37:zglobal.c     ****     {
+  38:zglobal.c     ****         error_dected =2;
+  92              		.loc 1 38 0
+  93 000e 0222     		movs	r2, #2
+  94 0010 014B     		ldr	r3, .L9
+  95 0012 1A70     		strb	r2, [r3]
+  96              	.L6:
+  39:zglobal.c     ****     }
+  40:zglobal.c     **** }
+  97              		.loc 1 40 0
+  98              		@ sp needed
+  99 0014 7047     		bx	lr
+ 100              	.L10:
+ 101 0016 C046     		.align	2
+ 102              	.L9:
+ 103 0018 00000000 		.word	error_dected
+ 104              		.cfi_endproc
+ 105              	.LFE1:
+ 106              		.size	ZBlock, .-ZBlock
+ 107              		.section	.text.ZWakeup,"ax",%progbits
+ 108              		.align	2
+ 109              		.global	ZWakeup
+ 110              		.code	16
+ 111              		.thumb_func
+ 112              		.type	ZWakeup, %function
+ 113              	ZWakeup:
+ 114              	.LFB2:
+  41:zglobal.c     **** 
+  42:zglobal.c     **** void ZWakeup(pcb_def * ppcb)    //,unsigned char cyc)
+  43:zglobal.c     **** {
+ 115              		.loc 1 43 0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 0
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 119              		@ link register save eliminated.
+ 120              	.LVL3:
+  44:zglobal.c     **** 	if(ppcb -> status == block)
+ 121              		.loc 1 44 0
+ 122 0000 0378     		ldrb	r3, [r0]
+ 123 0002 032B     		cmp	r3, #3
+ 124 0004 03D1     		bne	.L11
+  45:zglobal.c     **** 	{
+  46:zglobal.c     **** 		ppcb -> status = ready;
+ 125              		.loc 1 46 0
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 4
+
+
+ 126 0006 023B     		subs	r3, r3, #2
+ 127 0008 0370     		strb	r3, [r0]
+  47:zglobal.c     **** 		ppcb -> clk = 0;		
+ 128              		.loc 1 47 0
+ 129 000a 0023     		movs	r3, #0
+ 130 000c 4360     		str	r3, [r0, #4]
+ 131              	.L11:
+  48:zglobal.c     **** //		ppcb -> cycle = cyc;
+  49:zglobal.c     **** 	}
+  50:zglobal.c     **** //	else
+  51:zglobal.c     **** //	{
+  52:zglobal.c     **** //        error_dected = 3;
+  53:zglobal.c     **** //	}
+  54:zglobal.c     **** }
+ 132              		.loc 1 54 0
+ 133              		@ sp needed
+ 134 000e 7047     		bx	lr
+ 135              		.cfi_endproc
+ 136              	.LFE2:
+ 137              		.size	ZWakeup, .-ZWakeup
+ 138              		.section	.text.ZDestroy,"ax",%progbits
+ 139              		.align	2
+ 140              		.global	ZDestroy
+ 141              		.code	16
+ 142              		.thumb_func
+ 143              		.type	ZDestroy, %function
+ 144              	ZDestroy:
+ 145              	.LFB3:
+  55:zglobal.c     **** void ZDestroy(pcb_def * ppcb)
+  56:zglobal.c     **** {
+ 146              		.loc 1 56 0
+ 147              		.cfi_startproc
+ 148              		@ args = 0, pretend = 0, frame = 0
+ 149              		@ frame_needed = 0, uses_anonymous_args = 0
+ 150              		@ link register save eliminated.
+ 151              	.LVL4:
+  57:zglobal.c     **** 	ppcb -> clk = 0;
+ 152              		.loc 1 57 0
+ 153 0000 0023     		movs	r3, #0
+ 154 0002 4360     		str	r3, [r0, #4]
+  58:zglobal.c     **** 	ppcb -> mode = mdNone;
+ 155              		.loc 1 58 0
+ 156 0004 4370     		strb	r3, [r0, #1]
+  59:zglobal.c     **** 	ppcb -> step = 0;
+ 157              		.loc 1 59 0
+ 158 0006 8370     		strb	r3, [r0, #2]
+  60:zglobal.c     **** 	ppcb -> status = destroy;
+ 159              		.loc 1 60 0
+ 160 0008 0370     		strb	r3, [r0]
+  61:zglobal.c     **** 	ppcb -> cycle = 0;	
+ 161              		.loc 1 61 0
+ 162 000a C370     		strb	r3, [r0, #3]
+  62:zglobal.c     **** }
+ 163              		.loc 1 62 0
+ 164              		@ sp needed
+ 165 000c 7047     		bx	lr
+ 166              		.cfi_endproc
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 5
+
+
+ 167              	.LFE3:
+ 168              		.size	ZDestroy, .-ZDestroy
+ 169 000e C046     		.section	.text.ZpcbInit,"ax",%progbits
+ 170              		.align	2
+ 171              		.global	ZpcbInit
+ 172              		.code	16
+ 173              		.thumb_func
+ 174              		.type	ZpcbInit, %function
+ 175              	ZpcbInit:
+ 176              	.LFB4:
+  63:zglobal.c     **** 
+  64:zglobal.c     **** void ZpcbInit()
+  65:zglobal.c     **** {
+ 177              		.loc 1 65 0
+ 178              		.cfi_startproc
+ 179              		@ args = 0, pretend = 0, frame = 0
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ 181 0000 10B5     		push	{r4, lr}
+ 182              		.cfi_def_cfa_offset 8
+ 183              		.cfi_offset 4, -8
+ 184              		.cfi_offset 14, -4
+  66:zglobal.c     ****     ZDestroy(&pcb_ZClockchain);
+ 185              		.loc 1 66 0
+ 186 0002 0B4C     		ldr	r4, .L15
+ 187 0004 2000     		movs	r0, r4
+ 188 0006 FFF7FEFF 		bl	ZDestroy
+ 189              	.LVL5:
+  67:zglobal.c     ****     pcb_ZClockchain.status = block;
+ 190              		.loc 1 67 0
+ 191 000a 0323     		movs	r3, #3
+ 192 000c 2370     		strb	r3, [r4]
+  68:zglobal.c     ****     ZDestroy(&pcb_ZKey);
+ 193              		.loc 1 68 0
+ 194 000e 094C     		ldr	r4, .L15+4
+ 195 0010 2000     		movs	r0, r4
+ 196 0012 FFF7FEFF 		bl	ZDestroy
+ 197              	.LVL6:
+  69:zglobal.c     ****     ZCreate(&pcb_ZKey,mdProx,0);
+ 198              		.loc 1 69 0
+ 199 0016 0022     		movs	r2, #0
+ 200 0018 0821     		movs	r1, #8
+ 201 001a 2000     		movs	r0, r4
+ 202 001c FFF7FEFF 		bl	ZCreate
+ 203              	.LVL7:
+  70:zglobal.c     **** 
+  71:zglobal.c     ****     
+  72:zglobal.c     ****     ZDestroy(&pcb_ZMoto);
+ 204              		.loc 1 72 0
+ 205 0020 0548     		ldr	r0, .L15+8
+ 206 0022 FFF7FEFF 		bl	ZDestroy
+ 207              	.LVL8:
+  73:zglobal.c     **** //    ZDestroy(&pcb_ZBeep); //zzn!
+  74:zglobal.c     ****     ZDestroy(&pcb_ZManager);
+ 208              		.loc 1 74 0
+ 209 0026 0548     		ldr	r0, .L15+12
+ 210 0028 FFF7FEFF 		bl	ZDestroy
+ 211              	.LVL9:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 6
+
+
+  75:zglobal.c     ****     
+  76:zglobal.c     ****     
+  77:zglobal.c     **** }
+ 212              		.loc 1 77 0
+ 213              		@ sp needed
+ 214 002c 10BD     		pop	{r4, pc}
+ 215              	.L16:
+ 216 002e C046     		.align	2
+ 217              	.L15:
+ 218 0030 00000000 		.word	pcb_ZClockchain
+ 219 0034 00000000 		.word	pcb_ZKey
+ 220 0038 00000000 		.word	pcb_ZMoto
+ 221 003c 00000000 		.word	pcb_ZManager
+ 222              		.cfi_endproc
+ 223              	.LFE4:
+ 224              		.size	ZpcbInit, .-ZpcbInit
+ 225              		.comm	pcb_ZKey,8,4
+ 226              		.comm	pcb_ZManager,8,4
+ 227              		.comm	pcb_ZBeep,8,4
+ 228              		.comm	pcb_ZMoto,8,4
+ 229              		.comm	pcb_ZClockchain,8,4
+ 230              		.comm	error_dected,1,1
+ 231              		.text
+ 232              	.Letext0:
+ 233              		.file 2 "zglobal.h"
+ 234              		.section	.debug_info,"",%progbits
+ 235              	.Ldebug_info0:
+ 236 0000 A7020000 		.4byte	0x2a7
+ 237 0004 0400     		.2byte	0x4
+ 238 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 239 000a 04       		.byte	0x4
+ 240 000b 01       		.uleb128 0x1
+ 241 000c 1A010000 		.4byte	.LASF31
+ 242 0010 0C       		.byte	0xc
+ 243 0011 C4000000 		.4byte	.LASF32
+ 244 0015 5E000000 		.4byte	.LASF33
+ 245 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 246 001d 00000000 		.4byte	0
+ 247 0021 00000000 		.4byte	.Ldebug_line0
+ 248 0025 02       		.uleb128 0x2
+ 249 0026 01       		.byte	0x1
+ 250 0027 68000000 		.4byte	0x68
+ 251 002b 02       		.byte	0x2
+ 252 002c 0B       		.byte	0xb
+ 253 002d 68000000 		.4byte	0x68
+ 254 0031 03       		.uleb128 0x3
+ 255 0032 47000000 		.4byte	.LASF0
+ 256 0036 00       		.byte	0
+ 257 0037 03       		.uleb128 0x3
+ 258 0038 85000000 		.4byte	.LASF1
+ 259 003c 01       		.byte	0x1
+ 260 003d 03       		.uleb128 0x3
+ 261 003e A2000000 		.4byte	.LASF2
+ 262 0042 02       		.byte	0x2
+ 263 0043 03       		.uleb128 0x3
+ 264 0044 BF010000 		.4byte	.LASF3
+ 265 0048 03       		.byte	0x3
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 7
+
+
+ 266 0049 03       		.uleb128 0x3
+ 267 004a 1D000000 		.4byte	.LASF4
+ 268 004e 04       		.byte	0x4
+ 269 004f 03       		.uleb128 0x3
+ 270 0050 C5010000 		.4byte	.LASF5
+ 271 0054 05       		.byte	0x5
+ 272 0055 03       		.uleb128 0x3
+ 273 0056 B8010000 		.4byte	.LASF6
+ 274 005a 06       		.byte	0x6
+ 275 005b 03       		.uleb128 0x3
+ 276 005c 3D000000 		.4byte	.LASF7
+ 277 0060 07       		.byte	0x7
+ 278 0061 03       		.uleb128 0x3
+ 279 0062 BD000000 		.4byte	.LASF8
+ 280 0066 08       		.byte	0x8
+ 281 0067 00       		.byte	0
+ 282 0068 04       		.uleb128 0x4
+ 283 0069 01       		.byte	0x1
+ 284 006a 08       		.byte	0x8
+ 285 006b CE000000 		.4byte	.LASF17
+ 286 006f 05       		.uleb128 0x5
+ 287 0070 6D7600   		.ascii	"mv\000"
+ 288 0073 02       		.byte	0x2
+ 289 0074 0D       		.byte	0xd
+ 290 0075 25000000 		.4byte	0x25
+ 291 0079 02       		.uleb128 0x2
+ 292 007a 01       		.byte	0x1
+ 293 007b 68000000 		.4byte	0x68
+ 294 007f 02       		.byte	0x2
+ 295 0080 0E       		.byte	0xe
+ 296 0081 9E000000 		.4byte	0x9e
+ 297 0085 03       		.uleb128 0x3
+ 298 0086 EB000000 		.4byte	.LASF9
+ 299 008a 00       		.byte	0
+ 300 008b 03       		.uleb128 0x3
+ 301 008c DC000000 		.4byte	.LASF10
+ 302 0090 01       		.byte	0x1
+ 303 0091 03       		.uleb128 0x3
+ 304 0092 0E010000 		.4byte	.LASF11
+ 305 0096 02       		.byte	0x2
+ 306 0097 03       		.uleb128 0x3
+ 307 0098 CC010000 		.4byte	.LASF12
+ 308 009c 03       		.byte	0x3
+ 309 009d 00       		.byte	0
+ 310 009e 05       		.uleb128 0x5
+ 311 009f 737600   		.ascii	"sv\000"
+ 312 00a2 02       		.byte	0x2
+ 313 00a3 0E       		.byte	0xe
+ 314 00a4 79000000 		.4byte	0x79
+ 315 00a8 06       		.uleb128 0x6
+ 316 00a9 7E000000 		.4byte	.LASF34
+ 317 00ad 08       		.byte	0x8
+ 318 00ae 02       		.byte	0x2
+ 319 00af 0F       		.byte	0xf
+ 320 00b0 F1000000 		.4byte	0xf1
+ 321 00b4 07       		.uleb128 0x7
+ 322 00b5 92000000 		.4byte	.LASF13
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 8
+
+
+ 323 00b9 02       		.byte	0x2
+ 324 00ba 11       		.byte	0x11
+ 325 00bb 9E000000 		.4byte	0x9e
+ 326 00bf 00       		.byte	0
+ 327 00c0 07       		.uleb128 0x7
+ 328 00c1 2B000000 		.4byte	.LASF14
+ 329 00c5 02       		.byte	0x2
+ 330 00c6 12       		.byte	0x12
+ 331 00c7 6F000000 		.4byte	0x6f
+ 332 00cb 01       		.byte	0x1
+ 333 00cc 07       		.uleb128 0x7
+ 334 00cd 15010000 		.4byte	.LASF15
+ 335 00d1 02       		.byte	0x2
+ 336 00d2 13       		.byte	0x13
+ 337 00d3 68000000 		.4byte	0x68
+ 338 00d7 02       		.byte	0x2
+ 339 00d8 07       		.uleb128 0x7
+ 340 00d9 B2010000 		.4byte	.LASF16
+ 341 00dd 02       		.byte	0x2
+ 342 00de 14       		.byte	0x14
+ 343 00df 68000000 		.4byte	0x68
+ 344 00e3 03       		.byte	0x3
+ 345 00e4 08       		.uleb128 0x8
+ 346 00e5 636C6B00 		.ascii	"clk\000"
+ 347 00e9 02       		.byte	0x2
+ 348 00ea 15       		.byte	0x15
+ 349 00eb F1000000 		.4byte	0xf1
+ 350 00ef 04       		.byte	0x4
+ 351 00f0 00       		.byte	0
+ 352 00f1 04       		.uleb128 0x4
+ 353 00f2 04       		.byte	0x4
+ 354 00f3 07       		.byte	0x7
+ 355 00f4 10000000 		.4byte	.LASF18
+ 356 00f8 09       		.uleb128 0x9
+ 357 00f9 4E000000 		.4byte	.LASF19
+ 358 00fd 02       		.byte	0x2
+ 359 00fe 18       		.byte	0x18
+ 360 00ff A8000000 		.4byte	0xa8
+ 361 0103 0A       		.uleb128 0xa
+ 362 0104 56000000 		.4byte	.LASF21
+ 363 0108 01       		.byte	0x1
+ 364 0109 0D       		.byte	0xd
+ 365 010a 00000000 		.4byte	.LFB0
+ 366 010e 20000000 		.4byte	.LFE0-.LFB0
+ 367 0112 01       		.uleb128 0x1
+ 368 0113 9C       		.byte	0x9c
+ 369 0114 42010000 		.4byte	0x142
+ 370 0118 0B       		.uleb128 0xb
+ 371 0119 D2010000 		.4byte	.LASF20
+ 372 011d 01       		.byte	0x1
+ 373 011e 0D       		.byte	0xd
+ 374 011f 42010000 		.4byte	0x142
+ 375 0123 01       		.uleb128 0x1
+ 376 0124 50       		.byte	0x50
+ 377 0125 0B       		.uleb128 0xb
+ 378 0126 2B000000 		.4byte	.LASF14
+ 379 012a 01       		.byte	0x1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 9
+
+
+ 380 012b 0D       		.byte	0xd
+ 381 012c 68000000 		.4byte	0x68
+ 382 0130 01       		.uleb128 0x1
+ 383 0131 51       		.byte	0x51
+ 384 0132 0C       		.uleb128 0xc
+ 385 0133 63796300 		.ascii	"cyc\000"
+ 386 0137 01       		.byte	0x1
+ 387 0138 0D       		.byte	0xd
+ 388 0139 68000000 		.4byte	0x68
+ 389 013d 00000000 		.4byte	.LLST0
+ 390 0141 00       		.byte	0
+ 391 0142 0D       		.uleb128 0xd
+ 392 0143 04       		.byte	0x4
+ 393 0144 F8000000 		.4byte	0xf8
+ 394 0148 0A       		.uleb128 0xa
+ 395 0149 24000000 		.4byte	.LASF22
+ 396 014d 01       		.byte	0x1
+ 397 014e 1C       		.byte	0x1c
+ 398 014f 00000000 		.4byte	.LFB1
+ 399 0153 1C000000 		.4byte	.LFE1-.LFB1
+ 400 0157 01       		.uleb128 0x1
+ 401 0158 9C       		.byte	0x9c
+ 402 0159 78010000 		.4byte	0x178
+ 403 015d 0B       		.uleb128 0xb
+ 404 015e D2010000 		.4byte	.LASF20
+ 405 0162 01       		.byte	0x1
+ 406 0163 1C       		.byte	0x1c
+ 407 0164 42010000 		.4byte	0x142
+ 408 0168 01       		.uleb128 0x1
+ 409 0169 50       		.byte	0x50
+ 410 016a 0E       		.uleb128 0xe
+ 411 016b 636C6B00 		.ascii	"clk\000"
+ 412 016f 01       		.byte	0x1
+ 413 0170 1C       		.byte	0x1c
+ 414 0171 F1000000 		.4byte	0xf1
+ 415 0175 01       		.uleb128 0x1
+ 416 0176 51       		.byte	0x51
+ 417 0177 00       		.byte	0
+ 418 0178 0A       		.uleb128 0xa
+ 419 0179 FC000000 		.4byte	.LASF23
+ 420 017d 01       		.byte	0x1
+ 421 017e 2A       		.byte	0x2a
+ 422 017f 00000000 		.4byte	.LFB2
+ 423 0183 10000000 		.4byte	.LFE2-.LFB2
+ 424 0187 01       		.uleb128 0x1
+ 425 0188 9C       		.byte	0x9c
+ 426 0189 9B010000 		.4byte	0x19b
+ 427 018d 0B       		.uleb128 0xb
+ 428 018e D2010000 		.4byte	.LASF20
+ 429 0192 01       		.byte	0x1
+ 430 0193 2A       		.byte	0x2a
+ 431 0194 42010000 		.4byte	0x142
+ 432 0198 01       		.uleb128 0x1
+ 433 0199 50       		.byte	0x50
+ 434 019a 00       		.byte	0
+ 435 019b 0A       		.uleb128 0xa
+ 436 019c 99000000 		.4byte	.LASF24
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 10
+
+
+ 437 01a0 01       		.byte	0x1
+ 438 01a1 37       		.byte	0x37
+ 439 01a2 00000000 		.4byte	.LFB3
+ 440 01a6 0E000000 		.4byte	.LFE3-.LFB3
+ 441 01aa 01       		.uleb128 0x1
+ 442 01ab 9C       		.byte	0x9c
+ 443 01ac BE010000 		.4byte	0x1be
+ 444 01b0 0B       		.uleb128 0xb
+ 445 01b1 D2010000 		.4byte	.LASF20
+ 446 01b5 01       		.byte	0x1
+ 447 01b6 37       		.byte	0x37
+ 448 01b7 42010000 		.4byte	0x142
+ 449 01bb 01       		.uleb128 0x1
+ 450 01bc 50       		.byte	0x50
+ 451 01bd 00       		.byte	0
+ 452 01be 0F       		.uleb128 0xf
+ 453 01bf F3000000 		.4byte	.LASF35
+ 454 01c3 01       		.byte	0x1
+ 455 01c4 40       		.byte	0x40
+ 456 01c5 00000000 		.4byte	.LFB4
+ 457 01c9 40000000 		.4byte	.LFE4-.LFB4
+ 458 01cd 01       		.uleb128 0x1
+ 459 01ce 9C       		.byte	0x9c
+ 460 01cf 44020000 		.4byte	0x244
+ 461 01d3 10       		.uleb128 0x10
+ 462 01d4 0A000000 		.4byte	.LVL5
+ 463 01d8 9B010000 		.4byte	0x19b
+ 464 01dc E7010000 		.4byte	0x1e7
+ 465 01e0 11       		.uleb128 0x11
+ 466 01e1 01       		.uleb128 0x1
+ 467 01e2 50       		.byte	0x50
+ 468 01e3 02       		.uleb128 0x2
+ 469 01e4 74       		.byte	0x74
+ 470 01e5 00       		.sleb128 0
+ 471 01e6 00       		.byte	0
+ 472 01e7 10       		.uleb128 0x10
+ 473 01e8 16000000 		.4byte	.LVL6
+ 474 01ec 9B010000 		.4byte	0x19b
+ 475 01f0 FB010000 		.4byte	0x1fb
+ 476 01f4 11       		.uleb128 0x11
+ 477 01f5 01       		.uleb128 0x1
+ 478 01f6 50       		.byte	0x50
+ 479 01f7 02       		.uleb128 0x2
+ 480 01f8 74       		.byte	0x74
+ 481 01f9 00       		.sleb128 0
+ 482 01fa 00       		.byte	0
+ 483 01fb 10       		.uleb128 0x10
+ 484 01fc 20000000 		.4byte	.LVL7
+ 485 0200 03010000 		.4byte	0x103
+ 486 0204 19020000 		.4byte	0x219
+ 487 0208 11       		.uleb128 0x11
+ 488 0209 01       		.uleb128 0x1
+ 489 020a 50       		.byte	0x50
+ 490 020b 02       		.uleb128 0x2
+ 491 020c 74       		.byte	0x74
+ 492 020d 00       		.sleb128 0
+ 493 020e 11       		.uleb128 0x11
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 11
+
+
+ 494 020f 01       		.uleb128 0x1
+ 495 0210 51       		.byte	0x51
+ 496 0211 01       		.uleb128 0x1
+ 497 0212 38       		.byte	0x38
+ 498 0213 11       		.uleb128 0x11
+ 499 0214 01       		.uleb128 0x1
+ 500 0215 52       		.byte	0x52
+ 501 0216 01       		.uleb128 0x1
+ 502 0217 30       		.byte	0x30
+ 503 0218 00       		.byte	0
+ 504 0219 10       		.uleb128 0x10
+ 505 021a 26000000 		.4byte	.LVL8
+ 506 021e 9B010000 		.4byte	0x19b
+ 507 0222 30020000 		.4byte	0x230
+ 508 0226 11       		.uleb128 0x11
+ 509 0227 01       		.uleb128 0x1
+ 510 0228 50       		.byte	0x50
+ 511 0229 05       		.uleb128 0x5
+ 512 022a 03       		.byte	0x3
+ 513 022b 00000000 		.4byte	pcb_ZMoto
+ 514 022f 00       		.byte	0
+ 515 0230 12       		.uleb128 0x12
+ 516 0231 2C000000 		.4byte	.LVL9
+ 517 0235 9B010000 		.4byte	0x19b
+ 518 0239 11       		.uleb128 0x11
+ 519 023a 01       		.uleb128 0x1
+ 520 023b 50       		.byte	0x50
+ 521 023c 05       		.uleb128 0x5
+ 522 023d 03       		.byte	0x3
+ 523 023e 00000000 		.4byte	pcb_ZManager
+ 524 0242 00       		.byte	0
+ 525 0243 00       		.byte	0
+ 526 0244 13       		.uleb128 0x13
+ 527 0245 00000000 		.4byte	.LASF25
+ 528 0249 01       		.byte	0x1
+ 529 024a 06       		.byte	0x6
+ 530 024b F8000000 		.4byte	0xf8
+ 531 024f 05       		.uleb128 0x5
+ 532 0250 03       		.byte	0x3
+ 533 0251 00000000 		.4byte	pcb_ZClockchain
+ 534 0255 13       		.uleb128 0x13
+ 535 0256 04010000 		.4byte	.LASF26
+ 536 025a 01       		.byte	0x1
+ 537 025b 07       		.byte	0x7
+ 538 025c F8000000 		.4byte	0xf8
+ 539 0260 05       		.uleb128 0x5
+ 540 0261 03       		.byte	0x3
+ 541 0262 00000000 		.4byte	pcb_ZMoto
+ 542 0266 13       		.uleb128 0x13
+ 543 0267 A8010000 		.4byte	.LASF27
+ 544 026b 01       		.byte	0x1
+ 545 026c 08       		.byte	0x8
+ 546 026d F8000000 		.4byte	0xf8
+ 547 0271 05       		.uleb128 0x5
+ 548 0272 03       		.byte	0x3
+ 549 0273 00000000 		.4byte	pcb_ZBeep
+ 550 0277 13       		.uleb128 0x13
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 12
+
+
+ 551 0278 B0000000 		.4byte	.LASF28
+ 552 027c 01       		.byte	0x1
+ 553 027d 09       		.byte	0x9
+ 554 027e F8000000 		.4byte	0xf8
+ 555 0282 05       		.uleb128 0x5
+ 556 0283 03       		.byte	0x3
+ 557 0284 00000000 		.4byte	pcb_ZManager
+ 558 0288 13       		.uleb128 0x13
+ 559 0289 E2000000 		.4byte	.LASF29
+ 560 028d 01       		.byte	0x1
+ 561 028e 0A       		.byte	0xa
+ 562 028f F8000000 		.4byte	0xf8
+ 563 0293 05       		.uleb128 0x5
+ 564 0294 03       		.byte	0x3
+ 565 0295 00000000 		.4byte	pcb_ZKey
+ 566 0299 13       		.uleb128 0x13
+ 567 029a 30000000 		.4byte	.LASF30
+ 568 029e 01       		.byte	0x1
+ 569 029f 04       		.byte	0x4
+ 570 02a0 68000000 		.4byte	0x68
+ 571 02a4 05       		.uleb128 0x5
+ 572 02a5 03       		.byte	0x3
+ 573 02a6 00000000 		.4byte	error_dected
+ 574 02aa 00       		.byte	0
+ 575              		.section	.debug_abbrev,"",%progbits
+ 576              	.Ldebug_abbrev0:
+ 577 0000 01       		.uleb128 0x1
+ 578 0001 11       		.uleb128 0x11
+ 579 0002 01       		.byte	0x1
+ 580 0003 25       		.uleb128 0x25
+ 581 0004 0E       		.uleb128 0xe
+ 582 0005 13       		.uleb128 0x13
+ 583 0006 0B       		.uleb128 0xb
+ 584 0007 03       		.uleb128 0x3
+ 585 0008 0E       		.uleb128 0xe
+ 586 0009 1B       		.uleb128 0x1b
+ 587 000a 0E       		.uleb128 0xe
+ 588 000b 55       		.uleb128 0x55
+ 589 000c 17       		.uleb128 0x17
+ 590 000d 11       		.uleb128 0x11
+ 591 000e 01       		.uleb128 0x1
+ 592 000f 10       		.uleb128 0x10
+ 593 0010 17       		.uleb128 0x17
+ 594 0011 00       		.byte	0
+ 595 0012 00       		.byte	0
+ 596 0013 02       		.uleb128 0x2
+ 597 0014 04       		.uleb128 0x4
+ 598 0015 01       		.byte	0x1
+ 599 0016 0B       		.uleb128 0xb
+ 600 0017 0B       		.uleb128 0xb
+ 601 0018 49       		.uleb128 0x49
+ 602 0019 13       		.uleb128 0x13
+ 603 001a 3A       		.uleb128 0x3a
+ 604 001b 0B       		.uleb128 0xb
+ 605 001c 3B       		.uleb128 0x3b
+ 606 001d 0B       		.uleb128 0xb
+ 607 001e 01       		.uleb128 0x1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 13
+
+
+ 608 001f 13       		.uleb128 0x13
+ 609 0020 00       		.byte	0
+ 610 0021 00       		.byte	0
+ 611 0022 03       		.uleb128 0x3
+ 612 0023 28       		.uleb128 0x28
+ 613 0024 00       		.byte	0
+ 614 0025 03       		.uleb128 0x3
+ 615 0026 0E       		.uleb128 0xe
+ 616 0027 1C       		.uleb128 0x1c
+ 617 0028 0B       		.uleb128 0xb
+ 618 0029 00       		.byte	0
+ 619 002a 00       		.byte	0
+ 620 002b 04       		.uleb128 0x4
+ 621 002c 24       		.uleb128 0x24
+ 622 002d 00       		.byte	0
+ 623 002e 0B       		.uleb128 0xb
+ 624 002f 0B       		.uleb128 0xb
+ 625 0030 3E       		.uleb128 0x3e
+ 626 0031 0B       		.uleb128 0xb
+ 627 0032 03       		.uleb128 0x3
+ 628 0033 0E       		.uleb128 0xe
+ 629 0034 00       		.byte	0
+ 630 0035 00       		.byte	0
+ 631 0036 05       		.uleb128 0x5
+ 632 0037 16       		.uleb128 0x16
+ 633 0038 00       		.byte	0
+ 634 0039 03       		.uleb128 0x3
+ 635 003a 08       		.uleb128 0x8
+ 636 003b 3A       		.uleb128 0x3a
+ 637 003c 0B       		.uleb128 0xb
+ 638 003d 3B       		.uleb128 0x3b
+ 639 003e 0B       		.uleb128 0xb
+ 640 003f 49       		.uleb128 0x49
+ 641 0040 13       		.uleb128 0x13
+ 642 0041 00       		.byte	0
+ 643 0042 00       		.byte	0
+ 644 0043 06       		.uleb128 0x6
+ 645 0044 13       		.uleb128 0x13
+ 646 0045 01       		.byte	0x1
+ 647 0046 03       		.uleb128 0x3
+ 648 0047 0E       		.uleb128 0xe
+ 649 0048 0B       		.uleb128 0xb
+ 650 0049 0B       		.uleb128 0xb
+ 651 004a 3A       		.uleb128 0x3a
+ 652 004b 0B       		.uleb128 0xb
+ 653 004c 3B       		.uleb128 0x3b
+ 654 004d 0B       		.uleb128 0xb
+ 655 004e 01       		.uleb128 0x1
+ 656 004f 13       		.uleb128 0x13
+ 657 0050 00       		.byte	0
+ 658 0051 00       		.byte	0
+ 659 0052 07       		.uleb128 0x7
+ 660 0053 0D       		.uleb128 0xd
+ 661 0054 00       		.byte	0
+ 662 0055 03       		.uleb128 0x3
+ 663 0056 0E       		.uleb128 0xe
+ 664 0057 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 14
+
+
+ 665 0058 0B       		.uleb128 0xb
+ 666 0059 3B       		.uleb128 0x3b
+ 667 005a 0B       		.uleb128 0xb
+ 668 005b 49       		.uleb128 0x49
+ 669 005c 13       		.uleb128 0x13
+ 670 005d 38       		.uleb128 0x38
+ 671 005e 0B       		.uleb128 0xb
+ 672 005f 00       		.byte	0
+ 673 0060 00       		.byte	0
+ 674 0061 08       		.uleb128 0x8
+ 675 0062 0D       		.uleb128 0xd
+ 676 0063 00       		.byte	0
+ 677 0064 03       		.uleb128 0x3
+ 678 0065 08       		.uleb128 0x8
+ 679 0066 3A       		.uleb128 0x3a
+ 680 0067 0B       		.uleb128 0xb
+ 681 0068 3B       		.uleb128 0x3b
+ 682 0069 0B       		.uleb128 0xb
+ 683 006a 49       		.uleb128 0x49
+ 684 006b 13       		.uleb128 0x13
+ 685 006c 38       		.uleb128 0x38
+ 686 006d 0B       		.uleb128 0xb
+ 687 006e 00       		.byte	0
+ 688 006f 00       		.byte	0
+ 689 0070 09       		.uleb128 0x9
+ 690 0071 16       		.uleb128 0x16
+ 691 0072 00       		.byte	0
+ 692 0073 03       		.uleb128 0x3
+ 693 0074 0E       		.uleb128 0xe
+ 694 0075 3A       		.uleb128 0x3a
+ 695 0076 0B       		.uleb128 0xb
+ 696 0077 3B       		.uleb128 0x3b
+ 697 0078 0B       		.uleb128 0xb
+ 698 0079 49       		.uleb128 0x49
+ 699 007a 13       		.uleb128 0x13
+ 700 007b 00       		.byte	0
+ 701 007c 00       		.byte	0
+ 702 007d 0A       		.uleb128 0xa
+ 703 007e 2E       		.uleb128 0x2e
+ 704 007f 01       		.byte	0x1
+ 705 0080 3F       		.uleb128 0x3f
+ 706 0081 19       		.uleb128 0x19
+ 707 0082 03       		.uleb128 0x3
+ 708 0083 0E       		.uleb128 0xe
+ 709 0084 3A       		.uleb128 0x3a
+ 710 0085 0B       		.uleb128 0xb
+ 711 0086 3B       		.uleb128 0x3b
+ 712 0087 0B       		.uleb128 0xb
+ 713 0088 27       		.uleb128 0x27
+ 714 0089 19       		.uleb128 0x19
+ 715 008a 11       		.uleb128 0x11
+ 716 008b 01       		.uleb128 0x1
+ 717 008c 12       		.uleb128 0x12
+ 718 008d 06       		.uleb128 0x6
+ 719 008e 40       		.uleb128 0x40
+ 720 008f 18       		.uleb128 0x18
+ 721 0090 9742     		.uleb128 0x2117
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 15
+
+
+ 722 0092 19       		.uleb128 0x19
+ 723 0093 01       		.uleb128 0x1
+ 724 0094 13       		.uleb128 0x13
+ 725 0095 00       		.byte	0
+ 726 0096 00       		.byte	0
+ 727 0097 0B       		.uleb128 0xb
+ 728 0098 05       		.uleb128 0x5
+ 729 0099 00       		.byte	0
+ 730 009a 03       		.uleb128 0x3
+ 731 009b 0E       		.uleb128 0xe
+ 732 009c 3A       		.uleb128 0x3a
+ 733 009d 0B       		.uleb128 0xb
+ 734 009e 3B       		.uleb128 0x3b
+ 735 009f 0B       		.uleb128 0xb
+ 736 00a0 49       		.uleb128 0x49
+ 737 00a1 13       		.uleb128 0x13
+ 738 00a2 02       		.uleb128 0x2
+ 739 00a3 18       		.uleb128 0x18
+ 740 00a4 00       		.byte	0
+ 741 00a5 00       		.byte	0
+ 742 00a6 0C       		.uleb128 0xc
+ 743 00a7 05       		.uleb128 0x5
+ 744 00a8 00       		.byte	0
+ 745 00a9 03       		.uleb128 0x3
+ 746 00aa 08       		.uleb128 0x8
+ 747 00ab 3A       		.uleb128 0x3a
+ 748 00ac 0B       		.uleb128 0xb
+ 749 00ad 3B       		.uleb128 0x3b
+ 750 00ae 0B       		.uleb128 0xb
+ 751 00af 49       		.uleb128 0x49
+ 752 00b0 13       		.uleb128 0x13
+ 753 00b1 02       		.uleb128 0x2
+ 754 00b2 17       		.uleb128 0x17
+ 755 00b3 00       		.byte	0
+ 756 00b4 00       		.byte	0
+ 757 00b5 0D       		.uleb128 0xd
+ 758 00b6 0F       		.uleb128 0xf
+ 759 00b7 00       		.byte	0
+ 760 00b8 0B       		.uleb128 0xb
+ 761 00b9 0B       		.uleb128 0xb
+ 762 00ba 49       		.uleb128 0x49
+ 763 00bb 13       		.uleb128 0x13
+ 764 00bc 00       		.byte	0
+ 765 00bd 00       		.byte	0
+ 766 00be 0E       		.uleb128 0xe
+ 767 00bf 05       		.uleb128 0x5
+ 768 00c0 00       		.byte	0
+ 769 00c1 03       		.uleb128 0x3
+ 770 00c2 08       		.uleb128 0x8
+ 771 00c3 3A       		.uleb128 0x3a
+ 772 00c4 0B       		.uleb128 0xb
+ 773 00c5 3B       		.uleb128 0x3b
+ 774 00c6 0B       		.uleb128 0xb
+ 775 00c7 49       		.uleb128 0x49
+ 776 00c8 13       		.uleb128 0x13
+ 777 00c9 02       		.uleb128 0x2
+ 778 00ca 18       		.uleb128 0x18
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 16
+
+
+ 779 00cb 00       		.byte	0
+ 780 00cc 00       		.byte	0
+ 781 00cd 0F       		.uleb128 0xf
+ 782 00ce 2E       		.uleb128 0x2e
+ 783 00cf 01       		.byte	0x1
+ 784 00d0 3F       		.uleb128 0x3f
+ 785 00d1 19       		.uleb128 0x19
+ 786 00d2 03       		.uleb128 0x3
+ 787 00d3 0E       		.uleb128 0xe
+ 788 00d4 3A       		.uleb128 0x3a
+ 789 00d5 0B       		.uleb128 0xb
+ 790 00d6 3B       		.uleb128 0x3b
+ 791 00d7 0B       		.uleb128 0xb
+ 792 00d8 11       		.uleb128 0x11
+ 793 00d9 01       		.uleb128 0x1
+ 794 00da 12       		.uleb128 0x12
+ 795 00db 06       		.uleb128 0x6
+ 796 00dc 40       		.uleb128 0x40
+ 797 00dd 18       		.uleb128 0x18
+ 798 00de 9742     		.uleb128 0x2117
+ 799 00e0 19       		.uleb128 0x19
+ 800 00e1 01       		.uleb128 0x1
+ 801 00e2 13       		.uleb128 0x13
+ 802 00e3 00       		.byte	0
+ 803 00e4 00       		.byte	0
+ 804 00e5 10       		.uleb128 0x10
+ 805 00e6 898201   		.uleb128 0x4109
+ 806 00e9 01       		.byte	0x1
+ 807 00ea 11       		.uleb128 0x11
+ 808 00eb 01       		.uleb128 0x1
+ 809 00ec 31       		.uleb128 0x31
+ 810 00ed 13       		.uleb128 0x13
+ 811 00ee 01       		.uleb128 0x1
+ 812 00ef 13       		.uleb128 0x13
+ 813 00f0 00       		.byte	0
+ 814 00f1 00       		.byte	0
+ 815 00f2 11       		.uleb128 0x11
+ 816 00f3 8A8201   		.uleb128 0x410a
+ 817 00f6 00       		.byte	0
+ 818 00f7 02       		.uleb128 0x2
+ 819 00f8 18       		.uleb128 0x18
+ 820 00f9 9142     		.uleb128 0x2111
+ 821 00fb 18       		.uleb128 0x18
+ 822 00fc 00       		.byte	0
+ 823 00fd 00       		.byte	0
+ 824 00fe 12       		.uleb128 0x12
+ 825 00ff 898201   		.uleb128 0x4109
+ 826 0102 01       		.byte	0x1
+ 827 0103 11       		.uleb128 0x11
+ 828 0104 01       		.uleb128 0x1
+ 829 0105 31       		.uleb128 0x31
+ 830 0106 13       		.uleb128 0x13
+ 831 0107 00       		.byte	0
+ 832 0108 00       		.byte	0
+ 833 0109 13       		.uleb128 0x13
+ 834 010a 34       		.uleb128 0x34
+ 835 010b 00       		.byte	0
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 17
+
+
+ 836 010c 03       		.uleb128 0x3
+ 837 010d 0E       		.uleb128 0xe
+ 838 010e 3A       		.uleb128 0x3a
+ 839 010f 0B       		.uleb128 0xb
+ 840 0110 3B       		.uleb128 0x3b
+ 841 0111 0B       		.uleb128 0xb
+ 842 0112 49       		.uleb128 0x49
+ 843 0113 13       		.uleb128 0x13
+ 844 0114 3F       		.uleb128 0x3f
+ 845 0115 19       		.uleb128 0x19
+ 846 0116 02       		.uleb128 0x2
+ 847 0117 18       		.uleb128 0x18
+ 848 0118 00       		.byte	0
+ 849 0119 00       		.byte	0
+ 850 011a 00       		.byte	0
+ 851              		.section	.debug_loc,"",%progbits
+ 852              	.Ldebug_loc0:
+ 853              	.LLST0:
+ 854 0000 00000000 		.4byte	.LVL0
+ 855 0004 16000000 		.4byte	.LVL1
+ 856 0008 0100     		.2byte	0x1
+ 857 000a 52       		.byte	0x52
+ 858 000b 16000000 		.4byte	.LVL1
+ 859 000f 20000000 		.4byte	.LFE0
+ 860 0013 0400     		.2byte	0x4
+ 861 0015 F3       		.byte	0xf3
+ 862 0016 01       		.uleb128 0x1
+ 863 0017 52       		.byte	0x52
+ 864 0018 9F       		.byte	0x9f
+ 865 0019 00000000 		.4byte	0
+ 866 001d 00000000 		.4byte	0
+ 867              		.section	.debug_aranges,"",%progbits
+ 868 0000 3C000000 		.4byte	0x3c
+ 869 0004 0200     		.2byte	0x2
+ 870 0006 00000000 		.4byte	.Ldebug_info0
+ 871 000a 04       		.byte	0x4
+ 872 000b 00       		.byte	0
+ 873 000c 0000     		.2byte	0
+ 874 000e 0000     		.2byte	0
+ 875 0010 00000000 		.4byte	.LFB0
+ 876 0014 20000000 		.4byte	.LFE0-.LFB0
+ 877 0018 00000000 		.4byte	.LFB1
+ 878 001c 1C000000 		.4byte	.LFE1-.LFB1
+ 879 0020 00000000 		.4byte	.LFB2
+ 880 0024 10000000 		.4byte	.LFE2-.LFB2
+ 881 0028 00000000 		.4byte	.LFB3
+ 882 002c 0E000000 		.4byte	.LFE3-.LFB3
+ 883 0030 00000000 		.4byte	.LFB4
+ 884 0034 40000000 		.4byte	.LFE4-.LFB4
+ 885 0038 00000000 		.4byte	0
+ 886 003c 00000000 		.4byte	0
+ 887              		.section	.debug_ranges,"",%progbits
+ 888              	.Ldebug_ranges0:
+ 889 0000 00000000 		.4byte	.LFB0
+ 890 0004 20000000 		.4byte	.LFE0
+ 891 0008 00000000 		.4byte	.LFB1
+ 892 000c 1C000000 		.4byte	.LFE1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 18
+
+
+ 893 0010 00000000 		.4byte	.LFB2
+ 894 0014 10000000 		.4byte	.LFE2
+ 895 0018 00000000 		.4byte	.LFB3
+ 896 001c 0E000000 		.4byte	.LFE3
+ 897 0020 00000000 		.4byte	.LFB4
+ 898 0024 40000000 		.4byte	.LFE4
+ 899 0028 00000000 		.4byte	0
+ 900 002c 00000000 		.4byte	0
+ 901              		.section	.debug_line,"",%progbits
+ 902              	.Ldebug_line0:
+ 903 0000 9D000000 		.section	.debug_str,"MS",%progbits,1
+ 903      02002D00 
+ 903      00000201 
+ 903      FB0E0D00 
+ 903      01010101 
+ 904              	.LASF25:
+ 905 0000 7063625F 		.ascii	"pcb_ZClockchain\000"
+ 905      5A436C6F 
+ 905      636B6368 
+ 905      61696E00 
+ 906              	.LASF18:
+ 907 0010 756E7369 		.ascii	"unsigned int\000"
+ 907      676E6564 
+ 907      20696E74 
+ 907      00
+ 908              	.LASF4:
+ 909 001d 6D644265 		.ascii	"mdBeep\000"
+ 909      657000
+ 910              	.LASF22:
+ 911 0024 5A426C6F 		.ascii	"ZBlock\000"
+ 911      636B00
+ 912              	.LASF14:
+ 913 002b 6D6F6465 		.ascii	"mode\000"
+ 913      00
+ 914              	.LASF30:
+ 915 0030 6572726F 		.ascii	"error_dected\000"
+ 915      725F6465 
+ 915      63746564 
+ 915      00
+ 916              	.LASF7:
+ 917 003d 6D644B65 		.ascii	"mdKeyScan\000"
+ 917      79536361 
+ 917      6E00
+ 918              	.LASF0:
+ 919 0047 6D644E6F 		.ascii	"mdNone\000"
+ 919      6E6500
+ 920              	.LASF19:
+ 921 004e 7063625F 		.ascii	"pcb_def\000"
+ 921      64656600 
+ 922              	.LASF21:
+ 923 0056 5A437265 		.ascii	"ZCreate\000"
+ 923      61746500 
+ 924              	.LASF33:
+ 925 005e 443A5C43 		.ascii	"D:\\CYTEST\\MyELock\\MyELock.cydsn\000"
+ 925      59544553 
+ 925      545C4D79 
+ 925      454C6F63 
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 19
+
+
+ 925      6B5C4D79 
+ 926              	.LASF34:
+ 927 007e 74616770 		.ascii	"tagpcb\000"
+ 927      636200
+ 928              	.LASF1:
+ 929 0085 6D644D4F 		.ascii	"mdMOTO_CLOCK\000"
+ 929      544F5F43 
+ 929      4C4F434B 
+ 929      00
+ 930              	.LASF13:
+ 931 0092 73746174 		.ascii	"status\000"
+ 931      757300
+ 932              	.LASF24:
+ 933 0099 5A446573 		.ascii	"ZDestroy\000"
+ 933      74726F79 
+ 933      00
+ 934              	.LASF2:
+ 935 00a2 6D644D4F 		.ascii	"mdMOTO_CCLOCK\000"
+ 935      544F5F43 
+ 935      434C4F43 
+ 935      4B00
+ 936              	.LASF28:
+ 937 00b0 7063625F 		.ascii	"pcb_ZManager\000"
+ 937      5A4D616E 
+ 937      61676572 
+ 937      00
+ 938              	.LASF8:
+ 939 00bd 6D645072 		.ascii	"mdProx\000"
+ 939      6F7800
+ 940              	.LASF32:
+ 941 00c4 7A676C6F 		.ascii	"zglobal.c\000"
+ 941      62616C2E 
+ 941      6300
+ 942              	.LASF17:
+ 943 00ce 756E7369 		.ascii	"unsigned char\000"
+ 943      676E6564 
+ 943      20636861 
+ 943      7200
+ 944              	.LASF10:
+ 945 00dc 72656164 		.ascii	"ready\000"
+ 945      7900
+ 946              	.LASF29:
+ 947 00e2 7063625F 		.ascii	"pcb_ZKey\000"
+ 947      5A4B6579 
+ 947      00
+ 948              	.LASF9:
+ 949 00eb 64657374 		.ascii	"destroy\000"
+ 949      726F7900 
+ 950              	.LASF35:
+ 951 00f3 5A706362 		.ascii	"ZpcbInit\000"
+ 951      496E6974 
+ 951      00
+ 952              	.LASF23:
+ 953 00fc 5A57616B 		.ascii	"ZWakeup\000"
+ 953      65757000 
+ 954              	.LASF26:
+ 955 0104 7063625F 		.ascii	"pcb_ZMoto\000"
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccXphDDO.s 			page 20
+
+
+ 955      5A4D6F74 
+ 955      6F00
+ 956              	.LASF11:
+ 957 010e 65786375 		.ascii	"excute\000"
+ 957      746500
+ 958              	.LASF15:
+ 959 0115 73746570 		.ascii	"step\000"
+ 959      00
+ 960              	.LASF31:
+ 961 011a 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 961      43313120 
+ 961      352E342E 
+ 961      31203230 
+ 961      31363036 
+ 962 014d 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 962      20726576 
+ 962      6973696F 
+ 962      6E203233 
+ 962      37373135 
+ 963 0180 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 963      66756E63 
+ 963      74696F6E 
+ 963      2D736563 
+ 963      74696F6E 
+ 964              	.LASF27:
+ 965 01a8 7063625F 		.ascii	"pcb_ZBeep\000"
+ 965      5A426565 
+ 965      7000
+ 966              	.LASF16:
+ 967 01b2 6379636C 		.ascii	"cycle\000"
+ 967      6500
+ 968              	.LASF6:
+ 969 01b8 6D644D4B 		.ascii	"mdMKey\000"
+ 969      657900
+ 970              	.LASF3:
+ 971 01bf 6D644449 		.ascii	"mdDIM\000"
+ 971      4D00
+ 972              	.LASF5:
+ 973 01c5 6D644D42 		.ascii	"mdMBle\000"
+ 973      6C6500
+ 974              	.LASF12:
+ 975 01cc 626C6F63 		.ascii	"block\000"
+ 975      6B00
+ 976              	.LASF20:
+ 977 01d2 70706362 		.ascii	"ppcb\000"
+ 977      00
+ 978              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

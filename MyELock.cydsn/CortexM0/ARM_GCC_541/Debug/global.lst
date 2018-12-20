@@ -1,0 +1,1218 @@
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"global.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.Create,"ax",%progbits
+  20              		.align	2
+  21              		.global	Create
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	Create, %function
+  25              	Create:
+  26              	.LFB0:
+  27              		.file 1 "global.c"
+   1:global.c      **** #include "global.h"
+   2:global.c      **** 
+   3:global.c      **** #define zzndebug
+   4:global.c      **** 
+   5:global.c      **** pcb_def pcb_clockchain;
+   6:global.c      **** pcb_def pcb_MOTO;
+   7:global.c      **** //pcb_def pcb_AC_In;
+   8:global.c      **** //pcb_def pcb_DC_Out;
+   9:global.c      **** //pcb_def pcb_DC_In;
+  10:global.c      **** //pcb_def pcb_manager;
+  11:global.c      **** //pcb_def pcb_lcd;
+  12:global.c      **** //pcb_def pcb_keyread;
+  13:global.c      **** //pcb_def pcb_keyprocess;
+  14:global.c      **** 
+  15:global.c      **** void Create(pcb_def * ppcb,unsigned char mode,unsigned char mesg)
+  16:global.c      **** {
+  28              		.loc 1 16 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33              	.LVL0:
+  17:global.c      **** 	if(ppcb -> status == destroy)
+  34              		.loc 1 17 0
+  35 0000 0378     		ldrb	r3, [r0]
+  36 0002 002B     		cmp	r3, #0
+  37 0004 06D1     		bne	.L2
+  18:global.c      **** 	{
+  19:global.c      **** 		ppcb -> mode = mode;		
+  38              		.loc 1 19 0
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 2
+
+
+  39 0006 4170     		strb	r1, [r0, #1]
+  20:global.c      **** 		ppcb -> clk = 0;
+  40              		.loc 1 20 0
+  41 0008 8360     		str	r3, [r0, #8]
+  21:global.c      **** 		ppcb -> step = 0;
+  42              		.loc 1 21 0
+  43 000a 4360     		str	r3, [r0, #4]
+  22:global.c      **** 		ppcb -> status = ready;
+  44              		.loc 1 22 0
+  45 000c 0133     		adds	r3, r3, #1
+  46 000e 0370     		strb	r3, [r0]
+  23:global.c      **** 		ppcb -> message = mesg;
+  47              		.loc 1 23 0
+  48 0010 0273     		strb	r2, [r0, #12]
+  24:global.c      **** 	}
+  25:global.c      **** 	else
+  26:global.c      **** 	{
+  27:global.c      **** 		while (1);
+  28:global.c      **** 	}
+  29:global.c      **** }
+  49              		.loc 1 29 0
+  50 0012 00E0     		b	.L3
+  51              	.L2:
+  52 0014 FEE7     		b	.L2
+  53              	.L3:
+  54              		@ sp needed
+  55 0016 7047     		bx	lr
+  56              		.cfi_endproc
+  57              	.LFE0:
+  58              		.size	Create, .-Create
+  59              		.section	.text.Block,"ax",%progbits
+  60              		.align	2
+  61              		.global	Block
+  62              		.code	16
+  63              		.thumb_func
+  64              		.type	Block, %function
+  65              	Block:
+  66              	.LFB1:
+  30:global.c      **** void Block(pcb_def * ppcb,unsigned int clk)
+  31:global.c      **** {
+  67              		.loc 1 31 0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+  71              		@ link register save eliminated.
+  72              	.LVL1:
+  32:global.c      **** 	if(ppcb -> status != destroy)
+  73              		.loc 1 32 0
+  74 0000 0378     		ldrb	r3, [r0]
+  75 0002 002B     		cmp	r3, #0
+  76 0004 04D0     		beq	.L4
+  33:global.c      **** 	{
+  34:global.c      **** 		ppcb -> status = block;
+  77              		.loc 1 34 0
+  78 0006 0323     		movs	r3, #3
+  79 0008 0370     		strb	r3, [r0]
+  35:global.c      **** 		ppcb -> clk = clk;
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 3
+
+
+  80              		.loc 1 35 0
+  81 000a 8160     		str	r1, [r0, #8]
+  36:global.c      **** 		ppcb -> message = msgNone;
+  82              		.loc 1 36 0
+  83 000c 0023     		movs	r3, #0
+  84 000e 0373     		strb	r3, [r0, #12]
+  85              	.L4:
+  37:global.c      **** 	}
+  38:global.c      **** }
+  86              		.loc 1 38 0
+  87              		@ sp needed
+  88 0010 7047     		bx	lr
+  89              		.cfi_endproc
+  90              	.LFE1:
+  91              		.size	Block, .-Block
+  92 0012 C046     		.section	.text.Wakeup,"ax",%progbits
+  93              		.align	2
+  94              		.global	Wakeup
+  95              		.code	16
+  96              		.thumb_func
+  97              		.type	Wakeup, %function
+  98              	Wakeup:
+  99              	.LFB2:
+  39:global.c      **** 
+  40:global.c      **** void Wakeup(pcb_def * ppcb,unsigned char mesg)
+  41:global.c      **** {
+ 100              		.loc 1 41 0
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 0
+ 103              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104              		@ link register save eliminated.
+ 105              	.LVL2:
+  42:global.c      **** 	if(ppcb -> status == block)
+ 106              		.loc 1 42 0
+ 107 0000 0378     		ldrb	r3, [r0]
+ 108 0002 032B     		cmp	r3, #3
+ 109 0004 05D1     		bne	.L7
+  43:global.c      **** 	{
+  44:global.c      **** 		ppcb -> status = ready;
+ 110              		.loc 1 44 0
+ 111 0006 023B     		subs	r3, r3, #2
+ 112 0008 0370     		strb	r3, [r0]
+  45:global.c      **** 		ppcb -> clk = 0;		
+ 113              		.loc 1 45 0
+ 114 000a 0023     		movs	r3, #0
+ 115 000c 8360     		str	r3, [r0, #8]
+  46:global.c      **** 		ppcb -> message = mesg;
+ 116              		.loc 1 46 0
+ 117 000e 0173     		strb	r1, [r0, #12]
+  47:global.c      **** 	}
+  48:global.c      **** 	else
+  49:global.c      **** 	{
+  50:global.c      **** 		while (1);
+  51:global.c      **** 	}
+  52:global.c      **** }
+ 118              		.loc 1 52 0
+ 119 0010 00E0     		b	.L8
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 4
+
+
+ 120              	.L7:
+ 121 0012 FEE7     		b	.L7
+ 122              	.L8:
+ 123              		@ sp needed
+ 124 0014 7047     		bx	lr
+ 125              		.cfi_endproc
+ 126              	.LFE2:
+ 127              		.size	Wakeup, .-Wakeup
+ 128 0016 C046     		.section	.text.Destroy,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	Destroy
+ 131              		.code	16
+ 132              		.thumb_func
+ 133              		.type	Destroy, %function
+ 134              	Destroy:
+ 135              	.LFB3:
+  53:global.c      **** void Destroy(pcb_def * ppcb)
+  54:global.c      **** {
+ 136              		.loc 1 54 0
+ 137              		.cfi_startproc
+ 138              		@ args = 0, pretend = 0, frame = 0
+ 139              		@ frame_needed = 0, uses_anonymous_args = 0
+ 140              		@ link register save eliminated.
+ 141              	.LVL3:
+  55:global.c      **** 	ppcb -> clk = 0;
+ 142              		.loc 1 55 0
+ 143 0000 0023     		movs	r3, #0
+ 144 0002 8360     		str	r3, [r0, #8]
+  56:global.c      **** 	ppcb -> mode = mode_none;
+ 145              		.loc 1 56 0
+ 146 0004 4370     		strb	r3, [r0, #1]
+  57:global.c      **** 	ppcb -> step = 0;
+ 147              		.loc 1 57 0
+ 148 0006 4360     		str	r3, [r0, #4]
+  58:global.c      **** 	ppcb -> status = destroy;
+ 149              		.loc 1 58 0
+ 150 0008 0370     		strb	r3, [r0]
+  59:global.c      **** 	ppcb -> message = msgNone;	
+ 151              		.loc 1 59 0
+ 152 000a 0373     		strb	r3, [r0, #12]
+  60:global.c      **** }
+ 153              		.loc 1 60 0
+ 154              		@ sp needed
+ 155 000c 7047     		bx	lr
+ 156              		.cfi_endproc
+ 157              	.LFE3:
+ 158              		.size	Destroy, .-Destroy
+ 159 000e C046     		.section	.text.InitArray,"ax",%progbits
+ 160              		.align	2
+ 161              		.global	InitArray
+ 162              		.code	16
+ 163              		.thumb_func
+ 164              		.type	InitArray, %function
+ 165              	InitArray:
+ 166              	.LFB4:
+  61:global.c      **** 
+  62:global.c      **** void InitArray(unsigned char *p,unsigned char len,unsigned char dat)
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 5
+
+
+  63:global.c      **** {
+ 167              		.loc 1 63 0
+ 168              		.cfi_startproc
+ 169              		@ args = 0, pretend = 0, frame = 0
+ 170              		@ frame_needed = 0, uses_anonymous_args = 0
+ 171              		@ link register save eliminated.
+ 172              	.LVL4:
+  64:global.c      **** 	unsigned char i;
+  65:global.c      **** 	for(i=0;i<len;i++)
+ 173              		.loc 1 65 0
+ 174 0000 0023     		movs	r3, #0
+ 175 0002 03E0     		b	.L11
+ 176              	.LVL5:
+ 177              	.L12:
+  66:global.c      **** 	{
+  67:global.c      **** 		*p=dat;
+ 178              		.loc 1 67 0 discriminator 3
+ 179 0004 0270     		strb	r2, [r0]
+  68:global.c      **** 		p++;
+ 180              		.loc 1 68 0 discriminator 3
+ 181 0006 0130     		adds	r0, r0, #1
+ 182              	.LVL6:
+  65:global.c      **** 	{
+ 183              		.loc 1 65 0 discriminator 3
+ 184 0008 0133     		adds	r3, r3, #1
+ 185              	.LVL7:
+ 186 000a DBB2     		uxtb	r3, r3
+ 187              	.LVL8:
+ 188              	.L11:
+  65:global.c      **** 	{
+ 189              		.loc 1 65 0 is_stmt 0 discriminator 1
+ 190 000c 8B42     		cmp	r3, r1
+ 191 000e F9D3     		bcc	.L12
+  69:global.c      **** 	}
+  70:global.c      **** }
+ 192              		.loc 1 70 0 is_stmt 1
+ 193              		@ sp needed
+ 194 0010 7047     		bx	lr
+ 195              		.cfi_endproc
+ 196              	.LFE4:
+ 197              		.size	InitArray, .-InitArray
+ 198 0012 C046     		.section	.text.copyArray,"ax",%progbits
+ 199              		.align	2
+ 200              		.global	copyArray
+ 201              		.code	16
+ 202              		.thumb_func
+ 203              		.type	copyArray, %function
+ 204              	copyArray:
+ 205              	.LFB5:
+  71:global.c      **** 
+  72:global.c      **** void copyArray(unsigned char *pSource,unsigned char *pDest,unsigned char j)
+  73:global.c      **** {
+ 206              		.loc 1 73 0
+ 207              		.cfi_startproc
+ 208              		@ args = 0, pretend = 0, frame = 0
+ 209              		@ frame_needed = 0, uses_anonymous_args = 0
+ 210              	.LVL9:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 6
+
+
+ 211 0000 10B5     		push	{r4, lr}
+ 212              		.cfi_def_cfa_offset 8
+ 213              		.cfi_offset 4, -8
+ 214              		.cfi_offset 14, -4
+ 215              	.LVL10:
+  74:global.c      **** 	unsigned char i;
+  75:global.c      **** 	for(i=0;i<j;i++)
+ 216              		.loc 1 75 0
+ 217 0002 0023     		movs	r3, #0
+ 218 0004 05E0     		b	.L14
+ 219              	.LVL11:
+ 220              	.L15:
+  76:global.c      **** 	{
+  77:global.c      **** 		*pDest = *pSource;
+ 221              		.loc 1 77 0 discriminator 3
+ 222 0006 0478     		ldrb	r4, [r0]
+ 223 0008 0C70     		strb	r4, [r1]
+  78:global.c      **** 		pSource++;
+ 224              		.loc 1 78 0 discriminator 3
+ 225 000a 0130     		adds	r0, r0, #1
+ 226              	.LVL12:
+  79:global.c      **** 		pDest++;
+ 227              		.loc 1 79 0 discriminator 3
+ 228 000c 0131     		adds	r1, r1, #1
+ 229              	.LVL13:
+  75:global.c      **** 	{
+ 230              		.loc 1 75 0 discriminator 3
+ 231 000e 0133     		adds	r3, r3, #1
+ 232              	.LVL14:
+ 233 0010 DBB2     		uxtb	r3, r3
+ 234              	.LVL15:
+ 235              	.L14:
+  75:global.c      **** 	{
+ 236              		.loc 1 75 0 is_stmt 0 discriminator 1
+ 237 0012 9342     		cmp	r3, r2
+ 238 0014 F7D3     		bcc	.L15
+  80:global.c      **** 	}
+  81:global.c      **** }
+ 239              		.loc 1 81 0 is_stmt 1
+ 240              		@ sp needed
+ 241 0016 10BD     		pop	{r4, pc}
+ 242              		.cfi_endproc
+ 243              	.LFE5:
+ 244              		.size	copyArray, .-copyArray
+ 245              		.comm	pcb_MOTO,16,4
+ 246              		.comm	pcb_clockchain,16,4
+ 247              		.text
+ 248              	.Letext0:
+ 249              		.file 2 "global.h"
+ 250              		.section	.debug_info,"",%progbits
+ 251              	.Ldebug_info0:
+ 252 0000 8A020000 		.4byte	0x28a
+ 253 0004 0400     		.2byte	0x4
+ 254 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 255 000a 04       		.byte	0x4
+ 256 000b 01       		.uleb128 0x1
+ 257 000c E9000000 		.4byte	.LASF30
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 7
+
+
+ 258 0010 0C       		.byte	0xc
+ 259 0011 3D000000 		.4byte	.LASF31
+ 260 0015 4B000000 		.4byte	.LASF32
+ 261 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 262 001d 00000000 		.4byte	0
+ 263 0021 00000000 		.4byte	.Ldebug_line0
+ 264 0025 02       		.uleb128 0x2
+ 265 0026 01       		.byte	0x1
+ 266 0027 44000000 		.4byte	0x44
+ 267 002b 02       		.byte	0x2
+ 268 002c 09       		.byte	0x9
+ 269 002d 44000000 		.4byte	0x44
+ 270 0031 03       		.uleb128 0x3
+ 271 0032 AD010000 		.4byte	.LASF0
+ 272 0036 00       		.byte	0
+ 273 0037 03       		.uleb128 0x3
+ 274 0038 77010000 		.4byte	.LASF1
+ 275 003c 01       		.byte	0x1
+ 276 003d 03       		.uleb128 0x3
+ 277 003e 6B000000 		.4byte	.LASF2
+ 278 0042 02       		.byte	0x2
+ 279 0043 00       		.byte	0
+ 280 0044 04       		.uleb128 0x4
+ 281 0045 01       		.byte	0x1
+ 282 0046 08       		.byte	0x8
+ 283 0047 9A000000 		.4byte	.LASF15
+ 284 004b 05       		.uleb128 0x5
+ 285 004c B5010000 		.4byte	.LASF6
+ 286 0050 02       		.byte	0x2
+ 287 0051 09       		.byte	0x9
+ 288 0052 25000000 		.4byte	0x25
+ 289 0056 02       		.uleb128 0x2
+ 290 0057 01       		.byte	0x1
+ 291 0058 44000000 		.4byte	0x44
+ 292 005c 02       		.byte	0x2
+ 293 005d 0B       		.byte	0xb
+ 294 005e 75000000 		.4byte	0x75
+ 295 0062 03       		.uleb128 0x3
+ 296 0063 BD000000 		.4byte	.LASF3
+ 297 0067 00       		.byte	0
+ 298 0068 03       		.uleb128 0x3
+ 299 0069 8E000000 		.4byte	.LASF4
+ 300 006d 01       		.byte	0x1
+ 301 006e 03       		.uleb128 0x3
+ 302 006f A0010000 		.4byte	.LASF5
+ 303 0073 02       		.byte	0x2
+ 304 0074 00       		.byte	0
+ 305 0075 06       		.uleb128 0x6
+ 306 0076 6D7600   		.ascii	"mv\000"
+ 307 0079 02       		.byte	0x2
+ 308 007a 0C       		.byte	0xc
+ 309 007b 56000000 		.4byte	0x56
+ 310 007f 02       		.uleb128 0x2
+ 311 0080 01       		.byte	0x1
+ 312 0081 44000000 		.4byte	0x44
+ 313 0085 02       		.byte	0x2
+ 314 0086 0D       		.byte	0xd
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 8
+
+
+ 315 0087 A4000000 		.4byte	0xa4
+ 316 008b 03       		.uleb128 0x3
+ 317 008c B5000000 		.4byte	.LASF7
+ 318 0090 00       		.byte	0
+ 319 0091 03       		.uleb128 0x3
+ 320 0092 32000000 		.4byte	.LASF8
+ 321 0096 01       		.byte	0x1
+ 322 0097 03       		.uleb128 0x3
+ 323 0098 CE000000 		.4byte	.LASF9
+ 324 009c 02       		.byte	0x2
+ 325 009d 03       		.uleb128 0x3
+ 326 009e 9A010000 		.4byte	.LASF10
+ 327 00a2 03       		.byte	0x3
+ 328 00a3 00       		.byte	0
+ 329 00a4 06       		.uleb128 0x6
+ 330 00a5 737600   		.ascii	"sv\000"
+ 331 00a8 02       		.byte	0x2
+ 332 00a9 0D       		.byte	0xd
+ 333 00aa 7F000000 		.4byte	0x7f
+ 334 00ae 07       		.uleb128 0x7
+ 335 00af 93010000 		.4byte	.LASF33
+ 336 00b3 10       		.byte	0x10
+ 337 00b4 02       		.byte	0x2
+ 338 00b5 0E       		.byte	0xe
+ 339 00b6 F7000000 		.4byte	0xf7
+ 340 00ba 08       		.uleb128 0x8
+ 341 00bb 7F000000 		.4byte	.LASF11
+ 342 00bf 02       		.byte	0x2
+ 343 00c0 10       		.byte	0x10
+ 344 00c1 A4000000 		.4byte	0xa4
+ 345 00c5 00       		.byte	0
+ 346 00c6 08       		.uleb128 0x8
+ 347 00c7 25000000 		.4byte	.LASF12
+ 348 00cb 02       		.byte	0x2
+ 349 00cc 11       		.byte	0x11
+ 350 00cd 75000000 		.4byte	0x75
+ 351 00d1 01       		.byte	0x1
+ 352 00d2 08       		.uleb128 0x8
+ 353 00d3 D5000000 		.4byte	.LASF13
+ 354 00d7 02       		.byte	0x2
+ 355 00d8 12       		.byte	0x12
+ 356 00d9 F7000000 		.4byte	0xf7
+ 357 00dd 04       		.byte	0x4
+ 358 00de 09       		.uleb128 0x9
+ 359 00df 636C6B00 		.ascii	"clk\000"
+ 360 00e3 02       		.byte	0x2
+ 361 00e4 13       		.byte	0x13
+ 362 00e5 F7000000 		.4byte	0xf7
+ 363 00e9 08       		.byte	0x8
+ 364 00ea 08       		.uleb128 0x8
+ 365 00eb 00000000 		.4byte	.LASF14
+ 366 00ef 02       		.byte	0x2
+ 367 00f0 14       		.byte	0x14
+ 368 00f1 4B000000 		.4byte	0x4b
+ 369 00f5 0C       		.byte	0xc
+ 370 00f6 00       		.byte	0
+ 371 00f7 04       		.uleb128 0x4
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 9
+
+
+ 372 00f8 04       		.byte	0x4
+ 373 00f9 07       		.byte	0x7
+ 374 00fa 0E000000 		.4byte	.LASF16
+ 375 00fe 05       		.uleb128 0x5
+ 376 00ff 82010000 		.4byte	.LASF17
+ 377 0103 02       		.byte	0x2
+ 378 0104 16       		.byte	0x16
+ 379 0105 AE000000 		.4byte	0xae
+ 380 0109 0A       		.uleb128 0xa
+ 381 010a C7000000 		.4byte	.LASF20
+ 382 010e 01       		.byte	0x1
+ 383 010f 0F       		.byte	0xf
+ 384 0110 00000000 		.4byte	.LFB0
+ 385 0114 18000000 		.4byte	.LFE0-.LFB0
+ 386 0118 01       		.uleb128 0x1
+ 387 0119 9C       		.byte	0x9c
+ 388 011a 46010000 		.4byte	0x146
+ 389 011e 0B       		.uleb128 0xb
+ 390 011f 38000000 		.4byte	.LASF18
+ 391 0123 01       		.byte	0x1
+ 392 0124 0F       		.byte	0xf
+ 393 0125 46010000 		.4byte	0x146
+ 394 0129 01       		.uleb128 0x1
+ 395 012a 50       		.byte	0x50
+ 396 012b 0B       		.uleb128 0xb
+ 397 012c 25000000 		.4byte	.LASF12
+ 398 0130 01       		.byte	0x1
+ 399 0131 0F       		.byte	0xf
+ 400 0132 44000000 		.4byte	0x44
+ 401 0136 01       		.uleb128 0x1
+ 402 0137 51       		.byte	0x51
+ 403 0138 0B       		.uleb128 0xb
+ 404 0139 46000000 		.4byte	.LASF19
+ 405 013d 01       		.byte	0x1
+ 406 013e 0F       		.byte	0xf
+ 407 013f 44000000 		.4byte	0x44
+ 408 0143 01       		.uleb128 0x1
+ 409 0144 52       		.byte	0x52
+ 410 0145 00       		.byte	0
+ 411 0146 0C       		.uleb128 0xc
+ 412 0147 04       		.byte	0x4
+ 413 0148 FE000000 		.4byte	0xfe
+ 414 014c 0A       		.uleb128 0xa
+ 415 014d 08000000 		.4byte	.LASF21
+ 416 0151 01       		.byte	0x1
+ 417 0152 1E       		.byte	0x1e
+ 418 0153 00000000 		.4byte	.LFB1
+ 419 0157 12000000 		.4byte	.LFE1-.LFB1
+ 420 015b 01       		.uleb128 0x1
+ 421 015c 9C       		.byte	0x9c
+ 422 015d 7C010000 		.4byte	0x17c
+ 423 0161 0B       		.uleb128 0xb
+ 424 0162 38000000 		.4byte	.LASF18
+ 425 0166 01       		.byte	0x1
+ 426 0167 1E       		.byte	0x1e
+ 427 0168 46010000 		.4byte	0x146
+ 428 016c 01       		.uleb128 0x1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 10
+
+
+ 429 016d 50       		.byte	0x50
+ 430 016e 0D       		.uleb128 0xd
+ 431 016f 636C6B00 		.ascii	"clk\000"
+ 432 0173 01       		.byte	0x1
+ 433 0174 1E       		.byte	0x1e
+ 434 0175 F7000000 		.4byte	0xf7
+ 435 0179 01       		.uleb128 0x1
+ 436 017a 51       		.byte	0x51
+ 437 017b 00       		.byte	0
+ 438 017c 0A       		.uleb128 0xa
+ 439 017d A8000000 		.4byte	.LASF22
+ 440 0181 01       		.byte	0x1
+ 441 0182 28       		.byte	0x28
+ 442 0183 00000000 		.4byte	.LFB2
+ 443 0187 16000000 		.4byte	.LFE2-.LFB2
+ 444 018b 01       		.uleb128 0x1
+ 445 018c 9C       		.byte	0x9c
+ 446 018d AC010000 		.4byte	0x1ac
+ 447 0191 0B       		.uleb128 0xb
+ 448 0192 38000000 		.4byte	.LASF18
+ 449 0196 01       		.byte	0x1
+ 450 0197 28       		.byte	0x28
+ 451 0198 46010000 		.4byte	0x146
+ 452 019c 01       		.uleb128 0x1
+ 453 019d 50       		.byte	0x50
+ 454 019e 0B       		.uleb128 0xb
+ 455 019f 46000000 		.4byte	.LASF19
+ 456 01a3 01       		.byte	0x1
+ 457 01a4 28       		.byte	0x28
+ 458 01a5 44000000 		.4byte	0x44
+ 459 01a9 01       		.uleb128 0x1
+ 460 01aa 51       		.byte	0x51
+ 461 01ab 00       		.byte	0
+ 462 01ac 0A       		.uleb128 0xa
+ 463 01ad 2A000000 		.4byte	.LASF23
+ 464 01b1 01       		.byte	0x1
+ 465 01b2 35       		.byte	0x35
+ 466 01b3 00000000 		.4byte	.LFB3
+ 467 01b7 0E000000 		.4byte	.LFE3-.LFB3
+ 468 01bb 01       		.uleb128 0x1
+ 469 01bc 9C       		.byte	0x9c
+ 470 01bd CF010000 		.4byte	0x1cf
+ 471 01c1 0B       		.uleb128 0xb
+ 472 01c2 38000000 		.4byte	.LASF18
+ 473 01c6 01       		.byte	0x1
+ 474 01c7 35       		.byte	0x35
+ 475 01c8 46010000 		.4byte	0x146
+ 476 01cc 01       		.uleb128 0x1
+ 477 01cd 50       		.byte	0x50
+ 478 01ce 00       		.byte	0
+ 479 01cf 0A       		.uleb128 0xa
+ 480 01d0 1B000000 		.4byte	.LASF24
+ 481 01d4 01       		.byte	0x1
+ 482 01d5 3E       		.byte	0x3e
+ 483 01d6 00000000 		.4byte	.LFB4
+ 484 01da 12000000 		.4byte	.LFE4-.LFB4
+ 485 01de 01       		.uleb128 0x1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 11
+
+
+ 486 01df 9C       		.byte	0x9c
+ 487 01e0 19020000 		.4byte	0x219
+ 488 01e4 0E       		.uleb128 0xe
+ 489 01e5 7000     		.ascii	"p\000"
+ 490 01e7 01       		.byte	0x1
+ 491 01e8 3E       		.byte	0x3e
+ 492 01e9 19020000 		.4byte	0x219
+ 493 01ed 00000000 		.4byte	.LLST0
+ 494 01f1 0D       		.uleb128 0xd
+ 495 01f2 6C656E00 		.ascii	"len\000"
+ 496 01f6 01       		.byte	0x1
+ 497 01f7 3E       		.byte	0x3e
+ 498 01f8 44000000 		.4byte	0x44
+ 499 01fc 01       		.uleb128 0x1
+ 500 01fd 51       		.byte	0x51
+ 501 01fe 0D       		.uleb128 0xd
+ 502 01ff 64617400 		.ascii	"dat\000"
+ 503 0203 01       		.byte	0x1
+ 504 0204 3E       		.byte	0x3e
+ 505 0205 44000000 		.4byte	0x44
+ 506 0209 01       		.uleb128 0x1
+ 507 020a 52       		.byte	0x52
+ 508 020b 0F       		.uleb128 0xf
+ 509 020c 6900     		.ascii	"i\000"
+ 510 020e 01       		.byte	0x1
+ 511 020f 40       		.byte	0x40
+ 512 0210 44000000 		.4byte	0x44
+ 513 0214 1E000000 		.4byte	.LLST1
+ 514 0218 00       		.byte	0
+ 515 0219 0C       		.uleb128 0xc
+ 516 021a 04       		.byte	0x4
+ 517 021b 44000000 		.4byte	0x44
+ 518 021f 0A       		.uleb128 0xa
+ 519 0220 75000000 		.4byte	.LASF25
+ 520 0224 01       		.byte	0x1
+ 521 0225 48       		.byte	0x48
+ 522 0226 00000000 		.4byte	.LFB5
+ 523 022a 18000000 		.4byte	.LFE5-.LFB5
+ 524 022e 01       		.uleb128 0x1
+ 525 022f 9C       		.byte	0x9c
+ 526 0230 6B020000 		.4byte	0x26b
+ 527 0234 10       		.uleb128 0x10
+ 528 0235 86000000 		.4byte	.LASF26
+ 529 0239 01       		.byte	0x1
+ 530 023a 48       		.byte	0x48
+ 531 023b 19020000 		.4byte	0x219
+ 532 023f 48000000 		.4byte	.LLST2
+ 533 0243 10       		.uleb128 0x10
+ 534 0244 AF000000 		.4byte	.LASF27
+ 535 0248 01       		.byte	0x1
+ 536 0249 48       		.byte	0x48
+ 537 024a 19020000 		.4byte	0x219
+ 538 024e 66000000 		.4byte	.LLST3
+ 539 0252 0D       		.uleb128 0xd
+ 540 0253 6A00     		.ascii	"j\000"
+ 541 0255 01       		.byte	0x1
+ 542 0256 48       		.byte	0x48
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 12
+
+
+ 543 0257 44000000 		.4byte	0x44
+ 544 025b 01       		.uleb128 0x1
+ 545 025c 52       		.byte	0x52
+ 546 025d 0F       		.uleb128 0xf
+ 547 025e 6900     		.ascii	"i\000"
+ 548 0260 01       		.byte	0x1
+ 549 0261 4A       		.byte	0x4a
+ 550 0262 44000000 		.4byte	0x44
+ 551 0266 84000000 		.4byte	.LLST4
+ 552 026a 00       		.byte	0
+ 553 026b 11       		.uleb128 0x11
+ 554 026c DA000000 		.4byte	.LASF28
+ 555 0270 01       		.byte	0x1
+ 556 0271 05       		.byte	0x5
+ 557 0272 FE000000 		.4byte	0xfe
+ 558 0276 05       		.uleb128 0x5
+ 559 0277 03       		.byte	0x3
+ 560 0278 00000000 		.4byte	pcb_clockchain
+ 561 027c 11       		.uleb128 0x11
+ 562 027d 8A010000 		.4byte	.LASF29
+ 563 0281 01       		.byte	0x1
+ 564 0282 06       		.byte	0x6
+ 565 0283 FE000000 		.4byte	0xfe
+ 566 0287 05       		.uleb128 0x5
+ 567 0288 03       		.byte	0x3
+ 568 0289 00000000 		.4byte	pcb_MOTO
+ 569 028d 00       		.byte	0
+ 570              		.section	.debug_abbrev,"",%progbits
+ 571              	.Ldebug_abbrev0:
+ 572 0000 01       		.uleb128 0x1
+ 573 0001 11       		.uleb128 0x11
+ 574 0002 01       		.byte	0x1
+ 575 0003 25       		.uleb128 0x25
+ 576 0004 0E       		.uleb128 0xe
+ 577 0005 13       		.uleb128 0x13
+ 578 0006 0B       		.uleb128 0xb
+ 579 0007 03       		.uleb128 0x3
+ 580 0008 0E       		.uleb128 0xe
+ 581 0009 1B       		.uleb128 0x1b
+ 582 000a 0E       		.uleb128 0xe
+ 583 000b 55       		.uleb128 0x55
+ 584 000c 17       		.uleb128 0x17
+ 585 000d 11       		.uleb128 0x11
+ 586 000e 01       		.uleb128 0x1
+ 587 000f 10       		.uleb128 0x10
+ 588 0010 17       		.uleb128 0x17
+ 589 0011 00       		.byte	0
+ 590 0012 00       		.byte	0
+ 591 0013 02       		.uleb128 0x2
+ 592 0014 04       		.uleb128 0x4
+ 593 0015 01       		.byte	0x1
+ 594 0016 0B       		.uleb128 0xb
+ 595 0017 0B       		.uleb128 0xb
+ 596 0018 49       		.uleb128 0x49
+ 597 0019 13       		.uleb128 0x13
+ 598 001a 3A       		.uleb128 0x3a
+ 599 001b 0B       		.uleb128 0xb
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 13
+
+
+ 600 001c 3B       		.uleb128 0x3b
+ 601 001d 0B       		.uleb128 0xb
+ 602 001e 01       		.uleb128 0x1
+ 603 001f 13       		.uleb128 0x13
+ 604 0020 00       		.byte	0
+ 605 0021 00       		.byte	0
+ 606 0022 03       		.uleb128 0x3
+ 607 0023 28       		.uleb128 0x28
+ 608 0024 00       		.byte	0
+ 609 0025 03       		.uleb128 0x3
+ 610 0026 0E       		.uleb128 0xe
+ 611 0027 1C       		.uleb128 0x1c
+ 612 0028 0B       		.uleb128 0xb
+ 613 0029 00       		.byte	0
+ 614 002a 00       		.byte	0
+ 615 002b 04       		.uleb128 0x4
+ 616 002c 24       		.uleb128 0x24
+ 617 002d 00       		.byte	0
+ 618 002e 0B       		.uleb128 0xb
+ 619 002f 0B       		.uleb128 0xb
+ 620 0030 3E       		.uleb128 0x3e
+ 621 0031 0B       		.uleb128 0xb
+ 622 0032 03       		.uleb128 0x3
+ 623 0033 0E       		.uleb128 0xe
+ 624 0034 00       		.byte	0
+ 625 0035 00       		.byte	0
+ 626 0036 05       		.uleb128 0x5
+ 627 0037 16       		.uleb128 0x16
+ 628 0038 00       		.byte	0
+ 629 0039 03       		.uleb128 0x3
+ 630 003a 0E       		.uleb128 0xe
+ 631 003b 3A       		.uleb128 0x3a
+ 632 003c 0B       		.uleb128 0xb
+ 633 003d 3B       		.uleb128 0x3b
+ 634 003e 0B       		.uleb128 0xb
+ 635 003f 49       		.uleb128 0x49
+ 636 0040 13       		.uleb128 0x13
+ 637 0041 00       		.byte	0
+ 638 0042 00       		.byte	0
+ 639 0043 06       		.uleb128 0x6
+ 640 0044 16       		.uleb128 0x16
+ 641 0045 00       		.byte	0
+ 642 0046 03       		.uleb128 0x3
+ 643 0047 08       		.uleb128 0x8
+ 644 0048 3A       		.uleb128 0x3a
+ 645 0049 0B       		.uleb128 0xb
+ 646 004a 3B       		.uleb128 0x3b
+ 647 004b 0B       		.uleb128 0xb
+ 648 004c 49       		.uleb128 0x49
+ 649 004d 13       		.uleb128 0x13
+ 650 004e 00       		.byte	0
+ 651 004f 00       		.byte	0
+ 652 0050 07       		.uleb128 0x7
+ 653 0051 13       		.uleb128 0x13
+ 654 0052 01       		.byte	0x1
+ 655 0053 03       		.uleb128 0x3
+ 656 0054 0E       		.uleb128 0xe
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 14
+
+
+ 657 0055 0B       		.uleb128 0xb
+ 658 0056 0B       		.uleb128 0xb
+ 659 0057 3A       		.uleb128 0x3a
+ 660 0058 0B       		.uleb128 0xb
+ 661 0059 3B       		.uleb128 0x3b
+ 662 005a 0B       		.uleb128 0xb
+ 663 005b 01       		.uleb128 0x1
+ 664 005c 13       		.uleb128 0x13
+ 665 005d 00       		.byte	0
+ 666 005e 00       		.byte	0
+ 667 005f 08       		.uleb128 0x8
+ 668 0060 0D       		.uleb128 0xd
+ 669 0061 00       		.byte	0
+ 670 0062 03       		.uleb128 0x3
+ 671 0063 0E       		.uleb128 0xe
+ 672 0064 3A       		.uleb128 0x3a
+ 673 0065 0B       		.uleb128 0xb
+ 674 0066 3B       		.uleb128 0x3b
+ 675 0067 0B       		.uleb128 0xb
+ 676 0068 49       		.uleb128 0x49
+ 677 0069 13       		.uleb128 0x13
+ 678 006a 38       		.uleb128 0x38
+ 679 006b 0B       		.uleb128 0xb
+ 680 006c 00       		.byte	0
+ 681 006d 00       		.byte	0
+ 682 006e 09       		.uleb128 0x9
+ 683 006f 0D       		.uleb128 0xd
+ 684 0070 00       		.byte	0
+ 685 0071 03       		.uleb128 0x3
+ 686 0072 08       		.uleb128 0x8
+ 687 0073 3A       		.uleb128 0x3a
+ 688 0074 0B       		.uleb128 0xb
+ 689 0075 3B       		.uleb128 0x3b
+ 690 0076 0B       		.uleb128 0xb
+ 691 0077 49       		.uleb128 0x49
+ 692 0078 13       		.uleb128 0x13
+ 693 0079 38       		.uleb128 0x38
+ 694 007a 0B       		.uleb128 0xb
+ 695 007b 00       		.byte	0
+ 696 007c 00       		.byte	0
+ 697 007d 0A       		.uleb128 0xa
+ 698 007e 2E       		.uleb128 0x2e
+ 699 007f 01       		.byte	0x1
+ 700 0080 3F       		.uleb128 0x3f
+ 701 0081 19       		.uleb128 0x19
+ 702 0082 03       		.uleb128 0x3
+ 703 0083 0E       		.uleb128 0xe
+ 704 0084 3A       		.uleb128 0x3a
+ 705 0085 0B       		.uleb128 0xb
+ 706 0086 3B       		.uleb128 0x3b
+ 707 0087 0B       		.uleb128 0xb
+ 708 0088 27       		.uleb128 0x27
+ 709 0089 19       		.uleb128 0x19
+ 710 008a 11       		.uleb128 0x11
+ 711 008b 01       		.uleb128 0x1
+ 712 008c 12       		.uleb128 0x12
+ 713 008d 06       		.uleb128 0x6
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 15
+
+
+ 714 008e 40       		.uleb128 0x40
+ 715 008f 18       		.uleb128 0x18
+ 716 0090 9742     		.uleb128 0x2117
+ 717 0092 19       		.uleb128 0x19
+ 718 0093 01       		.uleb128 0x1
+ 719 0094 13       		.uleb128 0x13
+ 720 0095 00       		.byte	0
+ 721 0096 00       		.byte	0
+ 722 0097 0B       		.uleb128 0xb
+ 723 0098 05       		.uleb128 0x5
+ 724 0099 00       		.byte	0
+ 725 009a 03       		.uleb128 0x3
+ 726 009b 0E       		.uleb128 0xe
+ 727 009c 3A       		.uleb128 0x3a
+ 728 009d 0B       		.uleb128 0xb
+ 729 009e 3B       		.uleb128 0x3b
+ 730 009f 0B       		.uleb128 0xb
+ 731 00a0 49       		.uleb128 0x49
+ 732 00a1 13       		.uleb128 0x13
+ 733 00a2 02       		.uleb128 0x2
+ 734 00a3 18       		.uleb128 0x18
+ 735 00a4 00       		.byte	0
+ 736 00a5 00       		.byte	0
+ 737 00a6 0C       		.uleb128 0xc
+ 738 00a7 0F       		.uleb128 0xf
+ 739 00a8 00       		.byte	0
+ 740 00a9 0B       		.uleb128 0xb
+ 741 00aa 0B       		.uleb128 0xb
+ 742 00ab 49       		.uleb128 0x49
+ 743 00ac 13       		.uleb128 0x13
+ 744 00ad 00       		.byte	0
+ 745 00ae 00       		.byte	0
+ 746 00af 0D       		.uleb128 0xd
+ 747 00b0 05       		.uleb128 0x5
+ 748 00b1 00       		.byte	0
+ 749 00b2 03       		.uleb128 0x3
+ 750 00b3 08       		.uleb128 0x8
+ 751 00b4 3A       		.uleb128 0x3a
+ 752 00b5 0B       		.uleb128 0xb
+ 753 00b6 3B       		.uleb128 0x3b
+ 754 00b7 0B       		.uleb128 0xb
+ 755 00b8 49       		.uleb128 0x49
+ 756 00b9 13       		.uleb128 0x13
+ 757 00ba 02       		.uleb128 0x2
+ 758 00bb 18       		.uleb128 0x18
+ 759 00bc 00       		.byte	0
+ 760 00bd 00       		.byte	0
+ 761 00be 0E       		.uleb128 0xe
+ 762 00bf 05       		.uleb128 0x5
+ 763 00c0 00       		.byte	0
+ 764 00c1 03       		.uleb128 0x3
+ 765 00c2 08       		.uleb128 0x8
+ 766 00c3 3A       		.uleb128 0x3a
+ 767 00c4 0B       		.uleb128 0xb
+ 768 00c5 3B       		.uleb128 0x3b
+ 769 00c6 0B       		.uleb128 0xb
+ 770 00c7 49       		.uleb128 0x49
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 16
+
+
+ 771 00c8 13       		.uleb128 0x13
+ 772 00c9 02       		.uleb128 0x2
+ 773 00ca 17       		.uleb128 0x17
+ 774 00cb 00       		.byte	0
+ 775 00cc 00       		.byte	0
+ 776 00cd 0F       		.uleb128 0xf
+ 777 00ce 34       		.uleb128 0x34
+ 778 00cf 00       		.byte	0
+ 779 00d0 03       		.uleb128 0x3
+ 780 00d1 08       		.uleb128 0x8
+ 781 00d2 3A       		.uleb128 0x3a
+ 782 00d3 0B       		.uleb128 0xb
+ 783 00d4 3B       		.uleb128 0x3b
+ 784 00d5 0B       		.uleb128 0xb
+ 785 00d6 49       		.uleb128 0x49
+ 786 00d7 13       		.uleb128 0x13
+ 787 00d8 02       		.uleb128 0x2
+ 788 00d9 17       		.uleb128 0x17
+ 789 00da 00       		.byte	0
+ 790 00db 00       		.byte	0
+ 791 00dc 10       		.uleb128 0x10
+ 792 00dd 05       		.uleb128 0x5
+ 793 00de 00       		.byte	0
+ 794 00df 03       		.uleb128 0x3
+ 795 00e0 0E       		.uleb128 0xe
+ 796 00e1 3A       		.uleb128 0x3a
+ 797 00e2 0B       		.uleb128 0xb
+ 798 00e3 3B       		.uleb128 0x3b
+ 799 00e4 0B       		.uleb128 0xb
+ 800 00e5 49       		.uleb128 0x49
+ 801 00e6 13       		.uleb128 0x13
+ 802 00e7 02       		.uleb128 0x2
+ 803 00e8 17       		.uleb128 0x17
+ 804 00e9 00       		.byte	0
+ 805 00ea 00       		.byte	0
+ 806 00eb 11       		.uleb128 0x11
+ 807 00ec 34       		.uleb128 0x34
+ 808 00ed 00       		.byte	0
+ 809 00ee 03       		.uleb128 0x3
+ 810 00ef 0E       		.uleb128 0xe
+ 811 00f0 3A       		.uleb128 0x3a
+ 812 00f1 0B       		.uleb128 0xb
+ 813 00f2 3B       		.uleb128 0x3b
+ 814 00f3 0B       		.uleb128 0xb
+ 815 00f4 49       		.uleb128 0x49
+ 816 00f5 13       		.uleb128 0x13
+ 817 00f6 3F       		.uleb128 0x3f
+ 818 00f7 19       		.uleb128 0x19
+ 819 00f8 02       		.uleb128 0x2
+ 820 00f9 18       		.uleb128 0x18
+ 821 00fa 00       		.byte	0
+ 822 00fb 00       		.byte	0
+ 823 00fc 00       		.byte	0
+ 824              		.section	.debug_loc,"",%progbits
+ 825              	.Ldebug_loc0:
+ 826              	.LLST0:
+ 827 0000 00000000 		.4byte	.LVL4
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 17
+
+
+ 828 0004 08000000 		.4byte	.LVL6
+ 829 0008 0100     		.2byte	0x1
+ 830 000a 50       		.byte	0x50
+ 831 000b 08000000 		.4byte	.LVL6
+ 832 000f 12000000 		.4byte	.LFE4
+ 833 0013 0100     		.2byte	0x1
+ 834 0015 50       		.byte	0x50
+ 835 0016 00000000 		.4byte	0
+ 836 001a 00000000 		.4byte	0
+ 837              	.LLST1:
+ 838 001e 00000000 		.4byte	.LVL4
+ 839 0022 04000000 		.4byte	.LVL5
+ 840 0026 0200     		.2byte	0x2
+ 841 0028 30       		.byte	0x30
+ 842 0029 9F       		.byte	0x9f
+ 843 002a 04000000 		.4byte	.LVL5
+ 844 002e 0A000000 		.4byte	.LVL7
+ 845 0032 0100     		.2byte	0x1
+ 846 0034 53       		.byte	0x53
+ 847 0035 0C000000 		.4byte	.LVL8
+ 848 0039 12000000 		.4byte	.LFE4
+ 849 003d 0100     		.2byte	0x1
+ 850 003f 53       		.byte	0x53
+ 851 0040 00000000 		.4byte	0
+ 852 0044 00000000 		.4byte	0
+ 853              	.LLST2:
+ 854 0048 00000000 		.4byte	.LVL9
+ 855 004c 0C000000 		.4byte	.LVL12
+ 856 0050 0100     		.2byte	0x1
+ 857 0052 50       		.byte	0x50
+ 858 0053 0C000000 		.4byte	.LVL12
+ 859 0057 18000000 		.4byte	.LFE5
+ 860 005b 0100     		.2byte	0x1
+ 861 005d 50       		.byte	0x50
+ 862 005e 00000000 		.4byte	0
+ 863 0062 00000000 		.4byte	0
+ 864              	.LLST3:
+ 865 0066 00000000 		.4byte	.LVL9
+ 866 006a 0E000000 		.4byte	.LVL13
+ 867 006e 0100     		.2byte	0x1
+ 868 0070 51       		.byte	0x51
+ 869 0071 0E000000 		.4byte	.LVL13
+ 870 0075 18000000 		.4byte	.LFE5
+ 871 0079 0100     		.2byte	0x1
+ 872 007b 51       		.byte	0x51
+ 873 007c 00000000 		.4byte	0
+ 874 0080 00000000 		.4byte	0
+ 875              	.LLST4:
+ 876 0084 02000000 		.4byte	.LVL10
+ 877 0088 06000000 		.4byte	.LVL11
+ 878 008c 0200     		.2byte	0x2
+ 879 008e 30       		.byte	0x30
+ 880 008f 9F       		.byte	0x9f
+ 881 0090 06000000 		.4byte	.LVL11
+ 882 0094 10000000 		.4byte	.LVL14
+ 883 0098 0100     		.2byte	0x1
+ 884 009a 53       		.byte	0x53
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 18
+
+
+ 885 009b 12000000 		.4byte	.LVL15
+ 886 009f 18000000 		.4byte	.LFE5
+ 887 00a3 0100     		.2byte	0x1
+ 888 00a5 53       		.byte	0x53
+ 889 00a6 00000000 		.4byte	0
+ 890 00aa 00000000 		.4byte	0
+ 891              		.section	.debug_aranges,"",%progbits
+ 892 0000 44000000 		.4byte	0x44
+ 893 0004 0200     		.2byte	0x2
+ 894 0006 00000000 		.4byte	.Ldebug_info0
+ 895 000a 04       		.byte	0x4
+ 896 000b 00       		.byte	0
+ 897 000c 0000     		.2byte	0
+ 898 000e 0000     		.2byte	0
+ 899 0010 00000000 		.4byte	.LFB0
+ 900 0014 18000000 		.4byte	.LFE0-.LFB0
+ 901 0018 00000000 		.4byte	.LFB1
+ 902 001c 12000000 		.4byte	.LFE1-.LFB1
+ 903 0020 00000000 		.4byte	.LFB2
+ 904 0024 16000000 		.4byte	.LFE2-.LFB2
+ 905 0028 00000000 		.4byte	.LFB3
+ 906 002c 0E000000 		.4byte	.LFE3-.LFB3
+ 907 0030 00000000 		.4byte	.LFB4
+ 908 0034 12000000 		.4byte	.LFE4-.LFB4
+ 909 0038 00000000 		.4byte	.LFB5
+ 910 003c 18000000 		.4byte	.LFE5-.LFB5
+ 911 0040 00000000 		.4byte	0
+ 912 0044 00000000 		.4byte	0
+ 913              		.section	.debug_ranges,"",%progbits
+ 914              	.Ldebug_ranges0:
+ 915 0000 00000000 		.4byte	.LFB0
+ 916 0004 18000000 		.4byte	.LFE0
+ 917 0008 00000000 		.4byte	.LFB1
+ 918 000c 12000000 		.4byte	.LFE1
+ 919 0010 00000000 		.4byte	.LFB2
+ 920 0014 16000000 		.4byte	.LFE2
+ 921 0018 00000000 		.4byte	.LFB3
+ 922 001c 0E000000 		.4byte	.LFE3
+ 923 0020 00000000 		.4byte	.LFB4
+ 924 0024 12000000 		.4byte	.LFE4
+ 925 0028 00000000 		.4byte	.LFB5
+ 926 002c 18000000 		.4byte	.LFE5
+ 927 0030 00000000 		.4byte	0
+ 928 0034 00000000 		.4byte	0
+ 929              		.section	.debug_line,"",%progbits
+ 930              	.Ldebug_line0:
+ 931 0000 D8000000 		.section	.debug_str,"MS",%progbits,1
+ 931      02002B00 
+ 931      00000201 
+ 931      FB0E0D00 
+ 931      01010101 
+ 932              	.LASF14:
+ 933 0000 6D657373 		.ascii	"message\000"
+ 933      61676500 
+ 934              	.LASF21:
+ 935 0008 426C6F63 		.ascii	"Block\000"
+ 935      6B00
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 19
+
+
+ 936              	.LASF16:
+ 937 000e 756E7369 		.ascii	"unsigned int\000"
+ 937      676E6564 
+ 937      20696E74 
+ 937      00
+ 938              	.LASF24:
+ 939 001b 496E6974 		.ascii	"InitArray\000"
+ 939      41727261 
+ 939      7900
+ 940              	.LASF12:
+ 941 0025 6D6F6465 		.ascii	"mode\000"
+ 941      00
+ 942              	.LASF23:
+ 943 002a 44657374 		.ascii	"Destroy\000"
+ 943      726F7900 
+ 944              	.LASF8:
+ 945 0032 72656164 		.ascii	"ready\000"
+ 945      7900
+ 946              	.LASF18:
+ 947 0038 70706362 		.ascii	"ppcb\000"
+ 947      00
+ 948              	.LASF31:
+ 949 003d 676C6F62 		.ascii	"global.c\000"
+ 949      616C2E63 
+ 949      00
+ 950              	.LASF19:
+ 951 0046 6D657367 		.ascii	"mesg\000"
+ 951      00
+ 952              	.LASF32:
+ 953 004b 443A5C43 		.ascii	"D:\\CYTEST\\MyELock\\MyELock.cydsn\000"
+ 953      59544553 
+ 953      545C4D79 
+ 953      454C6F63 
+ 953      6B5C4D79 
+ 954              	.LASF2:
+ 955 006b 6D73674B 		.ascii	"msgKeyCmd\000"
+ 955      6579436D 
+ 955      6400
+ 956              	.LASF25:
+ 957 0075 636F7079 		.ascii	"copyArray\000"
+ 957      41727261 
+ 957      7900
+ 958              	.LASF11:
+ 959 007f 73746174 		.ascii	"status\000"
+ 959      757300
+ 960              	.LASF26:
+ 961 0086 70536F75 		.ascii	"pSource\000"
+ 961      72636500 
+ 962              	.LASF4:
+ 963 008e 6D4D4F54 		.ascii	"mMOTO_CLOCK\000"
+ 963      4F5F434C 
+ 963      4F434B00 
+ 964              	.LASF15:
+ 965 009a 756E7369 		.ascii	"unsigned char\000"
+ 965      676E6564 
+ 965      20636861 
+ 965      7200
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 20
+
+
+ 966              	.LASF22:
+ 967 00a8 57616B65 		.ascii	"Wakeup\000"
+ 967      757000
+ 968              	.LASF27:
+ 969 00af 70446573 		.ascii	"pDest\000"
+ 969      7400
+ 970              	.LASF7:
+ 971 00b5 64657374 		.ascii	"destroy\000"
+ 971      726F7900 
+ 972              	.LASF3:
+ 973 00bd 6D6F6465 		.ascii	"mode_none\000"
+ 973      5F6E6F6E 
+ 973      6500
+ 974              	.LASF20:
+ 975 00c7 43726561 		.ascii	"Create\000"
+ 975      746500
+ 976              	.LASF9:
+ 977 00ce 65786375 		.ascii	"excute\000"
+ 977      746500
+ 978              	.LASF13:
+ 979 00d5 73746570 		.ascii	"step\000"
+ 979      00
+ 980              	.LASF28:
+ 981 00da 7063625F 		.ascii	"pcb_clockchain\000"
+ 981      636C6F63 
+ 981      6B636861 
+ 981      696E00
+ 982              	.LASF30:
+ 983 00e9 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 983      43313120 
+ 983      352E342E 
+ 983      31203230 
+ 983      31363036 
+ 984 011c 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 984      20726576 
+ 984      6973696F 
+ 984      6E203233 
+ 984      37373135 
+ 985 014f 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 985      66756E63 
+ 985      74696F6E 
+ 985      2D736563 
+ 985      74696F6E 
+ 986              	.LASF1:
+ 987 0177 6D736754 		.ascii	"msgTimeOut\000"
+ 987      696D654F 
+ 987      757400
+ 988              	.LASF17:
+ 989 0182 7063625F 		.ascii	"pcb_def\000"
+ 989      64656600 
+ 990              	.LASF29:
+ 991 018a 7063625F 		.ascii	"pcb_MOTO\000"
+ 991      4D4F544F 
+ 991      00
+ 992              	.LASF33:
+ 993 0193 74616770 		.ascii	"tagpcb\000"
+ 993      636200
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\ccNIUHwd.s 			page 21
+
+
+ 994              	.LASF10:
+ 995 019a 626C6F63 		.ascii	"block\000"
+ 995      6B00
+ 996              	.LASF5:
+ 997 01a0 6D4D4F54 		.ascii	"mMOTO_CCLOCK\000"
+ 997      4F5F4343 
+ 997      4C4F434B 
+ 997      00
+ 998              	.LASF0:
+ 999 01ad 6D73674E 		.ascii	"msgNone\000"
+ 999      6F6E6500 
+ 1000              	.LASF6:
+ 1001 01b5 6D737367 		.ascii	"mssg\000"
+ 1001      00
+ 1002              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,134 @@
+#include <project.h>
+#include "zmain.h"
+
+
+
+void ZMoto()
+{
+	pcb_ZMoto.status = excute;
+	if(pcb_ZMoto.mode == mdMOTO_CLOCK)
+    {
+        switch (pcb_ZMoto.step)
+        {
+            case 0:
+                CPHASE0;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 1:
+                CPHASE1;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 2:
+                CPHASE2;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 3:
+                CPHASE3;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 4:
+                CPHASE4;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 5:
+                CPHASE5;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 6:
+                CPHASE6;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 7:
+                CPHASE7;
+                if(pcb_ZMoto.cycle>0)
+                {
+                    pcb_ZMoto.step = 0;
+                    pcb_ZMoto.cycle --;
+                }
+                else
+                {
+                    pcb_ZMoto.step = 8;
+                }
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            
+            default:
+                CPHASED;
+                ZDestroy(&pcb_ZMoto);
+                break;
+        }
+    }
+    else
+    {
+        switch (pcb_ZMoto.step)
+        {
+            case 8:
+                MOTOA_L; MOTOB_L; MOTOC_L; MOTOD_L;
+                pcb_ZMoto.mode = mdMOTO_CLOCK;
+                pcb_ZMoto.cycle = pcb_ZMoto.cycle >>4;
+                pcb_ZMoto.step = 0;
+                ZBlock(&pcb_ZMoto,3000);//3000ms
+                break;
+            case 7:
+                MOTOA_H; MOTOB_L; MOTOC_L; MOTOD_H;
+                if((pcb_ZMoto.cycle&0x0f)>0)
+                {
+                    pcb_ZMoto.step = 0;
+                    pcb_ZMoto.cycle --;
+                }
+                else
+                {
+                    pcb_ZMoto.step = 8;
+                }
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 6:
+                MOTOA_H; MOTOB_L; MOTOC_L; MOTOD_L;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 5:
+                MOTOA_H; MOTOB_H; MOTOC_L; MOTOD_L;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 4:
+                MOTOA_L; MOTOB_H; MOTOC_L; MOTOD_L;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 3:
+                MOTOA_L; MOTOB_H; MOTOC_H; MOTOD_L;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 2:
+                MOTOA_L; MOTOB_L; MOTOC_H; MOTOD_L;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 1:
+                MOTOA_L; MOTOB_L; MOTOC_H; MOTOD_H;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            case 0:
+                MOTOA_L; MOTOB_L; MOTOC_L; MOTOD_H;
+                pcb_ZMoto.step ++;
+                ZBlock(&pcb_ZMoto,2);
+                break;
+            default:
+                MOTOA_L; MOTOB_L; MOTOC_L; MOTOD_L;
+                ZDestroy(&pcb_ZMoto);
+                break;
+        }
+    }
+}
+ 

@@ -1,0 +1,970 @@
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 0
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"zdebug.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.ShowValue,"ax",%progbits
+  20              		.align	2
+  21              		.global	ShowValue
+  22              		.code	16
+  23              		.thumb_func
+  24              		.type	ShowValue, %function
+  25              	ShowValue:
+  26              	.LFB36:
+  27              		.file 1 "zdebug.c"
+   1:zdebug.c      **** /*******************************************************************************
+   2:zdebug.c      **** * File Name: debug.c
+   3:zdebug.c      **** *
+   4:zdebug.c      **** * Version: 1.0
+   5:zdebug.c      **** *
+   6:zdebug.c      **** * Description:
+   7:zdebug.c      **** *  This file contains functions for printf functionality.
+   8:zdebug.c      **** *
+   9:zdebug.c      **** * Hardware Dependency:
+  10:zdebug.c      **** *  CY8CKIT-042 BLE
+  11:zdebug.c      **** * 
+  12:zdebug.c      **** ********************************************************************************
+  13:zdebug.c      **** * Copyright 2015, Cypress Semiconductor Corporation.  All rights reserved.
+  14:zdebug.c      **** * You may use this file only in accordance with the license, terms, conditions,
+  15:zdebug.c      **** * disclaimers, and limitations in the end user license agreement accompanying
+  16:zdebug.c      **** * the software package with which this file was provided.
+  17:zdebug.c      **** *******************************************************************************/
+  18:zdebug.c      **** 
+  19:zdebug.c      **** 
+  20:zdebug.c      **** #include "zcommon.h"
+  21:zdebug.c      **** 
+  22:zdebug.c      **** #if (DEBUG_UART_ENABLED == ENABLED)
+  23:zdebug.c      **** 
+  24:zdebug.c      **** #if defined(__ARMCC_VERSION)
+  25:zdebug.c      ****     
+  26:zdebug.c      **** /* For MDK/RVDS compiler revise fputc function for printf functionality */
+  27:zdebug.c      **** struct __FILE 
+  28:zdebug.c      **** {
+  29:zdebug.c      ****     int handle;  
+  30:zdebug.c      **** };
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 2
+
+
+  31:zdebug.c      **** 
+  32:zdebug.c      **** enum 
+  33:zdebug.c      **** {
+  34:zdebug.c      ****     STDIN_HANDLE,
+  35:zdebug.c      ****     STDOUT_HANDLE,
+  36:zdebug.c      ****     STDERR_HANDLE
+  37:zdebug.c      **** };
+  38:zdebug.c      **** 
+  39:zdebug.c      **** FILE __stdin = {STDIN_HANDLE};
+  40:zdebug.c      **** FILE __stdout = {STDOUT_HANDLE};
+  41:zdebug.c      **** FILE __stderr = {STDERR_HANDLE};
+  42:zdebug.c      **** 
+  43:zdebug.c      **** int fputc(int ch, FILE *file) 
+  44:zdebug.c      **** {
+  45:zdebug.c      ****     int ret = EOF;
+  46:zdebug.c      **** 
+  47:zdebug.c      ****     switch( file->handle )
+  48:zdebug.c      ****     {
+  49:zdebug.c      ****         case STDOUT_HANDLE:
+  50:zdebug.c      ****             UART_DEB_UartPutChar(ch);
+  51:zdebug.c      ****             ret = ch ;
+  52:zdebug.c      ****             break ;
+  53:zdebug.c      **** 
+  54:zdebug.c      ****         case STDERR_HANDLE:
+  55:zdebug.c      ****             ret = ch ;
+  56:zdebug.c      ****             break ;
+  57:zdebug.c      **** 
+  58:zdebug.c      ****         default:
+  59:zdebug.c      ****             file = file;
+  60:zdebug.c      ****             break ;
+  61:zdebug.c      ****     }
+  62:zdebug.c      ****     return ret ;
+  63:zdebug.c      **** }
+  64:zdebug.c      **** 
+  65:zdebug.c      **** #elif defined (__ICCARM__)      /* IAR */
+  66:zdebug.c      **** 
+  67:zdebug.c      **** /* For IAR compiler revise __write() function for printf functionality */
+  68:zdebug.c      **** size_t __write(int handle, const unsigned char * buffer, size_t size)
+  69:zdebug.c      **** {
+  70:zdebug.c      ****     size_t nChars = 0;
+  71:zdebug.c      **** 
+  72:zdebug.c      ****     if (buffer == 0)
+  73:zdebug.c      ****     {
+  74:zdebug.c      ****         /*
+  75:zdebug.c      ****          * This means that we should flush internal buffers.  Since we
+  76:zdebug.c      ****          * don't we just return.  (Remember, "handle" == -1 means that all
+  77:zdebug.c      ****          * handles should be flushed.)
+  78:zdebug.c      ****          */
+  79:zdebug.c      ****         return (0);
+  80:zdebug.c      ****     }
+  81:zdebug.c      **** 
+  82:zdebug.c      ****     for (/* Empty */; size != 0; --size)
+  83:zdebug.c      ****     {
+  84:zdebug.c      ****         UART_DEB_UartPutChar(*buffer++);
+  85:zdebug.c      ****         ++nChars;
+  86:zdebug.c      ****     }
+  87:zdebug.c      **** 
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 3
+
+
+  88:zdebug.c      ****     return (nChars);
+  89:zdebug.c      **** }
+  90:zdebug.c      **** 
+  91:zdebug.c      **** #else  /* (__GNUC__)  GCC */
+  92:zdebug.c      **** 
+  93:zdebug.c      **** /* For GCC compiler revise _write() function for printf functionality */
+  94:zdebug.c      **** int _write(int file, char *ptr, int len)
+  95:zdebug.c      **** {
+  96:zdebug.c      ****     int i;
+  97:zdebug.c      ****     file = file;
+  98:zdebug.c      ****     for (i = 0; i < len; i++)
+  99:zdebug.c      ****     {
+ 100:zdebug.c      ****         UART_DEB_UartPutChar(*ptr++);
+ 101:zdebug.c      ****     }
+ 102:zdebug.c      ****     return len;
+ 103:zdebug.c      **** }
+ 104:zdebug.c      **** 
+ 105:zdebug.c      **** 
+ 106:zdebug.c      **** #endif  /* (__ARMCC_VERSION) */   
+ 107:zdebug.c      **** 
+ 108:zdebug.c      **** #endif /* DEBUG_UART_ENABLED == ENABLED */
+ 109:zdebug.c      **** 
+ 110:zdebug.c      **** 
+ 111:zdebug.c      **** void ShowValue(CYBLE_GATT_VALUE_T *value)
+ 112:zdebug.c      **** {
+  28              		.loc 1 112 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              	.LVL0:
+  33 0000 70B5     		push	{r4, r5, r6, lr}
+  34              		.cfi_def_cfa_offset 16
+  35              		.cfi_offset 4, -16
+  36              		.cfi_offset 5, -12
+  37              		.cfi_offset 6, -8
+  38              		.cfi_offset 14, -4
+  39 0002 0500     		movs	r5, r0
+  40              	.LVL1:
+ 113:zdebug.c      ****     int16 i;
+ 114:zdebug.c      ****     
+ 115:zdebug.c      ****     for(i = 0; i < value->len; i++)
+  41              		.loc 1 115 0
+  42 0004 0024     		movs	r4, #0
+  43 0006 06E0     		b	.L2
+  44              	.LVL2:
+  45              	.L3:
+ 116:zdebug.c      ****     {
+ 117:zdebug.c      ****         //DBG_PRINTF("%2.2x ", value->val[i]);
+ 118:zdebug.c      ****         DBG_PRINTF("%#x ", value->val[i]);
+  46              		.loc 1 118 0 discriminator 3
+  47 0008 2B68     		ldr	r3, [r5]
+  48 000a 195D     		ldrb	r1, [r3, r4]
+  49 000c 0548     		ldr	r0, .L4
+  50 000e FFF7FEFF 		bl	printf
+  51              	.LVL3:
+ 115:zdebug.c      ****     {
+  52              		.loc 1 115 0 discriminator 3
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 4
+
+
+  53 0012 0134     		adds	r4, r4, #1
+  54              	.LVL4:
+  55 0014 24B2     		sxth	r4, r4
+  56              	.LVL5:
+  57              	.L2:
+ 115:zdebug.c      ****     {
+  58              		.loc 1 115 0 is_stmt 0 discriminator 1
+  59 0016 AB88     		ldrh	r3, [r5, #4]
+  60 0018 9C42     		cmp	r4, r3
+  61 001a F5DB     		blt	.L3
+ 119:zdebug.c      ****     }
+ 120:zdebug.c      ****     DBG_PRINTF("\r\n");
+  62              		.loc 1 120 0 is_stmt 1
+  63 001c 0248     		ldr	r0, .L4+4
+  64 001e FFF7FEFF 		bl	puts
+  65              	.LVL6:
+ 121:zdebug.c      **** }
+  66              		.loc 1 121 0
+  67              		@ sp needed
+  68              	.LVL7:
+  69              	.LVL8:
+  70 0022 70BD     		pop	{r4, r5, r6, pc}
+  71              	.L5:
+  72              		.align	2
+  73              	.L4:
+  74 0024 00000000 		.word	.LC0
+  75 0028 08000000 		.word	.LC2
+  76              		.cfi_endproc
+  77              	.LFE36:
+  78              		.size	ShowValue, .-ShowValue
+  79              		.section	.text.Set32ByPtr,"ax",%progbits
+  80              		.align	2
+  81              		.global	Set32ByPtr
+  82              		.code	16
+  83              		.thumb_func
+  84              		.type	Set32ByPtr, %function
+  85              	Set32ByPtr:
+  86              	.LFB37:
+ 122:zdebug.c      **** 
+ 123:zdebug.c      **** 
+ 124:zdebug.c      **** void Set32ByPtr(uint8 ptr[], uint32 value)
+ 125:zdebug.c      **** {
+  87              		.loc 1 125 0
+  88              		.cfi_startproc
+  89              		@ args = 0, pretend = 0, frame = 0
+  90              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		@ link register save eliminated.
+  92              	.LVL9:
+ 126:zdebug.c      ****     ptr[0u] = (uint8) value;
+  93              		.loc 1 126 0
+  94 0000 0170     		strb	r1, [r0]
+ 127:zdebug.c      ****     ptr[1u] = (uint8) (value >> 8u);    
+  95              		.loc 1 127 0
+  96 0002 0B0A     		lsrs	r3, r1, #8
+  97 0004 4370     		strb	r3, [r0, #1]
+ 128:zdebug.c      ****     ptr[2u] = (uint8) (value >> 16u);    
+  98              		.loc 1 128 0
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 5
+
+
+  99 0006 0B0C     		lsrs	r3, r1, #16
+ 100 0008 8370     		strb	r3, [r0, #2]
+ 129:zdebug.c      ****     ptr[3u] = (uint8) (value >> 24u);
+ 101              		.loc 1 129 0
+ 102 000a 090E     		lsrs	r1, r1, #24
+ 103              	.LVL10:
+ 104 000c C170     		strb	r1, [r0, #3]
+ 130:zdebug.c      **** }
+ 105              		.loc 1 130 0
+ 106              		@ sp needed
+ 107 000e 7047     		bx	lr
+ 108              		.cfi_endproc
+ 109              	.LFE37:
+ 110              		.size	Set32ByPtr, .-Set32ByPtr
+ 111              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 112              		.align	2
+ 113              	.LC0:
+ 114 0000 25237820 		.ascii	"%#x \000"
+ 114      00
+ 115 0005 000000   		.space	3
+ 116              	.LC2:
+ 117 0008 0D00     		.ascii	"\015\000"
+ 118              		.text
+ 119              	.Letext0:
+ 120              		.file 2 "Generated_Source\\PSoC4/cytypes.h"
+ 121              		.file 3 "Generated_Source\\PSoC4/BLE_1_StackGatt.h"
+ 122              		.file 4 "c:\\program files (x86)\\cypress\\psoc creator\\4.2\\psoc creator\\import\\gnu\\arm\\5.4.
+ 123              		.file 5 "<built-in>"
+ 124              		.section	.debug_info,"",%progbits
+ 125              	.Ldebug_info0:
+ 126 0000 AC010000 		.4byte	0x1ac
+ 127 0004 0400     		.2byte	0x4
+ 128 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 129 000a 04       		.byte	0x4
+ 130 000b 01       		.uleb128 0x1
+ 131 000c DB000000 		.4byte	.LASF23
+ 132 0010 0C       		.byte	0xc
+ 133 0011 8C010000 		.4byte	.LASF24
+ 134 0015 2E000000 		.4byte	.LASF25
+ 135 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 136 001d 00000000 		.4byte	0
+ 137 0021 00000000 		.4byte	.Ldebug_line0
+ 138 0025 02       		.uleb128 0x2
+ 139 0026 01       		.byte	0x1
+ 140 0027 06       		.byte	0x6
+ 141 0028 B9010000 		.4byte	.LASF0
+ 142 002c 02       		.uleb128 0x2
+ 143 002d 01       		.byte	0x1
+ 144 002e 08       		.byte	0x8
+ 145 002f 6B000000 		.4byte	.LASF1
+ 146 0033 02       		.uleb128 0x2
+ 147 0034 02       		.byte	0x2
+ 148 0035 05       		.byte	0x5
+ 149 0036 A1010000 		.4byte	.LASF2
+ 150 003a 02       		.uleb128 0x2
+ 151 003b 02       		.byte	0x2
+ 152 003c 07       		.byte	0x7
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 6
+
+
+ 153 003d 06000000 		.4byte	.LASF3
+ 154 0041 02       		.uleb128 0x2
+ 155 0042 04       		.byte	0x4
+ 156 0043 05       		.byte	0x5
+ 157 0044 AB010000 		.4byte	.LASF4
+ 158 0048 02       		.uleb128 0x2
+ 159 0049 04       		.byte	0x4
+ 160 004a 07       		.byte	0x7
+ 161 004b 7F000000 		.4byte	.LASF5
+ 162 004f 02       		.uleb128 0x2
+ 163 0050 08       		.byte	0x8
+ 164 0051 05       		.byte	0x5
+ 165 0052 7E010000 		.4byte	.LASF6
+ 166 0056 02       		.uleb128 0x2
+ 167 0057 08       		.byte	0x8
+ 168 0058 07       		.byte	0x7
+ 169 0059 54000000 		.4byte	.LASF7
+ 170 005d 03       		.uleb128 0x3
+ 171 005e 04       		.byte	0x4
+ 172 005f 05       		.byte	0x5
+ 173 0060 696E7400 		.ascii	"int\000"
+ 174 0064 02       		.uleb128 0x2
+ 175 0065 04       		.byte	0x4
+ 176 0066 07       		.byte	0x7
+ 177 0067 BF000000 		.4byte	.LASF8
+ 178 006b 04       		.uleb128 0x4
+ 179 006c 91000000 		.4byte	.LASF9
+ 180 0070 02       		.byte	0x2
+ 181 0071 E401     		.2byte	0x1e4
+ 182 0073 2C000000 		.4byte	0x2c
+ 183 0077 04       		.uleb128 0x4
+ 184 0078 9E000000 		.4byte	.LASF10
+ 185 007c 02       		.byte	0x2
+ 186 007d E501     		.2byte	0x1e5
+ 187 007f 3A000000 		.4byte	0x3a
+ 188 0083 04       		.uleb128 0x4
+ 189 0084 A5000000 		.4byte	.LASF11
+ 190 0088 02       		.byte	0x2
+ 191 0089 E601     		.2byte	0x1e6
+ 192 008b 48000000 		.4byte	0x48
+ 193 008f 04       		.uleb128 0x4
+ 194 0090 79000000 		.4byte	.LASF12
+ 195 0094 02       		.byte	0x2
+ 196 0095 E801     		.2byte	0x1e8
+ 197 0097 33000000 		.4byte	0x33
+ 198 009b 02       		.uleb128 0x2
+ 199 009c 04       		.byte	0x4
+ 200 009d 04       		.byte	0x4
+ 201 009e 4E000000 		.4byte	.LASF13
+ 202 00a2 02       		.uleb128 0x2
+ 203 00a3 08       		.byte	0x8
+ 204 00a4 04       		.byte	0x4
+ 205 00a5 97000000 		.4byte	.LASF14
+ 206 00a9 02       		.uleb128 0x2
+ 207 00aa 01       		.byte	0x1
+ 208 00ab 08       		.byte	0x8
+ 209 00ac 95010000 		.4byte	.LASF15
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 7
+
+
+ 210 00b0 02       		.uleb128 0x2
+ 211 00b1 08       		.byte	0x8
+ 212 00b2 04       		.byte	0x4
+ 213 00b3 69010000 		.4byte	.LASF16
+ 214 00b7 02       		.uleb128 0x2
+ 215 00b8 04       		.byte	0x4
+ 216 00b9 07       		.byte	0x7
+ 217 00ba 75010000 		.4byte	.LASF17
+ 218 00be 05       		.uleb128 0x5
+ 219 00bf 04       		.byte	0x4
+ 220 00c0 6B000000 		.4byte	0x6b
+ 221 00c4 06       		.uleb128 0x6
+ 222 00c5 08       		.byte	0x8
+ 223 00c6 03       		.byte	0x3
+ 224 00c7 BE01     		.2byte	0x1be
+ 225 00c9 F5000000 		.4byte	0xf5
+ 226 00cd 07       		.uleb128 0x7
+ 227 00ce 76616C00 		.ascii	"val\000"
+ 228 00d2 03       		.byte	0x3
+ 229 00d3 C101     		.2byte	0x1c1
+ 230 00d5 BE000000 		.4byte	0xbe
+ 231 00d9 00       		.byte	0
+ 232 00da 07       		.uleb128 0x7
+ 233 00db 6C656E00 		.ascii	"len\000"
+ 234 00df 03       		.byte	0x3
+ 235 00e0 C401     		.2byte	0x1c4
+ 236 00e2 77000000 		.4byte	0x77
+ 237 00e6 04       		.byte	0x4
+ 238 00e7 08       		.uleb128 0x8
+ 239 00e8 C5010000 		.4byte	.LASF18
+ 240 00ec 03       		.byte	0x3
+ 241 00ed CB01     		.2byte	0x1cb
+ 242 00ef 77000000 		.4byte	0x77
+ 243 00f3 06       		.byte	0x6
+ 244 00f4 00       		.byte	0
+ 245 00f5 04       		.uleb128 0x4
+ 246 00f6 AC000000 		.4byte	.LASF19
+ 247 00fa 03       		.byte	0x3
+ 248 00fb CD01     		.2byte	0x1cd
+ 249 00fd C4000000 		.4byte	0xc4
+ 250 0101 09       		.uleb128 0x9
+ 251 0102 24000000 		.4byte	.LASF20
+ 252 0106 01       		.byte	0x1
+ 253 0107 6F       		.byte	0x6f
+ 254 0108 00000000 		.4byte	.LFB36
+ 255 010c 2C000000 		.4byte	.LFE36-.LFB36
+ 256 0110 01       		.uleb128 0x1
+ 257 0111 9C       		.byte	0x9c
+ 258 0112 5D010000 		.4byte	0x15d
+ 259 0116 0A       		.uleb128 0xa
+ 260 0117 00000000 		.4byte	.LASF22
+ 261 011b 01       		.byte	0x1
+ 262 011c 6F       		.byte	0x6f
+ 263 011d 5D010000 		.4byte	0x15d
+ 264 0121 00000000 		.4byte	.LLST0
+ 265 0125 0B       		.uleb128 0xb
+ 266 0126 6900     		.ascii	"i\000"
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 8
+
+
+ 267 0128 01       		.byte	0x1
+ 268 0129 71       		.byte	0x71
+ 269 012a 8F000000 		.4byte	0x8f
+ 270 012e 2C000000 		.4byte	.LLST1
+ 271 0132 0C       		.uleb128 0xc
+ 272 0133 12000000 		.4byte	.LVL3
+ 273 0137 95010000 		.4byte	0x195
+ 274 013b 49010000 		.4byte	0x149
+ 275 013f 0D       		.uleb128 0xd
+ 276 0140 01       		.uleb128 0x1
+ 277 0141 50       		.byte	0x50
+ 278 0142 05       		.uleb128 0x5
+ 279 0143 03       		.byte	0x3
+ 280 0144 00000000 		.4byte	.LC0
+ 281 0148 00       		.byte	0
+ 282 0149 0E       		.uleb128 0xe
+ 283 014a 22000000 		.4byte	.LVL6
+ 284 014e A0010000 		.4byte	0x1a0
+ 285 0152 0D       		.uleb128 0xd
+ 286 0153 01       		.uleb128 0x1
+ 287 0154 50       		.byte	0x50
+ 288 0155 05       		.uleb128 0x5
+ 289 0156 03       		.byte	0x3
+ 290 0157 08000000 		.4byte	.LC2
+ 291 015b 00       		.byte	0
+ 292 015c 00       		.byte	0
+ 293 015d 05       		.uleb128 0x5
+ 294 015e 04       		.byte	0x4
+ 295 015f F5000000 		.4byte	0xf5
+ 296 0163 09       		.uleb128 0x9
+ 297 0164 19000000 		.4byte	.LASF21
+ 298 0168 01       		.byte	0x1
+ 299 0169 7C       		.byte	0x7c
+ 300 016a 00000000 		.4byte	.LFB37
+ 301 016e 10000000 		.4byte	.LFE37-.LFB37
+ 302 0172 01       		.uleb128 0x1
+ 303 0173 9C       		.byte	0x9c
+ 304 0174 95010000 		.4byte	0x195
+ 305 0178 0F       		.uleb128 0xf
+ 306 0179 70747200 		.ascii	"ptr\000"
+ 307 017d 01       		.byte	0x1
+ 308 017e 7C       		.byte	0x7c
+ 309 017f BE000000 		.4byte	0xbe
+ 310 0183 01       		.uleb128 0x1
+ 311 0184 50       		.byte	0x50
+ 312 0185 0A       		.uleb128 0xa
+ 313 0186 00000000 		.4byte	.LASF22
+ 314 018a 01       		.byte	0x1
+ 315 018b 7C       		.byte	0x7c
+ 316 018c 83000000 		.4byte	0x83
+ 317 0190 56000000 		.4byte	.LLST2
+ 318 0194 00       		.byte	0
+ 319 0195 10       		.uleb128 0x10
+ 320 0196 9A010000 		.4byte	.LASF26
+ 321 019a 9A010000 		.4byte	.LASF26
+ 322 019e 04       		.byte	0x4
+ 323 019f BB       		.byte	0xbb
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 9
+
+
+ 324 01a0 11       		.uleb128 0x11
+ 325 01a1 B4010000 		.4byte	.LASF27
+ 326 01a5 CC000000 		.4byte	.LASF28
+ 327 01a9 05       		.byte	0x5
+ 328 01aa 00       		.byte	0
+ 329 01ab B4010000 		.4byte	.LASF27
+ 330 01af 00       		.byte	0
+ 331              		.section	.debug_abbrev,"",%progbits
+ 332              	.Ldebug_abbrev0:
+ 333 0000 01       		.uleb128 0x1
+ 334 0001 11       		.uleb128 0x11
+ 335 0002 01       		.byte	0x1
+ 336 0003 25       		.uleb128 0x25
+ 337 0004 0E       		.uleb128 0xe
+ 338 0005 13       		.uleb128 0x13
+ 339 0006 0B       		.uleb128 0xb
+ 340 0007 03       		.uleb128 0x3
+ 341 0008 0E       		.uleb128 0xe
+ 342 0009 1B       		.uleb128 0x1b
+ 343 000a 0E       		.uleb128 0xe
+ 344 000b 55       		.uleb128 0x55
+ 345 000c 17       		.uleb128 0x17
+ 346 000d 11       		.uleb128 0x11
+ 347 000e 01       		.uleb128 0x1
+ 348 000f 10       		.uleb128 0x10
+ 349 0010 17       		.uleb128 0x17
+ 350 0011 00       		.byte	0
+ 351 0012 00       		.byte	0
+ 352 0013 02       		.uleb128 0x2
+ 353 0014 24       		.uleb128 0x24
+ 354 0015 00       		.byte	0
+ 355 0016 0B       		.uleb128 0xb
+ 356 0017 0B       		.uleb128 0xb
+ 357 0018 3E       		.uleb128 0x3e
+ 358 0019 0B       		.uleb128 0xb
+ 359 001a 03       		.uleb128 0x3
+ 360 001b 0E       		.uleb128 0xe
+ 361 001c 00       		.byte	0
+ 362 001d 00       		.byte	0
+ 363 001e 03       		.uleb128 0x3
+ 364 001f 24       		.uleb128 0x24
+ 365 0020 00       		.byte	0
+ 366 0021 0B       		.uleb128 0xb
+ 367 0022 0B       		.uleb128 0xb
+ 368 0023 3E       		.uleb128 0x3e
+ 369 0024 0B       		.uleb128 0xb
+ 370 0025 03       		.uleb128 0x3
+ 371 0026 08       		.uleb128 0x8
+ 372 0027 00       		.byte	0
+ 373 0028 00       		.byte	0
+ 374 0029 04       		.uleb128 0x4
+ 375 002a 16       		.uleb128 0x16
+ 376 002b 00       		.byte	0
+ 377 002c 03       		.uleb128 0x3
+ 378 002d 0E       		.uleb128 0xe
+ 379 002e 3A       		.uleb128 0x3a
+ 380 002f 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 10
+
+
+ 381 0030 3B       		.uleb128 0x3b
+ 382 0031 05       		.uleb128 0x5
+ 383 0032 49       		.uleb128 0x49
+ 384 0033 13       		.uleb128 0x13
+ 385 0034 00       		.byte	0
+ 386 0035 00       		.byte	0
+ 387 0036 05       		.uleb128 0x5
+ 388 0037 0F       		.uleb128 0xf
+ 389 0038 00       		.byte	0
+ 390 0039 0B       		.uleb128 0xb
+ 391 003a 0B       		.uleb128 0xb
+ 392 003b 49       		.uleb128 0x49
+ 393 003c 13       		.uleb128 0x13
+ 394 003d 00       		.byte	0
+ 395 003e 00       		.byte	0
+ 396 003f 06       		.uleb128 0x6
+ 397 0040 13       		.uleb128 0x13
+ 398 0041 01       		.byte	0x1
+ 399 0042 0B       		.uleb128 0xb
+ 400 0043 0B       		.uleb128 0xb
+ 401 0044 3A       		.uleb128 0x3a
+ 402 0045 0B       		.uleb128 0xb
+ 403 0046 3B       		.uleb128 0x3b
+ 404 0047 05       		.uleb128 0x5
+ 405 0048 01       		.uleb128 0x1
+ 406 0049 13       		.uleb128 0x13
+ 407 004a 00       		.byte	0
+ 408 004b 00       		.byte	0
+ 409 004c 07       		.uleb128 0x7
+ 410 004d 0D       		.uleb128 0xd
+ 411 004e 00       		.byte	0
+ 412 004f 03       		.uleb128 0x3
+ 413 0050 08       		.uleb128 0x8
+ 414 0051 3A       		.uleb128 0x3a
+ 415 0052 0B       		.uleb128 0xb
+ 416 0053 3B       		.uleb128 0x3b
+ 417 0054 05       		.uleb128 0x5
+ 418 0055 49       		.uleb128 0x49
+ 419 0056 13       		.uleb128 0x13
+ 420 0057 38       		.uleb128 0x38
+ 421 0058 0B       		.uleb128 0xb
+ 422 0059 00       		.byte	0
+ 423 005a 00       		.byte	0
+ 424 005b 08       		.uleb128 0x8
+ 425 005c 0D       		.uleb128 0xd
+ 426 005d 00       		.byte	0
+ 427 005e 03       		.uleb128 0x3
+ 428 005f 0E       		.uleb128 0xe
+ 429 0060 3A       		.uleb128 0x3a
+ 430 0061 0B       		.uleb128 0xb
+ 431 0062 3B       		.uleb128 0x3b
+ 432 0063 05       		.uleb128 0x5
+ 433 0064 49       		.uleb128 0x49
+ 434 0065 13       		.uleb128 0x13
+ 435 0066 38       		.uleb128 0x38
+ 436 0067 0B       		.uleb128 0xb
+ 437 0068 00       		.byte	0
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 11
+
+
+ 438 0069 00       		.byte	0
+ 439 006a 09       		.uleb128 0x9
+ 440 006b 2E       		.uleb128 0x2e
+ 441 006c 01       		.byte	0x1
+ 442 006d 3F       		.uleb128 0x3f
+ 443 006e 19       		.uleb128 0x19
+ 444 006f 03       		.uleb128 0x3
+ 445 0070 0E       		.uleb128 0xe
+ 446 0071 3A       		.uleb128 0x3a
+ 447 0072 0B       		.uleb128 0xb
+ 448 0073 3B       		.uleb128 0x3b
+ 449 0074 0B       		.uleb128 0xb
+ 450 0075 27       		.uleb128 0x27
+ 451 0076 19       		.uleb128 0x19
+ 452 0077 11       		.uleb128 0x11
+ 453 0078 01       		.uleb128 0x1
+ 454 0079 12       		.uleb128 0x12
+ 455 007a 06       		.uleb128 0x6
+ 456 007b 40       		.uleb128 0x40
+ 457 007c 18       		.uleb128 0x18
+ 458 007d 9742     		.uleb128 0x2117
+ 459 007f 19       		.uleb128 0x19
+ 460 0080 01       		.uleb128 0x1
+ 461 0081 13       		.uleb128 0x13
+ 462 0082 00       		.byte	0
+ 463 0083 00       		.byte	0
+ 464 0084 0A       		.uleb128 0xa
+ 465 0085 05       		.uleb128 0x5
+ 466 0086 00       		.byte	0
+ 467 0087 03       		.uleb128 0x3
+ 468 0088 0E       		.uleb128 0xe
+ 469 0089 3A       		.uleb128 0x3a
+ 470 008a 0B       		.uleb128 0xb
+ 471 008b 3B       		.uleb128 0x3b
+ 472 008c 0B       		.uleb128 0xb
+ 473 008d 49       		.uleb128 0x49
+ 474 008e 13       		.uleb128 0x13
+ 475 008f 02       		.uleb128 0x2
+ 476 0090 17       		.uleb128 0x17
+ 477 0091 00       		.byte	0
+ 478 0092 00       		.byte	0
+ 479 0093 0B       		.uleb128 0xb
+ 480 0094 34       		.uleb128 0x34
+ 481 0095 00       		.byte	0
+ 482 0096 03       		.uleb128 0x3
+ 483 0097 08       		.uleb128 0x8
+ 484 0098 3A       		.uleb128 0x3a
+ 485 0099 0B       		.uleb128 0xb
+ 486 009a 3B       		.uleb128 0x3b
+ 487 009b 0B       		.uleb128 0xb
+ 488 009c 49       		.uleb128 0x49
+ 489 009d 13       		.uleb128 0x13
+ 490 009e 02       		.uleb128 0x2
+ 491 009f 17       		.uleb128 0x17
+ 492 00a0 00       		.byte	0
+ 493 00a1 00       		.byte	0
+ 494 00a2 0C       		.uleb128 0xc
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 12
+
+
+ 495 00a3 898201   		.uleb128 0x4109
+ 496 00a6 01       		.byte	0x1
+ 497 00a7 11       		.uleb128 0x11
+ 498 00a8 01       		.uleb128 0x1
+ 499 00a9 31       		.uleb128 0x31
+ 500 00aa 13       		.uleb128 0x13
+ 501 00ab 01       		.uleb128 0x1
+ 502 00ac 13       		.uleb128 0x13
+ 503 00ad 00       		.byte	0
+ 504 00ae 00       		.byte	0
+ 505 00af 0D       		.uleb128 0xd
+ 506 00b0 8A8201   		.uleb128 0x410a
+ 507 00b3 00       		.byte	0
+ 508 00b4 02       		.uleb128 0x2
+ 509 00b5 18       		.uleb128 0x18
+ 510 00b6 9142     		.uleb128 0x2111
+ 511 00b8 18       		.uleb128 0x18
+ 512 00b9 00       		.byte	0
+ 513 00ba 00       		.byte	0
+ 514 00bb 0E       		.uleb128 0xe
+ 515 00bc 898201   		.uleb128 0x4109
+ 516 00bf 01       		.byte	0x1
+ 517 00c0 11       		.uleb128 0x11
+ 518 00c1 01       		.uleb128 0x1
+ 519 00c2 31       		.uleb128 0x31
+ 520 00c3 13       		.uleb128 0x13
+ 521 00c4 00       		.byte	0
+ 522 00c5 00       		.byte	0
+ 523 00c6 0F       		.uleb128 0xf
+ 524 00c7 05       		.uleb128 0x5
+ 525 00c8 00       		.byte	0
+ 526 00c9 03       		.uleb128 0x3
+ 527 00ca 08       		.uleb128 0x8
+ 528 00cb 3A       		.uleb128 0x3a
+ 529 00cc 0B       		.uleb128 0xb
+ 530 00cd 3B       		.uleb128 0x3b
+ 531 00ce 0B       		.uleb128 0xb
+ 532 00cf 49       		.uleb128 0x49
+ 533 00d0 13       		.uleb128 0x13
+ 534 00d1 02       		.uleb128 0x2
+ 535 00d2 18       		.uleb128 0x18
+ 536 00d3 00       		.byte	0
+ 537 00d4 00       		.byte	0
+ 538 00d5 10       		.uleb128 0x10
+ 539 00d6 2E       		.uleb128 0x2e
+ 540 00d7 00       		.byte	0
+ 541 00d8 3F       		.uleb128 0x3f
+ 542 00d9 19       		.uleb128 0x19
+ 543 00da 3C       		.uleb128 0x3c
+ 544 00db 19       		.uleb128 0x19
+ 545 00dc 6E       		.uleb128 0x6e
+ 546 00dd 0E       		.uleb128 0xe
+ 547 00de 03       		.uleb128 0x3
+ 548 00df 0E       		.uleb128 0xe
+ 549 00e0 3A       		.uleb128 0x3a
+ 550 00e1 0B       		.uleb128 0xb
+ 551 00e2 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 13
+
+
+ 552 00e3 0B       		.uleb128 0xb
+ 553 00e4 00       		.byte	0
+ 554 00e5 00       		.byte	0
+ 555 00e6 11       		.uleb128 0x11
+ 556 00e7 2E       		.uleb128 0x2e
+ 557 00e8 00       		.byte	0
+ 558 00e9 3F       		.uleb128 0x3f
+ 559 00ea 19       		.uleb128 0x19
+ 560 00eb 3C       		.uleb128 0x3c
+ 561 00ec 19       		.uleb128 0x19
+ 562 00ed 6E       		.uleb128 0x6e
+ 563 00ee 0E       		.uleb128 0xe
+ 564 00ef 03       		.uleb128 0x3
+ 565 00f0 0E       		.uleb128 0xe
+ 566 00f1 3A       		.uleb128 0x3a
+ 567 00f2 0B       		.uleb128 0xb
+ 568 00f3 3B       		.uleb128 0x3b
+ 569 00f4 0B       		.uleb128 0xb
+ 570 00f5 6E       		.uleb128 0x6e
+ 571 00f6 0E       		.uleb128 0xe
+ 572 00f7 00       		.byte	0
+ 573 00f8 00       		.byte	0
+ 574 00f9 00       		.byte	0
+ 575              		.section	.debug_loc,"",%progbits
+ 576              	.Ldebug_loc0:
+ 577              	.LLST0:
+ 578 0000 00000000 		.4byte	.LVL0
+ 579 0004 08000000 		.4byte	.LVL2
+ 580 0008 0100     		.2byte	0x1
+ 581 000a 50       		.byte	0x50
+ 582 000b 08000000 		.4byte	.LVL2
+ 583 000f 22000000 		.4byte	.LVL8
+ 584 0013 0100     		.2byte	0x1
+ 585 0015 55       		.byte	0x55
+ 586 0016 22000000 		.4byte	.LVL8
+ 587 001a 2C000000 		.4byte	.LFE36
+ 588 001e 0400     		.2byte	0x4
+ 589 0020 F3       		.byte	0xf3
+ 590 0021 01       		.uleb128 0x1
+ 591 0022 50       		.byte	0x50
+ 592 0023 9F       		.byte	0x9f
+ 593 0024 00000000 		.4byte	0
+ 594 0028 00000000 		.4byte	0
+ 595              	.LLST1:
+ 596 002c 04000000 		.4byte	.LVL1
+ 597 0030 08000000 		.4byte	.LVL2
+ 598 0034 0200     		.2byte	0x2
+ 599 0036 30       		.byte	0x30
+ 600 0037 9F       		.byte	0x9f
+ 601 0038 08000000 		.4byte	.LVL2
+ 602 003c 14000000 		.4byte	.LVL4
+ 603 0040 0100     		.2byte	0x1
+ 604 0042 54       		.byte	0x54
+ 605 0043 16000000 		.4byte	.LVL5
+ 606 0047 22000000 		.4byte	.LVL7
+ 607 004b 0100     		.2byte	0x1
+ 608 004d 54       		.byte	0x54
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 14
+
+
+ 609 004e 00000000 		.4byte	0
+ 610 0052 00000000 		.4byte	0
+ 611              	.LLST2:
+ 612 0056 00000000 		.4byte	.LVL9
+ 613 005a 0C000000 		.4byte	.LVL10
+ 614 005e 0100     		.2byte	0x1
+ 615 0060 51       		.byte	0x51
+ 616 0061 0C000000 		.4byte	.LVL10
+ 617 0065 10000000 		.4byte	.LFE37
+ 618 0069 0400     		.2byte	0x4
+ 619 006b F3       		.byte	0xf3
+ 620 006c 01       		.uleb128 0x1
+ 621 006d 51       		.byte	0x51
+ 622 006e 9F       		.byte	0x9f
+ 623 006f 00000000 		.4byte	0
+ 624 0073 00000000 		.4byte	0
+ 625              		.section	.debug_aranges,"",%progbits
+ 626 0000 24000000 		.4byte	0x24
+ 627 0004 0200     		.2byte	0x2
+ 628 0006 00000000 		.4byte	.Ldebug_info0
+ 629 000a 04       		.byte	0x4
+ 630 000b 00       		.byte	0
+ 631 000c 0000     		.2byte	0
+ 632 000e 0000     		.2byte	0
+ 633 0010 00000000 		.4byte	.LFB36
+ 634 0014 2C000000 		.4byte	.LFE36-.LFB36
+ 635 0018 00000000 		.4byte	.LFB37
+ 636 001c 10000000 		.4byte	.LFE37-.LFB37
+ 637 0020 00000000 		.4byte	0
+ 638 0024 00000000 		.4byte	0
+ 639              		.section	.debug_ranges,"",%progbits
+ 640              	.Ldebug_ranges0:
+ 641 0000 00000000 		.4byte	.LFB36
+ 642 0004 2C000000 		.4byte	.LFE36
+ 643 0008 00000000 		.4byte	.LFB37
+ 644 000c 10000000 		.4byte	.LFE37
+ 645 0010 00000000 		.4byte	0
+ 646 0014 00000000 		.4byte	0
+ 647              		.section	.debug_line,"",%progbits
+ 648              	.Ldebug_line0:
+ 649 0000 18010000 		.section	.debug_str,"MS",%progbits,1
+ 649      0200D900 
+ 649      00000201 
+ 649      FB0E0D00 
+ 649      01010101 
+ 650              	.LASF22:
+ 651 0000 76616C75 		.ascii	"value\000"
+ 651      6500
+ 652              	.LASF3:
+ 653 0006 73686F72 		.ascii	"short unsigned int\000"
+ 653      7420756E 
+ 653      7369676E 
+ 653      65642069 
+ 653      6E7400
+ 654              	.LASF21:
+ 655 0019 53657433 		.ascii	"Set32ByPtr\000"
+ 655      32427950 
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 15
+
+
+ 655      747200
+ 656              	.LASF20:
+ 657 0024 53686F77 		.ascii	"ShowValue\000"
+ 657      56616C75 
+ 657      6500
+ 658              	.LASF25:
+ 659 002e 443A5C43 		.ascii	"D:\\CYTest\\MyELock\\MyELock.cydsn\000"
+ 659      59546573 
+ 659      745C4D79 
+ 659      454C6F63 
+ 659      6B5C4D79 
+ 660              	.LASF13:
+ 661 004e 666C6F61 		.ascii	"float\000"
+ 661      7400
+ 662              	.LASF7:
+ 663 0054 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 663      206C6F6E 
+ 663      6720756E 
+ 663      7369676E 
+ 663      65642069 
+ 664              	.LASF1:
+ 665 006b 756E7369 		.ascii	"unsigned char\000"
+ 665      676E6564 
+ 665      20636861 
+ 665      7200
+ 666              	.LASF12:
+ 667 0079 696E7431 		.ascii	"int16\000"
+ 667      3600
+ 668              	.LASF5:
+ 669 007f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 669      20756E73 
+ 669      69676E65 
+ 669      6420696E 
+ 669      7400
+ 670              	.LASF9:
+ 671 0091 75696E74 		.ascii	"uint8\000"
+ 671      3800
+ 672              	.LASF14:
+ 673 0097 646F7562 		.ascii	"double\000"
+ 673      6C6500
+ 674              	.LASF10:
+ 675 009e 75696E74 		.ascii	"uint16\000"
+ 675      313600
+ 676              	.LASF11:
+ 677 00a5 75696E74 		.ascii	"uint32\000"
+ 677      333200
+ 678              	.LASF19:
+ 679 00ac 4359424C 		.ascii	"CYBLE_GATT_VALUE_T\000"
+ 679      455F4741 
+ 679      54545F56 
+ 679      414C5545 
+ 679      5F5400
+ 680              	.LASF8:
+ 681 00bf 756E7369 		.ascii	"unsigned int\000"
+ 681      676E6564 
+ 681      20696E74 
+ 681      00
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 16
+
+
+ 682              	.LASF28:
+ 683 00cc 5F5F6275 		.ascii	"__builtin_puts\000"
+ 683      696C7469 
+ 683      6E5F7075 
+ 683      747300
+ 684              	.LASF23:
+ 685 00db 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 685      43313120 
+ 685      352E342E 
+ 685      31203230 
+ 685      31363036 
+ 686 010e 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 686      20726576 
+ 686      6973696F 
+ 686      6E203233 
+ 686      37373135 
+ 687 0141 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 687      66756E63 
+ 687      74696F6E 
+ 687      2D736563 
+ 687      74696F6E 
+ 688              	.LASF16:
+ 689 0169 6C6F6E67 		.ascii	"long double\000"
+ 689      20646F75 
+ 689      626C6500 
+ 690              	.LASF17:
+ 691 0175 73697A65 		.ascii	"sizetype\000"
+ 691      74797065 
+ 691      00
+ 692              	.LASF6:
+ 693 017e 6C6F6E67 		.ascii	"long long int\000"
+ 693      206C6F6E 
+ 693      6720696E 
+ 693      7400
+ 694              	.LASF24:
+ 695 018c 7A646562 		.ascii	"zdebug.c\000"
+ 695      75672E63 
+ 695      00
+ 696              	.LASF15:
+ 697 0195 63686172 		.ascii	"char\000"
+ 697      00
+ 698              	.LASF26:
+ 699 019a 7072696E 		.ascii	"printf\000"
+ 699      746600
+ 700              	.LASF2:
+ 701 01a1 73686F72 		.ascii	"short int\000"
+ 701      7420696E 
+ 701      7400
+ 702              	.LASF4:
+ 703 01ab 6C6F6E67 		.ascii	"long int\000"
+ 703      20696E74 
+ 703      00
+ 704              	.LASF27:
+ 705 01b4 70757473 		.ascii	"puts\000"
+ 705      00
+ 706              	.LASF0:
+ 707 01b9 7369676E 		.ascii	"signed char\000"
+ARM GAS  C:\Users\Zhu\AppData\Local\Temp\ccdlQS1A.s 			page 17
+
+
+ 707      65642063 
+ 707      68617200 
+ 708              	.LASF18:
+ 709 01c5 61637475 		.ascii	"actualLen\000"
+ 709      616C4C65 
+ 709      6E00
+ 710              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

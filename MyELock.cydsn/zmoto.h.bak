@@ -1,0 +1,65 @@
+#ifndef _ZMOTO_H_
+#define _ZMOTO_H_
+
+#include <project.h>
+    
+#define MOTOA_H MOTOR_A_Write(1)
+#define MOTOA_L MOTOR_A_Write(0)
+#define MOTOB_H MOTOR_B_Write(1)
+#define MOTOB_L MOTOR_B_Write(0)
+#define MOTOC_H MOTOR_C_Write(1)
+#define MOTOC_L MOTOR_C_Write(0)
+#define MOTOD_H MOTOR_D_Write(1)
+#define MOTOD_L MOTOR_D_Write(0)
+    
+#define CPHASED \
+    MOTOA_L; \
+    MOTOB_L; \
+    MOTOC_L; \
+    MOTOD_L;
+#define CPHASE0 \
+    MOTOA_H; \
+    MOTOB_L; \
+    MOTOC_L; \
+    MOTOD_H;
+#define CPHASE1 \
+    MOTOA_H; \
+    MOTOB_L; \
+    MOTOC_L; \
+    MOTOD_L;
+#define CPHASE2 \
+    MOTOA_H; \
+    MOTOB_H; \
+    MOTOC_L; \
+    MOTOD_L;
+#define CPHASE3 \
+    MOTOA_L; \
+    MOTOB_H; \
+    MOTOC_L; \
+    MOTOD_L;
+#define CPHASE4 \
+    MOTOA_L; \
+    MOTOB_H; \
+    MOTOC_H; \
+    MOTOD_L;
+#define CPHASE5 \
+    MOTOA_L; \
+    MOTOB_L; \
+    MOTOC_H; \
+    MOTOD_L;
+#define CPHASE6 \
+    MOTOA_L; \
+    MOTOB_L; \
+    MOTOC_H; \
+    MOTOD_H;
+#define CPHASE7 \
+    MOTOA_L; \
+    MOTOB_L; \
+    MOTOC_L; \
+    MOTOD_H;
+
+extern void ZMoto();
+
+
+#endif
+

@@ -1,0 +1,7 @@
+D:\CYTest\MyELock\MyELock.cydsn\MyELock.cyprj|de3078cc-e64b-4b65-b23a-a8878a9ae70c
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|ec167291-6a3f-4155-846e-0d212f603356
+C:\Users\Zhu\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|7d4ae253-eac3-4f29-adc8-abb7aad2c39b
+C:\Users\Zhu\Documents\PSoC Creator\4.1\Downloads ( 4.1).cylib\Downloads ( 4.1).cyprj|c7fbe77e-9399-4413-b26f-92a1159eae6d
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|12e7f508-08c4-44fd-927f-269a4453a66a
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|f2ff78f3-7e10-42a6-9d2a-38d60a12e659
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|4d78d482-ecac-4c12-b7c3-4b1a93fe0a24
