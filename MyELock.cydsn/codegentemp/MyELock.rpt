@@ -1,13 +1,13 @@
-Loading plugins phase: Elapsed time ==> 0s.318ms
+Loading plugins phase: Elapsed time ==> 0s.410ms
 <CYPRESSTAG name="CyDsfit arguments...">
-cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p D:\CYTest\MyELock\MyELock.cydsn\MyELock.cyprj -d CY8C4247LQI-BL483 -s D:\CYTest\MyELock\MyELock.cydsn\Generated_Source\PSoC4 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+cydsfit arguments: -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -.fdsreffile=referenced_files.txt -p D:\CYTEST\MyELock\eLock\MyELock.cydsn\MyELock.cyprj -d CY8C4247LQI-BL483 -s D:\CYTEST\MyELock\eLock\MyELock.cydsn\Generated_Source\PSoC4 -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
 </CYPRESSTAG>
 <CYPRESSTAG name="Design elaboration results...">
 </CYPRESSTAG>
-Elaboration phase: Elapsed time ==> 3s.184ms
+Elaboration phase: Elapsed time ==> 4s.346ms
 <CYPRESSTAG name="HDL generation results...">
 </CYPRESSTAG>
-HDL generation phase: Elapsed time ==> 0s.099ms
+HDL generation phase: Elapsed time ==> 0s.090ms
 <CYPRESSTAG name="Synthesis results...">
 
      | | | | | | |
@@ -25,23 +25,23 @@ HDL generation phase: Elapsed time ==> 0s.099ms
 ======================================================================
 Compiling:  MyELock.v
 Program  :   C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\bin\warp.exe
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTest\MyELock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 MyELock.v -verilog
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTEST\MyELock\eLock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 MyELock.v -verilog
 ======================================================================
 
 ======================================================================
 Compiling:  MyELock.v
 Program  :   C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\bin\warp.exe
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTest\MyELock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 MyELock.v -verilog
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTEST\MyELock\eLock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 MyELock.v -verilog
 ======================================================================
 
 ======================================================================
 Compiling:  MyELock.v
 Program  :   vlogfe
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTest\MyELock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 -verilog MyELock.v
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTEST\MyELock\eLock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 -verilog MyELock.v
 ======================================================================
 
 vlogfe V6.3 IR 41:  Verilog parser
-Tue Dec 18 09:07:54 2018
+Thu Dec 20 19:39:34 2018
 
 
 ======================================================================
@@ -51,7 +51,7 @@ Options  :    -yv2 -q10 MyELock.v
 ======================================================================
 
 vpp V6.3 IR 41:  Verilog Pre-Processor
-Tue Dec 18 09:07:54 2018
+Thu Dec 20 19:39:34 2018
 
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'
 Flattening file 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\or_v1_0\or_v1_0.v'
@@ -82,11 +82,11 @@ vlogfe:  No errors.
 ======================================================================
 Compiling:  MyELock.v
 Program  :   tovif
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTest\MyELock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 -verilog MyELock.v
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTEST\MyELock\eLock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 -verilog MyELock.v
 ======================================================================
 
 tovif V6.3 IR 41:  High-level synthesis
-Tue Dec 18 09:07:55 2018
+Thu Dec 20 19:39:34 2018
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -97,9 +97,9 @@ Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\c
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\mod_cnst.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\mod_mthv.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif'.
-Linking 'D:\CYTest\MyELock\MyELock.cydsn\codegentemp\MyELock.ctl'.
+Linking 'D:\CYTEST\MyELock\eLock\MyELock.cydsn\codegentemp\MyELock.ctl'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'.
-Linking 'D:\CYTest\MyELock\MyELock.cydsn\codegentemp\MyELock.v'.
+Linking 'D:\CYTEST\MyELock\eLock\MyELock.cydsn\codegentemp\MyELock.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\or_v1_0\or_v1_0.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0\cy_constant_v1_0.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\OneTerminal\OneTerminal.v'.
@@ -112,11 +112,11 @@ tovif:  No errors.
 ======================================================================
 Compiling:  MyELock.v
 Program  :   topld
-Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTest\MyELock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 -verilog MyELock.v
+Options  :    -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTEST\MyELock\eLock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 -verilog MyELock.v
 ======================================================================
 
 topld V6.3 IR 41:  Synthesis and optimization
-Tue Dec 18 09:07:55 2018
+Thu Dec 20 19:39:34 2018
 
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\std.vhd'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\cypress.vhd'.
@@ -127,9 +127,9 @@ Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\c
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\mod_cnst.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\mod_mthv.vif'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\lib\common\stdlogic\mod_genv.vif'.
-Linking 'D:\CYTest\MyELock\MyELock.cydsn\codegentemp\MyELock.ctl'.
+Linking 'D:\CYTEST\MyELock\eLock\MyELock.cydsn\codegentemp\MyELock.ctl'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_virtualmux_v1_0\cy_virtualmux_v1_0.v'.
-Linking 'D:\CYTest\MyELock\MyELock.cydsn\codegentemp\MyELock.v'.
+Linking 'D:\CYTEST\MyELock\eLock\MyELock.cydsn\codegentemp\MyELock.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\or_v1_0\or_v1_0.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\cy_constant_v1_0\cy_constant_v1_0.v'.
 Linking 'C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\CyPrimitives\cyprimitives.cylib\OneTerminal\OneTerminal.v'.
@@ -242,16 +242,16 @@ topld:  No errors.
 
 CYPRESS_DIR    : C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp
 Warp Program   : C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\warp\bin\warp.exe
-Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTest\MyELock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 MyELock.v -verilog
+Warp Arguments : -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTEST\MyELock\eLock\MyELock.cydsn\MyELock.cyprj -dcpsoc3 MyELock.v -verilog
 </CYPRESSTAG>
-Warp synthesis phase: Elapsed time ==> 0s.953ms
+Warp synthesis phase: Elapsed time ==> 0s.950ms
 <CYPRESSTAG name="Fitter results...">
 <CYPRESSTAG name="Fitter startup details...">
-cyp3fit: V4.2.0.641, Family: PSoC3, Started at: Tuesday, 18 December 2018 09:07:55
-Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTest\MyELock\MyELock.cydsn\MyELock.cyprj -d CY8C4247LQI-BL483 MyELock.v -verilog
+cyp3fit: V4.2.0.641, Family: PSoC3, Started at: Thursday, 20 December 2018 19:39:35
+Options: -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE -ya -.fftprj=D:\CYTEST\MyELock\eLock\MyELock.cydsn\MyELock.cyprj -d CY8C4247LQI-BL483 MyELock.v -verilog
 </CYPRESSTAG>
 <CYPRESSTAG name="Design parsing">
-Design parsing phase: Elapsed time ==> 0s.013ms
+Design parsing phase: Elapsed time ==> 0s.020ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Tech Mapping">
 <CYPRESSTAG name="Initial Mapping" icon="FILE_RPT_TECHM">
@@ -1313,8 +1313,8 @@ DAC                           :      :      :      :
   7-bit IDAC                  :    1 :    0 :    1 : 100.00 %
   8-bit IDAC                  :    1 :    0 :    1 : 100.00 %
 </CYPRESSTAG>
-Technology Mapping: Elapsed time ==> 0s.056ms
-Tech Mapping phase: Elapsed time ==> 0s.171ms
+Technology Mapping: Elapsed time ==> 0s.070ms
+Tech Mapping phase: Elapsed time ==> 0s.120ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Placement">
 <CYPRESSTAG name="FFB & IO Pre Placement">
@@ -1355,15 +1355,15 @@ ClockGenBlock                       : CLK_GEN_[FFB(CLK_GEN,0)]
 </CYPRESSTAG>
 </CYPRESSTAG>
 <CYPRESSTAG name="Real Analog Placement">
-Elapsed time ==> 0.8492613s
+Elapsed time ==> 0.2445189s
 </CYPRESSTAG>
-Analog Placement phase: Elapsed time ==> 1s.555ms
+Analog Placement phase: Elapsed time ==> 0s.920ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Routing">
 <CYPRESSTAG name="Analog Routing">
-Route success=True, Iterations=1 Elapsed=0.0376789 secs
+Route success=True, Iterations=1 Elapsed=0.0066376 secs
 </CYPRESSTAG>
-Analog Routing phase: Elapsed time ==> 0s.040ms
+Analog Routing phase: Elapsed time ==> 0s.010ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Analog Code Generation">
 ============ Analog Final Answer Routes ============
@@ -1450,12 +1450,12 @@ Map of item to net {
 }
 Mux Info {
 }
-Analog Code Generation phase: Elapsed time ==> 0s.113ms
+Analog Code Generation phase: Elapsed time ==> 0s.037ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Placement">
 <CYPRESSTAG name="Detailed placement messages">
 I2659: No Constrained paths were found. The placer will run in non-timing driven mode.
-I2076: Total run-time: 1.5 sec.
+I2076: Total run-time: 0.7 sec.
 
 </CYPRESSTAG>
 <CYPRESSTAG name="PLD Packing">
@@ -1479,14 +1479,14 @@ PLD Packing Summary
 <CYPRESSTAG name="Packed PLD Contents">
 Packed PLD Contents not displayed at this verbose level.</CYPRESSTAG>
 </CYPRESSTAG>
-PLD Packing: Elapsed time ==> 0s.031ms
+PLD Packing: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Partitioning">
 <CYPRESSTAG name="Initial Partitioning Summary">
 Initial Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
 <CYPRESSTAG name="Final Partitioning Summary">
 Final Partitioning Summary not displayed at this verbose level.</CYPRESSTAG>
-Partitioning: Elapsed time ==> 0s.138ms
+Partitioning: Elapsed time ==> 0s.030ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Final Placement Summary">
 
@@ -2746,33 +2746,33 @@ Port | Pin | Fixed |      Type |       Drive Mode |               Name | Connect
 </CYPRESSTAG>
 </CYPRESSTAG>
 </CYPRESSTAG>
-Digital component placer commit/Report: Elapsed time ==> 0s.040ms
-Digital Placement phase: Elapsed time ==> 4s.223ms
+Digital component placer commit/Report: Elapsed time ==> 0s.050ms
+Digital Placement phase: Elapsed time ==> 1s.126ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Digital Routing">
 "C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\bin/sjrouter.exe" --xml-path "C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\dev\psoc4/3/128k/route_arch-rrg.cydata" --vh2-path "MyELock_r.vh2" --pcf-path "MyELock.pco" --des-name "MyELock" --dsf-path "MyELock.dsf" --sdc-path "MyELock.sdc" --lib-path "MyELock_r.lib"
 Routing successful.
-Digital Routing phase: Elapsed time ==> 1s.401ms
+Digital Routing phase: Elapsed time ==> 1s.170ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Generation">
-Bitstream Generation phase: Elapsed time ==> 1s.084ms
+Bitstream Generation phase: Elapsed time ==> 0s.380ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Bitstream Verification">
-Bitstream Verification phase: Elapsed time ==> 0s.048ms
+Bitstream Verification phase: Elapsed time ==> 0s.040ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Static timing analysis">
 Timing report is in MyELock_timing.html.
-Static timing analysis phase: Elapsed time ==> 2s.014ms
+Static timing analysis phase: Elapsed time ==> 0s.360ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Data reporting">
 Data reporting phase: Elapsed time ==> 0s.000ms
 </CYPRESSTAG>
 <CYPRESSTAG name="Database update...">
-Design database save phase: Elapsed time ==> 0s.207ms
+Design database save phase: Elapsed time ==> 0s.270ms
 </CYPRESSTAG>
-cydsfit: Elapsed time ==> 10s.890ms
+cydsfit: Elapsed time ==> 4s.483ms
 </CYPRESSTAG>
-Fitter phase: Elapsed time ==> 10s.914ms
-API generation phase: Elapsed time ==> 10s.930ms
-Dependency generation phase: Elapsed time ==> 0s.051ms
-Cleanup phase: Elapsed time ==> 0s.002ms
+Fitter phase: Elapsed time ==> 4s.483ms
+API generation phase: Elapsed time ==> 4s.257ms
+Dependency generation phase: Elapsed time ==> 0s.020ms
+Cleanup phase: Elapsed time ==> 0s.000ms

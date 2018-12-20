@@ -4,17 +4,17 @@
 //#define DEBUG_UART
 //#define ezi2c
     
-#define RED \
-    Pin_P_G_Write(1); \
-    Pin_K_R_Write(0)
+//#define RED \
+//    Pin_P_G_Write(1); \
+//    Pin_K_R_Write(0)
+//    
+//#define GREEN \
+//    Pin_P_G_Write(0); \
+//    Pin_K_R_Write(1) 
     
-#define GREEN \
-    Pin_P_G_Write(0); \
-    Pin_K_R_Write(1) 
-    
-#define DIM \
-    Pin_P_G_Write(1); \
-    Pin_K_R_Write(1) 
+//#define DIM \
+//    Pin_P_G_Write(1); \
+//    Pin_K_R_Write(1) 
     
 #define Back_Light  1
 #define Back_Dim    0

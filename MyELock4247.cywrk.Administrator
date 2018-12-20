@@ -13,7 +13,7 @@
 <v>Output</v>
 </TreeKeys>
 <TreeStates>
-<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MyELock4247\MyELock\Header Files\zbeep.h">
+<CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237 type_name="CyDesigner.Common.Base.Controls.CyTreeViewState" version="1" SelectedNodeId="MyELock4247\MyELock\Header Files\zmain.h">
 <ExpandedNodeIds>
 <v>MyELock4247</v>
 <v>MyELock4247\MyELock</v>
@@ -159,18 +159,6 @@
 <v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\Pin_G_PM.lst</v>
 <v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM.lst</v>
 <v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\PWM_PM.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_BOOT.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_PM.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_rx.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_rx_PM.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_SCBCLK.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_SPI_UART.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_SPI_UART_INT.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_tx.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_tx_PM.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_UART.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\UART_DEB_UART_BOOT.lst</v>
 <v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\zbeep.lst</v>
 <v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\zble.lst</v>
 <v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\zdebug.lst</v>
@@ -189,45 +177,6 @@
 <VisibleNodeIds>
 <v>MyELock4247</v>
 <v>MyELock4247\MyELock</v>
-<v>MyELock4247\MyELock\CortexM0</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\BLE_1.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\BLE_1_bless_isr.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\BLE_1_custom.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\BLE_1_eventHandler.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\BLE_1_gatt.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\BLE_1_HAL_INT.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\BLE_1_HAL_PVT.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_Control.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_Filter.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_INT.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_ISR.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_Processing.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_SelfTest.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_Sensing.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_SensingCSD_LL.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_Structure.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CapSense_Tuner.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\Clock_1.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\Cm0Start.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\cy_em_eeprom.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CyBootAsmGnu.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\cyfitter_cfg.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CyFlash.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLFClk.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\CyLib.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\cymetadata.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\cyPm.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\cyutils.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\eeprom.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\Em_EEPROM.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\ISR_Finger.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\ISR_PWM.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\main.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\MOTOR_A.lst</v>
-<v>MyELock4247\MyELock\CortexM0\ARM_GCC_541\Debug\Listing Files\MOTOR_A_PM.lst</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
 </TreeStates>
@@ -252,7 +201,6 @@
 <v>MyELock4247\MyELock\cy_pins_v2_20</v>
 <v>MyELock4247\MyELock\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>MyELock4247\MyELock\Em_EEPROM_v2_20.pdf</v>
-<v>MyELock4247\MyELock\SCB_P4_v4_0.pdf</v>
 <v>MyELock4247\MyELock\TCPWM_P4_v2_10.pdf</v>
 </ExpandedNodeIds>
 <VisibleNodeIds>
@@ -271,7 +219,6 @@
 <v>MyELock4247\MyELock\cy_pins_v2_20</v>
 <v>MyELock4247\MyELock\cy_pins_v2_20\cy_pins_v2_20.pdf</v>
 <v>MyELock4247\MyELock\Em_EEPROM_v2_20.pdf</v>
-<v>MyELock4247\MyELock\SCB_P4_v4_0.pdf</v>
 <v>MyELock4247\MyELock\TCPWM_P4_v2_10.pdf</v>
 </VisibleNodeIds>
 </CyGuid_2a325b3b-c96a-4e9f-b7a0-2c44ecb5f237>
@@ -287,12 +234,7 @@
 </CyGuid_fdba8dfd-b15b-4469-9bbb-9e40c3e70997>
 <Unloaded />
 <OpenDocs>
-<name v=".\MyELock.cydsn\TopDesign\TopDesign.cysch" />
-<name v=".\MyELock.cydsn\main.c" />
-<name v=".\MyELock.cydsn\eeprom.c" />
-<name v=".\MyELock.cydsn\eeprom.h" />
-<name v=".\MyELock.cydsn\zmanager.c" />
-<name v=".\MyELock.cydsn\zbeep.h" />
+<name v=".\MyELock.cydsn\zmain.h" />
 </OpenDocs>
 <OpenDocsLayout><![CDATA[<?xml version="1.0"?><!--
 
@@ -300,7 +242,7 @@
   Copyright (c) 2001-2016 Actipro Software LLC.  All rights reserved.
   http://www.actiprosoftware.com
 
---><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="967, 570" SelectedTabbedMdiWindow="44e1385a-2320-45ba-b326-74415a44468e"><DocumentWindow Key="D:\CYTEST\MyELock\MyELock.cydsn\TopDesign\TopDesign.cysch" Guid="a3037ac2-1c6f-4581-868f-7f0d5a82e537" /><DocumentWindow Key="D:\CYTEST\MyELock\MyELock.cydsn\main.c" Guid="44e1385a-2320-45ba-b326-74415a44468e" /><DocumentWindow Key="D:\CYTEST\MyELock\MyELock.cydsn\eeprom.c" Guid="4a39a3d7-5c69-4bbf-9095-7dcc4bc31a1b" /><DocumentWindow Key="D:\CYTEST\MyELock\MyELock.cydsn\eeprom.h" Guid="09a21f90-0c80-43c9-8069-674ebe8250f9" /><DocumentWindow Key="D:\CYTEST\MyELock\MyELock.cydsn\zmanager.c" Guid="e4e2794b-5c53-4aeb-abde-4a44cff888a6" /><DocumentWindow Key="D:\CYTEST\MyELock\MyELock.cydsn\zbeep.h" Guid="869f4ad3-bac8-4234-9c1d-3639494eb8ac" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
+--><DocumentLayout Version="1.0"><LayoutData><TabbedMdiRootContainer Orientation="Horizontal"><TabbedMdiContainer Size="967, 570" SelectedTabbedMdiWindow="e6aae71f-f9dc-4623-99b1-260fc1b28122"><ToolWindow Key="Start Page:bd4649ab-da6b-4d04-a663-c722b8bf99db:Start Page" Guid="4c782e0e-1756-4c26-9304-297ec418d877" /><DocumentWindow Key="D:\CYTEST\MyELock\eLock\MyELock.cydsn\zmain.h" Guid="e6aae71f-f9dc-4623-99b1-260fc1b28122" /></TabbedMdiContainer></TabbedMdiRootContainer><FloatingContainers /></LayoutData></DocumentLayout>]]></OpenDocsLayout>
 <config v="" />
 <AutoUpdate v="true" />
 </CyGuid_843a90a4-0c4b-4e44-991d-05e7fb117a21>

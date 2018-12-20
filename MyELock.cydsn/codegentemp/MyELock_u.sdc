@@ -1,3 +1,3 @@
-# Component constraints for D:\CYTest\MyELock\MyELock.cydsn\TopDesign\TopDesign.cysch
-# Project: D:\CYTest\MyELock\MyELock.cydsn\MyELock.cyprj
-# Date: Tue, 18 Dec 2018 01:07:54 GMT
+# Component constraints for D:\CYTEST\MyELock\eLock\MyELock.cydsn\TopDesign\TopDesign.cysch
+# Project: D:\CYTEST\MyELock\eLock\MyELock.cydsn\MyELock.cyprj
+# Date: Thu, 20 Dec 2018 11:39:34 GMT

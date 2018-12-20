@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
   28:Generated_Source\PSoC4/Em_EEPROM.c **** };
   29:Generated_Source\PSoC4/Em_EEPROM.c **** 
   30:Generated_Source\PSoC4/Em_EEPROM.c **** /** The instance-specific context structure that holds all required information
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 2
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 2
 
 
   31:Generated_Source\PSoC4/Em_EEPROM.c **** * about an EEPROM instance. This structure is filled by the Em_EEPROM
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
   42              		.loc 1 70 0
   43 000a 0133     		adds	r3, r3, #1
   44 000c FF33     		adds	r3, r3, #255
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 3
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 3
 
 
   45 000e 0093     		str	r3, [sp]
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
   83 000c 00000000 		.word	0
   84              		.text
   85              	.Letext0:
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 4
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 4
 
 
   86              		.file 2 "Generated_Source\\PSoC4\\cytypes.h"
@@ -190,45 +190,45 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
   92 0006 00000000 		.4byte	.Ldebug_abbrev0
   93 000a 04       		.byte	0x4
   94 000b 01       		.uleb128 0x1
-  95 000c 99010000 		.4byte	.LASF35
+  95 000c 8C010000 		.4byte	.LASF35
   96 0010 0C       		.byte	0xc
-  97 0011 8A020000 		.4byte	.LASF36
-  98 0015 5D000000 		.4byte	.LASF37
+  97 0011 7D020000 		.4byte	.LASF36
+  98 0015 32000000 		.4byte	.LASF37
   99 0019 00000000 		.4byte	.Ldebug_ranges0+0
  100 001d 00000000 		.4byte	0
  101 0021 00000000 		.4byte	.Ldebug_line0
  102 0025 02       		.uleb128 0x2
  103 0026 01       		.byte	0x1
  104 0027 06       		.byte	0x6
- 105 0028 DA020000 		.4byte	.LASF0
+ 105 0028 CD020000 		.4byte	.LASF0
  106 002c 02       		.uleb128 0x2
  107 002d 01       		.byte	0x1
  108 002e 08       		.byte	0x8
- 109 002f A1000000 		.4byte	.LASF1
+ 109 002f 94000000 		.4byte	.LASF1
  110 0033 02       		.uleb128 0x2
  111 0034 02       		.byte	0x2
  112 0035 05       		.byte	0x5
- 113 0036 80020000 		.4byte	.LASF2
+ 113 0036 73020000 		.4byte	.LASF2
  114 003a 02       		.uleb128 0x2
  115 003b 02       		.byte	0x2
  116 003c 07       		.byte	0x7
- 117 003d 32000000 		.4byte	.LASF3
+ 117 003d D9020000 		.4byte	.LASF3
  118 0041 02       		.uleb128 0x2
  119 0042 04       		.byte	0x4
  120 0043 05       		.byte	0x5
- 121 0044 B7020000 		.4byte	.LASF4
+ 121 0044 AA020000 		.4byte	.LASF4
  122 0048 02       		.uleb128 0x2
  123 0049 04       		.byte	0x4
  124 004a 07       		.byte	0x7
- 125 004b C7000000 		.4byte	.LASF5
+ 125 004b BA000000 		.4byte	.LASF5
  126 004f 02       		.uleb128 0x2
  127 0050 08       		.byte	0x8
  128 0051 05       		.byte	0x5
- 129 0052 30020000 		.4byte	.LASF6
+ 129 0052 23020000 		.4byte	.LASF6
  130 0056 02       		.uleb128 0x2
  131 0057 08       		.byte	0x8
  132 0058 07       		.byte	0x7
- 133 0059 47010000 		.4byte	.LASF7
+ 133 0059 3A010000 		.4byte	.LASF7
  134 005d 03       		.uleb128 0x3
  135 005e 04       		.byte	0x4
  136 005f 05       		.byte	0x5
@@ -236,69 +236,69 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  138 0064 02       		.uleb128 0x2
  139 0065 04       		.byte	0x4
  140 0066 07       		.byte	0x7
- 141 0067 24010000 		.4byte	.LASF8
+ 141 0067 17010000 		.4byte	.LASF8
  142 006b 04       		.uleb128 0x4
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 5
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 5
 
 
- 143 006c D9000000 		.4byte	.LASF9
+ 143 006c CC000000 		.4byte	.LASF9
  144 0070 02       		.byte	0x2
  145 0071 E401     		.2byte	0x1e4
  146 0073 2C000000 		.4byte	0x2c
  147 0077 04       		.uleb128 0x4
- 148 0078 1D010000 		.4byte	.LASF10
+ 148 0078 10010000 		.4byte	.LASF10
  149 007c 02       		.byte	0x2
  150 007d E601     		.2byte	0x1e6
  151 007f 48000000 		.4byte	0x48
  152 0083 02       		.uleb128 0x2
  153 0084 04       		.byte	0x4
  154 0085 04       		.byte	0x4
- 155 0086 9B000000 		.4byte	.LASF11
+ 155 0086 8E000000 		.4byte	.LASF11
  156 008a 02       		.uleb128 0x2
  157 008b 08       		.byte	0x8
  158 008c 04       		.byte	0x4
- 159 008d 08010000 		.4byte	.LASF12
+ 159 008d FB000000 		.4byte	.LASF12
  160 0091 02       		.uleb128 0x2
  161 0092 01       		.byte	0x1
  162 0093 08       		.byte	0x8
- 163 0094 4B020000 		.4byte	.LASF13
+ 163 0094 3E020000 		.4byte	.LASF13
  164 0098 02       		.uleb128 0x2
  165 0099 08       		.byte	0x8
  166 009a 04       		.byte	0x4
- 167 009b C0020000 		.4byte	.LASF14
+ 167 009b B3020000 		.4byte	.LASF14
  168 009f 02       		.uleb128 0x2
  169 00a0 04       		.byte	0x4
  170 00a1 07       		.byte	0x7
- 171 00a2 27020000 		.4byte	.LASF15
+ 171 00a2 1A020000 		.4byte	.LASF15
  172 00a6 05       		.uleb128 0x5
  173 00a7 10       		.byte	0x10
  174 00a8 03       		.byte	0x3
  175 00a9 FB       		.byte	0xfb
  176 00aa EF000000 		.4byte	0xef
  177 00ae 06       		.uleb128 0x6
- 178 00af 90000000 		.4byte	.LASF16
+ 178 00af 83000000 		.4byte	.LASF16
  179 00b3 03       		.byte	0x3
  180 00b4 FE       		.byte	0xfe
  181 00b5 77000000 		.4byte	0x77
  182 00b9 00       		.byte	0
  183 00ba 07       		.uleb128 0x7
- 184 00bb 7D000000 		.4byte	.LASF17
+ 184 00bb 70000000 		.4byte	.LASF17
  185 00bf 03       		.byte	0x3
  186 00c0 0301     		.2byte	0x103
  187 00c2 77000000 		.4byte	0x77
  188 00c6 04       		.byte	0x4
  189 00c7 07       		.uleb128 0x7
- 190 00c8 0F010000 		.4byte	.LASF18
+ 190 00c8 02010000 		.4byte	.LASF18
  191 00cc 03       		.byte	0x3
  192 00cd 0601     		.2byte	0x106
  193 00cf 6B000000 		.4byte	0x6b
  194 00d3 08       		.byte	0x8
  195 00d4 07       		.uleb128 0x7
- 196 00d5 84010000 		.4byte	.LASF19
+ 196 00d5 77010000 		.4byte	.LASF19
  197 00d9 03       		.byte	0x3
  198 00da 0B01     		.2byte	0x10b
  199 00dc 6B000000 		.4byte	0x6b
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 6
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 6
 
 
  200 00e0 09       		.byte	0x9
@@ -310,7 +310,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  206 00ed 0C       		.byte	0xc
  207 00ee 00       		.byte	0
  208 00ef 04       		.uleb128 0x4
- 209 00f0 DF000000 		.4byte	.LASF21
+ 209 00f0 D2000000 		.4byte	.LASF21
  210 00f4 03       		.byte	0x3
  211 00f5 0F01     		.2byte	0x10f
  212 00f7 A6000000 		.4byte	0xa6
@@ -320,7 +320,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  216 00fe 1601     		.2byte	0x116
  217 0100 6D010000 		.4byte	0x16d
  218 0104 07       		.uleb128 0x7
- 219 0105 AD020000 		.4byte	.LASF22
+ 219 0105 A0020000 		.4byte	.LASF22
  220 0109 03       		.byte	0x3
  221 010a 1B01     		.2byte	0x11b
  222 010c 77000000 		.4byte	0x77
@@ -332,33 +332,33 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  228 0119 77000000 		.4byte	0x77
  229 011d 04       		.byte	0x4
  230 011e 07       		.uleb128 0x7
- 231 011f CC020000 		.4byte	.LASF24
+ 231 011f BF020000 		.4byte	.LASF24
  232 0123 03       		.byte	0x3
  233 0124 2301     		.2byte	0x123
  234 0126 77000000 		.4byte	0x77
  235 012a 08       		.byte	0x8
  236 012b 07       		.uleb128 0x7
- 237 012c 90000000 		.4byte	.LASF16
+ 237 012c 83000000 		.4byte	.LASF16
  238 0130 03       		.byte	0x3
  239 0131 2601     		.2byte	0x126
  240 0133 77000000 		.4byte	0x77
  241 0137 0C       		.byte	0xc
  242 0138 07       		.uleb128 0x7
- 243 0139 7D000000 		.4byte	.LASF17
+ 243 0139 70000000 		.4byte	.LASF17
  244 013d 03       		.byte	0x3
  245 013e 2B01     		.2byte	0x12b
  246 0140 77000000 		.4byte	0x77
  247 0144 10       		.byte	0x10
  248 0145 07       		.uleb128 0x7
- 249 0146 0F010000 		.4byte	.LASF18
+ 249 0146 02010000 		.4byte	.LASF18
  250 014a 03       		.byte	0x3
  251 014b 2E01     		.2byte	0x12e
  252 014d 6B000000 		.4byte	0x6b
  253 0151 14       		.byte	0x14
  254 0152 07       		.uleb128 0x7
- 255 0153 84010000 		.4byte	.LASF19
+ 255 0153 77010000 		.4byte	.LASF19
  256 0157 03       		.byte	0x3
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 7
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 7
 
 
  257 0158 3301     		.2byte	0x133
@@ -372,7 +372,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  265 016b 18       		.byte	0x18
  266 016c 00       		.byte	0
  267 016d 04       		.uleb128 0x4
- 268 016e 45000000 		.4byte	.LASF25
+ 268 016e 58000000 		.4byte	.LASF25
  269 0172 03       		.byte	0x3
  270 0173 3701     		.2byte	0x137
  271 0175 FB000000 		.4byte	0xfb
@@ -383,28 +383,28 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  276 0180 5401     		.2byte	0x154
  277 0182 A5010000 		.4byte	0x1a5
  278 0186 0A       		.uleb128 0xa
- 279 0187 5E010000 		.4byte	.LASF26
+ 279 0187 51010000 		.4byte	.LASF26
  280 018b 00       		.byte	0
  281 018c 0A       		.uleb128 0xa
- 282 018d 50020000 		.4byte	.LASF27
+ 282 018d 43020000 		.4byte	.LASF27
  283 0191 01       		.byte	0x1
  284 0192 0A       		.uleb128 0xa
- 285 0193 E6020000 		.4byte	.LASF28
+ 285 0193 EC020000 		.4byte	.LASF28
  286 0197 02       		.byte	0x2
  287 0198 0A       		.uleb128 0xa
- 288 0199 31010000 		.4byte	.LASF29
+ 288 0199 24010000 		.4byte	.LASF29
  289 019d 03       		.byte	0x3
  290 019e 0A       		.uleb128 0xa
- 291 019f AF000000 		.4byte	.LASF30
+ 291 019f A2000000 		.4byte	.LASF30
  292 01a3 04       		.byte	0x4
  293 01a4 00       		.byte	0
  294 01a5 04       		.uleb128 0x4
- 295 01a6 67020000 		.4byte	.LASF31
+ 295 01a6 5A020000 		.4byte	.LASF31
  296 01aa 03       		.byte	0x3
  297 01ab 5A01     		.2byte	0x15a
  298 01ad 79010000 		.4byte	0x179
  299 01b1 0B       		.uleb128 0xb
- 300 01b2 00030000 		.4byte	.LASF38
+ 300 01b2 06030000 		.4byte	.LASF38
  301 01b6 01       		.byte	0x1
  302 01b7 40       		.byte	0x40
  303 01b8 A5010000 		.4byte	0x1a5
@@ -414,11 +414,11 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  307 01c5 9C       		.byte	0x9c
  308 01c6 0E020000 		.4byte	0x20e
  309 01ca 0C       		.uleb128 0xc
- 310 01cb 3E020000 		.4byte	.LASF39
+ 310 01cb 31020000 		.4byte	.LASF39
  311 01cf 01       		.byte	0x1
  312 01d0 40       		.byte	0x40
  313 01d1 77000000 		.4byte	0x77
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 8
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 8
 
 
  314 01d5 00000000 		.4byte	.LLST0
@@ -430,7 +430,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  320 01e4 01       		.uleb128 0x1
  321 01e5 50       		.byte	0x50
  322 01e6 0E       		.uleb128 0xe
- 323 01e7 92010000 		.4byte	.LASF32
+ 323 01e7 85010000 		.4byte	.LASF32
  324 01eb 01       		.byte	0x1
  325 01ec 43       		.byte	0x43
  326 01ed EF000000 		.4byte	0xef
@@ -455,7 +455,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  345 020c 00       		.byte	0
  346 020d 00       		.byte	0
  347 020e 11       		.uleb128 0x11
- 348 020f 73010000 		.4byte	.LASF33
+ 348 020f 66010000 		.4byte	.LASF33
  349 0213 01       		.byte	0x1
  350 0214 15       		.byte	0x15
  351 0215 1F020000 		.4byte	0x21f
@@ -473,12 +473,12 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  363 0230 03       		.byte	0x3
  364 0231 00000000 		.4byte	Em_EEPROM_context
  365 0235 13       		.uleb128 0x13
- 366 0236 F6000000 		.4byte	.LASF40
- 367 023a F6000000 		.4byte	.LASF40
+ 366 0236 E9000000 		.4byte	.LASF40
+ 367 023a E9000000 		.4byte	.LASF40
  368 023e 03       		.byte	0x3
  369 023f 6701     		.2byte	0x167
  370 0241 00       		.byte	0
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 9
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 9
 
 
  371              		.section	.debug_abbrev,"",%progbits
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  425 0034 00       		.byte	0
  426 0035 00       		.byte	0
  427 0036 05       		.uleb128 0x5
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 10
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 10
 
 
  428 0037 13       		.uleb128 0x13
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  482 006d 00       		.byte	0
  483 006e 09       		.uleb128 0x9
  484 006f 04       		.uleb128 0x4
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 11
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 11
 
 
  485 0070 01       		.byte	0x1
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  539 00a7 3A       		.uleb128 0x3a
  540 00a8 0B       		.uleb128 0xb
  541 00a9 3B       		.uleb128 0x3b
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 12
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 12
 
 
  542 00aa 0B       		.uleb128 0xb
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  596 00e5 00       		.byte	0
  597 00e6 11       		.uleb128 0x11
  598 00e7 34       		.uleb128 0x34
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 13
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 13
 
 
  599 00e8 00       		.byte	0
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  653 001f 0400     		.2byte	0x4
  654 0021 F3       		.byte	0xf3
  655 0022 01       		.uleb128 0x1
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 14
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 14
 
 
  656 0023 50       		.byte	0x50
@@ -827,213 +827,213 @@ ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 1
  686      65724F66 
  686      526F7773 
  686      00
- 687              	.LASF3:
- 688 0032 73686F72 		.ascii	"short unsigned int\000"
- 688      7420756E 
- 688      7369676E 
- 688      65642069 
- 688      6E7400
+ 687              	.LASF37:
+ 688 0032 443A5C43 		.ascii	"D:\\CYTEST\\MyELock\\eLock\\MyELock.cydsn\000"
+ 688      59544553 
+ 688      545C4D79 
+ 688      454C6F63 
+ 688      6B5C654C 
  689              	.LASF25:
- 690 0045 63795F73 		.ascii	"cy_stc_eeprom_context_t\000"
+ 690 0058 63795F73 		.ascii	"cy_stc_eeprom_context_t\000"
  690      74635F65 
  690      6570726F 
  690      6D5F636F 
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 15
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 15
 
 
  690      6E746578 
- 691              	.LASF37:
- 692 005d 443A5C43 		.ascii	"D:\\CYTest\\MyELock\\MyELock.cydsn\000"
- 692      59546573 
- 692      745C4D79 
- 692      454C6F63 
- 692      6B5C4D79 
- 693              	.LASF17:
- 694 007d 77656172 		.ascii	"wearLevelingFactor\000"
- 694      4C657665 
- 694      6C696E67 
- 694      46616374 
- 694      6F7200
- 695              	.LASF16:
- 696 0090 65657072 		.ascii	"eepromSize\000"
- 696      6F6D5369 
- 696      7A6500
- 697              	.LASF11:
- 698 009b 666C6F61 		.ascii	"float\000"
- 698      7400
- 699              	.LASF1:
- 700 00a1 756E7369 		.ascii	"unsigned char\000"
- 700      676E6564 
- 700      20636861 
- 700      7200
- 701              	.LASF30:
- 702 00af 43595F45 		.ascii	"CY_EM_EEPROM_WRITE_FAIL\000"
- 702      4D5F4545 
- 702      50524F4D 
- 702      5F575249 
- 702      54455F46 
- 703              	.LASF5:
- 704 00c7 6C6F6E67 		.ascii	"long unsigned int\000"
- 704      20756E73 
- 704      69676E65 
- 704      6420696E 
- 704      7400
- 705              	.LASF9:
- 706 00d9 75696E74 		.ascii	"uint8\000"
- 706      3800
- 707              	.LASF21:
- 708 00df 63795F73 		.ascii	"cy_stc_eeprom_config_t\000"
- 708      74635F65 
- 708      6570726F 
- 708      6D5F636F 
- 708      6E666967 
- 709              	.LASF40:
- 710 00f6 43795F45 		.ascii	"Cy_Em_EEPROM_Init\000"
- 710      6D5F4545 
- 710      50524F4D 
- 710      5F496E69 
- 710      7400
- 711              	.LASF12:
- 712 0108 646F7562 		.ascii	"double\000"
- 712      6C6500
- 713              	.LASF18:
- 714 010f 72656475 		.ascii	"redundantCopy\000"
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 16
+ 691              	.LASF17:
+ 692 0070 77656172 		.ascii	"wearLevelingFactor\000"
+ 692      4C657665 
+ 692      6C696E67 
+ 692      46616374 
+ 692      6F7200
+ 693              	.LASF16:
+ 694 0083 65657072 		.ascii	"eepromSize\000"
+ 694      6F6D5369 
+ 694      7A6500
+ 695              	.LASF11:
+ 696 008e 666C6F61 		.ascii	"float\000"
+ 696      7400
+ 697              	.LASF1:
+ 698 0094 756E7369 		.ascii	"unsigned char\000"
+ 698      676E6564 
+ 698      20636861 
+ 698      7200
+ 699              	.LASF30:
+ 700 00a2 43595F45 		.ascii	"CY_EM_EEPROM_WRITE_FAIL\000"
+ 700      4D5F4545 
+ 700      50524F4D 
+ 700      5F575249 
+ 700      54455F46 
+ 701              	.LASF5:
+ 702 00ba 6C6F6E67 		.ascii	"long unsigned int\000"
+ 702      20756E73 
+ 702      69676E65 
+ 702      6420696E 
+ 702      7400
+ 703              	.LASF9:
+ 704 00cc 75696E74 		.ascii	"uint8\000"
+ 704      3800
+ 705              	.LASF21:
+ 706 00d2 63795F73 		.ascii	"cy_stc_eeprom_config_t\000"
+ 706      74635F65 
+ 706      6570726F 
+ 706      6D5F636F 
+ 706      6E666967 
+ 707              	.LASF40:
+ 708 00e9 43795F45 		.ascii	"Cy_Em_EEPROM_Init\000"
+ 708      6D5F4545 
+ 708      50524F4D 
+ 708      5F496E69 
+ 708      7400
+ 709              	.LASF12:
+ 710 00fb 646F7562 		.ascii	"double\000"
+ 710      6C6500
+ 711              	.LASF18:
+ 712 0102 72656475 		.ascii	"redundantCopy\000"
+ 712      6E64616E 
+ 712      74436F70 
+ 712      7900
+ 713              	.LASF10:
+ 714 0110 75696E74 		.ascii	"uint32\000"
+ 714      333200
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 16
 
 
- 714      6E64616E 
- 714      74436F70 
- 714      7900
- 715              	.LASF10:
- 716 011d 75696E74 		.ascii	"uint32\000"
- 716      333200
- 717              	.LASF8:
- 718 0124 756E7369 		.ascii	"unsigned int\000"
- 718      676E6564 
- 718      20696E74 
- 718      00
- 719              	.LASF29:
- 720 0131 43595F45 		.ascii	"CY_EM_EEPROM_BAD_DATA\000"
- 720      4D5F4545 
- 720      50524F4D 
- 720      5F424144 
- 720      5F444154 
- 721              	.LASF7:
- 722 0147 6C6F6E67 		.ascii	"long long unsigned int\000"
- 722      206C6F6E 
- 722      6720756E 
- 722      7369676E 
- 722      65642069 
- 723              	.LASF26:
- 724 015e 43595F45 		.ascii	"CY_EM_EEPROM_SUCCESS\000"
- 724      4D5F4545 
- 724      50524F4D 
- 724      5F535543 
- 724      43455353 
- 725              	.LASF33:
- 726 0173 456D5F45 		.ascii	"Em_EEPROM_config\000"
- 726      4550524F 
- 726      4D5F636F 
- 726      6E666967 
- 726      00
- 727              	.LASF19:
- 728 0184 626C6F63 		.ascii	"blockingWrite\000"
- 728      6B696E67 
- 728      57726974 
- 728      6500
- 729              	.LASF32:
- 730 0192 636F6E66 		.ascii	"config\000"
- 730      696700
- 731              	.LASF35:
- 732 0199 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
- 732      43313120 
- 732      352E342E 
- 732      31203230 
- 732      31363036 
- 733 01cc 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
- 733      20726576 
- 733      6973696F 
- 733      6E203233 
- 733      37373135 
- 734 01ff 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
- 734      66756E63 
- 734      74696F6E 
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 17
+ 715              	.LASF8:
+ 716 0117 756E7369 		.ascii	"unsigned int\000"
+ 716      676E6564 
+ 716      20696E74 
+ 716      00
+ 717              	.LASF29:
+ 718 0124 43595F45 		.ascii	"CY_EM_EEPROM_BAD_DATA\000"
+ 718      4D5F4545 
+ 718      50524F4D 
+ 718      5F424144 
+ 718      5F444154 
+ 719              	.LASF7:
+ 720 013a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 720      206C6F6E 
+ 720      6720756E 
+ 720      7369676E 
+ 720      65642069 
+ 721              	.LASF26:
+ 722 0151 43595F45 		.ascii	"CY_EM_EEPROM_SUCCESS\000"
+ 722      4D5F4545 
+ 722      50524F4D 
+ 722      5F535543 
+ 722      43455353 
+ 723              	.LASF33:
+ 724 0166 456D5F45 		.ascii	"Em_EEPROM_config\000"
+ 724      4550524F 
+ 724      4D5F636F 
+ 724      6E666967 
+ 724      00
+ 725              	.LASF19:
+ 726 0177 626C6F63 		.ascii	"blockingWrite\000"
+ 726      6B696E67 
+ 726      57726974 
+ 726      6500
+ 727              	.LASF32:
+ 728 0185 636F6E66 		.ascii	"config\000"
+ 728      696700
+ 729              	.LASF35:
+ 730 018c 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 730      43313120 
+ 730      352E342E 
+ 730      31203230 
+ 730      31363036 
+ 731 01bf 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m0 -mthumb -g -O"
+ 731      20726576 
+ 731      6973696F 
+ 731      6E203233 
+ 731      37373135 
+ 732 01f2 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 732      66756E63 
+ 732      74696F6E 
+ 732      2D736563 
+ 732      74696F6E 
+ 733              	.LASF15:
+ 734 021a 73697A65 		.ascii	"sizetype\000"
+ 734      74797065 
+ 734      00
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 17
 
 
- 734      2D736563 
- 734      74696F6E 
- 735              	.LASF15:
- 736 0227 73697A65 		.ascii	"sizetype\000"
- 736      74797065 
- 736      00
- 737              	.LASF6:
- 738 0230 6C6F6E67 		.ascii	"long long int\000"
- 738      206C6F6E 
- 738      6720696E 
- 738      7400
- 739              	.LASF39:
- 740 023e 73746172 		.ascii	"startAddress\000"
- 740      74416464 
- 740      72657373 
+ 735              	.LASF6:
+ 736 0223 6C6F6E67 		.ascii	"long long int\000"
+ 736      206C6F6E 
+ 736      6720696E 
+ 736      7400
+ 737              	.LASF39:
+ 738 0231 73746172 		.ascii	"startAddress\000"
+ 738      74416464 
+ 738      72657373 
+ 738      00
+ 739              	.LASF13:
+ 740 023e 63686172 		.ascii	"char\000"
  740      00
- 741              	.LASF13:
- 742 024b 63686172 		.ascii	"char\000"
- 742      00
- 743              	.LASF27:
- 744 0250 43595F45 		.ascii	"CY_EM_EEPROM_BAD_PARAM\000"
- 744      4D5F4545 
- 744      50524F4D 
- 744      5F424144 
- 744      5F504152 
- 745              	.LASF31:
- 746 0267 63795F65 		.ascii	"cy_en_em_eeprom_status_t\000"
- 746      6E5F656D 
- 746      5F656570 
- 746      726F6D5F 
- 746      73746174 
- 747              	.LASF2:
- 748 0280 73686F72 		.ascii	"short int\000"
- 748      7420696E 
- 748      7400
- 749              	.LASF36:
- 750 028a 47656E65 		.ascii	"Generated_Source\\PSoC4\\Em_EEPROM.c\000"
- 750      72617465 
- 750      645F536F 
- 750      75726365 
- 750      5C50536F 
- 751              	.LASF22:
- 752 02ad 776C456E 		.ascii	"wlEndAddr\000"
- 752      64416464 
- 752      7200
- 753              	.LASF4:
- 754 02b7 6C6F6E67 		.ascii	"long int\000"
- 754      20696E74 
- 754      00
- 755              	.LASF14:
- 756 02c0 6C6F6E67 		.ascii	"long double\000"
- 756      20646F75 
- 756      626C6500 
- 757              	.LASF24:
- 758 02cc 6C617374 		.ascii	"lastWrRowAddr\000"
- 758      5772526F 
- 758      77416464 
-ARM GAS  C:\Users\Zhu\AppData\Local\Temp\cciUt5b5.s 			page 18
+ 741              	.LASF27:
+ 742 0243 43595F45 		.ascii	"CY_EM_EEPROM_BAD_PARAM\000"
+ 742      4D5F4545 
+ 742      50524F4D 
+ 742      5F424144 
+ 742      5F504152 
+ 743              	.LASF31:
+ 744 025a 63795F65 		.ascii	"cy_en_em_eeprom_status_t\000"
+ 744      6E5F656D 
+ 744      5F656570 
+ 744      726F6D5F 
+ 744      73746174 
+ 745              	.LASF2:
+ 746 0273 73686F72 		.ascii	"short int\000"
+ 746      7420696E 
+ 746      7400
+ 747              	.LASF36:
+ 748 027d 47656E65 		.ascii	"Generated_Source\\PSoC4\\Em_EEPROM.c\000"
+ 748      72617465 
+ 748      645F536F 
+ 748      75726365 
+ 748      5C50536F 
+ 749              	.LASF22:
+ 750 02a0 776C456E 		.ascii	"wlEndAddr\000"
+ 750      64416464 
+ 750      7200
+ 751              	.LASF4:
+ 752 02aa 6C6F6E67 		.ascii	"long int\000"
+ 752      20696E74 
+ 752      00
+ 753              	.LASF14:
+ 754 02b3 6C6F6E67 		.ascii	"long double\000"
+ 754      20646F75 
+ 754      626C6500 
+ 755              	.LASF24:
+ 756 02bf 6C617374 		.ascii	"lastWrRowAddr\000"
+ 756      5772526F 
+ 756      77416464 
+ 756      7200
+ 757              	.LASF0:
+ 758 02cd 7369676E 		.ascii	"signed char\000"
+ 758      65642063 
+ 758      68617200 
+ 759              	.LASF3:
+ARM GAS  C:\Users\ADMINI~1\AppData\Local\Temp\cc89byqg.s 			page 18
 
 
- 758      7200
- 759              	.LASF0:
- 760 02da 7369676E 		.ascii	"signed char\000"
- 760      65642063 
- 760      68617200 
+ 760 02d9 73686F72 		.ascii	"short unsigned int\000"
+ 760      7420756E 
+ 760      7369676E 
+ 760      65642069 
+ 760      6E7400
  761              	.LASF28:
- 762 02e6 43595F45 		.ascii	"CY_EM_EEPROM_BAD_CHECKSUM\000"
+ 762 02ec 43595F45 		.ascii	"CY_EM_EEPROM_BAD_CHECKSUM\000"
  762      4D5F4545 
  762      50524F4D 
  762      5F424144 
  762      5F434845 
  763              	.LASF38:
- 764 0300 456D5F45 		.ascii	"Em_EEPROM_Init\000"
+ 764 0306 456D5F45 		.ascii	"Em_EEPROM_Init\000"
  764      4550524F 
  764      4D5F496E 
  764      697400
